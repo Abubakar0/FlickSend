@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M9",
+  "generatedAt": "2026-09-09T12:45:59.479Z",
+  "target": "m9-firefox-windows",
+  "environment": {
+    "realBrowser": true,
+    "automated": true,
+    "emulated": false,
+    "automationProtocol": "WEBDRIVER_BIDI",
+    "headless": true,
+    "hostOperatingSystem": "Windows_NT",
+    "hostOperatingSystemVersion": "10.0.19045",
+    "hostArchitecture": "x64"
+  },
+  "browser": {
+    "name": "FIREFOX",
+    "version": "155.0.1",
+    "userAgentVersion": "155.0",
+    "engine": "GECKO",
+    "operatingSystem": "WINDOWS",
+    "operatingSystemVersion": "10.0",
+    "deviceClass": "DESKTOP",
+    "architecture": null
+  },
+  "supportTier": "SUPPORTED_WITH_LIMITATIONS",
+  "capabilities": {
+    "schemaVersion": 1,
+    "detectedAt": "2026-09-09T12:45:15.963Z",
+    "browser": "FIREFOX",
+    "browserVersion": "155.0",
+    "engine": "GECKO",
+    "operatingSystem": "WINDOWS",
+    "operatingSystemVersion": "10.0",
+    "deviceClass": "DESKTOP",
+    "architecture": null,
+    "webRtcDataChannel": "AVAILABLE",
+    "webRtcStats": "AVAILABLE",
+    "fileSelection": "AVAILABLE",
+    "directorySelection": "UNAVAILABLE",
+    "dragDropFiles": "AVAILABLE",
+    "dragDropDirectories": "AVAILABLE",
+    "directFileWrite": "UNAVAILABLE",
+    "directDirectoryWrite": "UNAVAILABLE",
+    "opfs": "AVAILABLE",
+    "persistentStorage": "AVAILABLE",
+    "persistentStorageState": "NOT_PERSISTED",
+    "storageEstimate": {
+      "availability": "AVAILABLE",
+      "quotaBytes": 10737418240,
+      "usageBytes": 0
+    },
+    "webCryptoSha256": "AVAILABLE",
+    "webWorkers": "AVAILABLE",
+    "routeStats": "AVAILABLE",
+    "rttStats": "UNKNOWN",
+    "availableOutgoingBitrate": "UNKNOWN",
+    "wakeLock": "AVAILABLE",
+    "backgroundBehavior": "UNKNOWN",
+    "supportedTransferModes": {
+      "canSendFiles": "AVAILABLE",
+      "canSendFolders": "UNAVAILABLE",
+      "canReceiveSingleFiles": "UNAVAILABLE",
+      "canReceiveFolders": "UNAVAILABLE",
+      "canResumeInSession": "UNAVAILABLE",
+      "canResumeAfterReload": "UNKNOWN",
+      "canUseDirectDestination": "UNAVAILABLE",
+      "canUseTurn": "AVAILABLE",
+      "canShowDetailedHealth": "AVAILABLE"
+    }
+  },
+  "qualificationResults": {
+    "capabilityDetection": "PASS",
+    "directWebRtc": "PASS",
+    "directWebRtcTerminalError": null,
+    "turnRelay": "NOT_SUPPORTED",
+    "turnRelayTerminalError": "FS_ROUTE_EXHAUSTED",
+    "routeRecovery": "NOT_TESTED",
+    "m5SingleFile": {
+      "delivered": true,
+      "manifestRootVerified": true,
+      "route": "DIRECT / DIRECT_SRFLX / udp",
+      "health": {
+        "timestampMs": 2304,
+        "transferState": "DELIVERED",
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_SRFLX",
+        "currentThroughputBps": 11053216.46746348,
+        "rollingThroughputBps": 6641811.559778306,
+        "averageThroughputBps": 6641811.559778306,
+        "peakThroughputBps": 16100975.047984645,
+        "senderReadBps": 4194304000,
+        "receiverWriteBps": null,
+        "senderBufferedAmountBytes": 0,
+        "rollingAverageBufferedAmountBytes": 939636,
+        "peakBufferedAmountBytes": 8391168,
+        "percentTimeAboveHighWater": 0.1111111111111111,
+        "percentTimeBelowLowWater": 0.8888888888888888,
+        "receiveQueueBytes": 0,
+        "peakReceiveQueueBytes": null,
+        "percentTimeQueueNearLimit": 0,
+        "rttMs": 0,
+        "availableOutgoingBitrateBps": null,
+        "safeBytes": 8388608,
+        "totalBytes": 8388608,
+        "routeRecoveryCount": 0,
+        "integrityRetryCount": 0,
+        "routeChangeCount": 0,
+        "timeSinceLastRouteChangeMs": 1263,
+        "stallDurationMs": 0,
+        "stallCount": 0,
+        "etaMs": null,
+        "healthState": "UNKNOWN",
+        "bottleneck": "INSUFFICIENT_DATA",
+        "confidence": "LOW",
+        "reasons": [
+          {
+            "code": "MISSING_MEASUREMENTS",
+            "detail": "Transfer is not actively moving payload."
+          }
+        ],
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "UNAVAILABLE",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "UNAVAILABLE",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        },
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_SRFLX",
+            "startedAtMs": 1041,
+            "endedAtMs": null,
+            "averageThroughputBps": null
+          }
+        ],
+        "events": []
+      },
+      "source": "AUTOMATION_GENERATED_FILE",
+      "destination": "BOUNDED_OPFS_FIXTURE"
+    },
+    "m5Resume": {
+      "delivered": true,
+      "transferIdStable": true,
+      "safeBytesBeforeDisconnect": 8388608,
+      "remainingBytesAtResume": 8388608,
+      "resumedPayloadBytes": 8388608,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "m5CorruptionRetry": {
+      "delivered": true,
+      "retries": 1,
+      "manifestRootVerified": true
+    },
+    "m6StructuralStreamPack": {
+      "delivered": true,
+      "files": 3,
+      "directories": 3,
+      "emptyDirectoryPreserved": true,
+      "finalTreeMatch": true,
+      "manifestRootVerified": true,
+      "source": "VIRTUAL_STRUCTURAL_FIXTURE",
+      "destination": "BOUNDED_OPFS_FIXTURE"
+    },
+    "destinationStreaming": "LIMITED",
+    "backgroundLifecycle": "NOT_TESTED",
+    "pageRefresh": "NOT_TESTED",
+    "browserRestart": "NOT_TESTED",
+    "permissionAfterPicker": "NOT_TESTED",
+    "ordinaryReconnect": "NOT_TESTED",
+    "permissionRevocation": "NOT_TESTED",
+    "screenLockSleep": "NOT_TESTED"
+  },
+  "limitations": [
+    "Firefox stable was automated through its standard WebDriver BiDi endpoint, not Playwright's patched Firefox protocol.",
+    "The local Firefox direct route was available before the separate direct-to-relay recovery qualification.",
+    "File input uses a deterministic automation fixture; no native source picker interaction occurred.",
+    "Firefox lacks a qualified selected streaming external destination in this run; bounded OPFS remains fixture infrastructure only.",
+    "StreamPack coverage uses the bounded virtual structural fixture because real directory-picker evidence remains assisted.",
+    "Native picker permissions, permission revocation, refresh, browser restart, backgrounding, screen lock, and sleep were not exercised.",
+    "Local direct transfer completed, but forced local coturn relay exhausted safely with FS_ROUTE_EXHAUSTED; TURN and direct-to-relay recovery are not supported in this recorded Windows environment."
+  ]
+}

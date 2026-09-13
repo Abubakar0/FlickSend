@@ -1,0 +1,55 @@
+.p6-people-page {
+  display: grid;
+  gap: var(--fs-space-8);
+  max-width: 58rem;
+  margin: 0 auto;
+  padding-block: var(--fs-space-8);
+}
+
+.p6-people-page section {
+  display: grid;
+  gap: var(--fs-space-3);
+}
+
+.p6-person-card {
+  padding: var(--fs-space-3);
+}
+
+.p6-pairing-code {
+  padding: var(--fs-space-3);
+  background: var(--fs-surface-muted);
+}
+
+.p6-pairing-code code {
+  overflow-wrap: anywhere;
+  color: var(--fs-text-primary);
+  font-weight: 700;
+}
+
+.p6-pairing-input {
+  display: grid;
+  gap: var(--fs-space-2);
+}
+
+.p6-sr-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 42rem) {
+  .p6-people-page {
+    padding-inline: var(--fs-space-4);
+  }
+
+  .p6-person-card .fs-person-row {
+    align-items: flex-start;
+  }
+
+  .p6-person-card .fs-person-row__action {
+    margin-top: var(--fs-space-2);
+  }
+}

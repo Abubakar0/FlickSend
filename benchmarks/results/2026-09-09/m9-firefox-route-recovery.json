@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M9",
+  "kind": "browser-route-recovery-qualification",
+  "generatedAt": "2026-09-09T12:45:59.481Z",
+  "target": "m9-firefox-route-recovery",
+  "environment": {
+    "realBrowser": true,
+    "automated": true,
+    "emulated": false,
+    "automationProtocol": "WEBDRIVER_BIDI",
+    "headless": true,
+    "hostOperatingSystem": "Windows_NT",
+    "hostOperatingSystemVersion": "10.0.19045",
+    "hostArchitecture": "x64"
+  },
+  "browser": {
+    "name": "FIREFOX",
+    "version": "155.0.1",
+    "userAgentVersion": "155.0",
+    "engine": "GECKO",
+    "operatingSystem": "WINDOWS",
+    "operatingSystemVersion": "10.0",
+    "deviceClass": "DESKTOP",
+    "architecture": null
+  },
+  "qualificationResults": {
+    "attempted": false,
+    "routeRecovery": "NOT_TESTED",
+    "reason": "Forced relay did not establish, so direct-to-relay replacement was not eligible."
+  },
+  "limitations": [
+    "Firefox stable was automated through its standard WebDriver BiDi endpoint, not Playwright's patched Firefox protocol.",
+    "The local Firefox direct route was available before the separate direct-to-relay recovery qualification.",
+    "File input uses a deterministic automation fixture; no native source picker interaction occurred.",
+    "Firefox lacks a qualified selected streaming external destination in this run; bounded OPFS remains fixture infrastructure only.",
+    "StreamPack coverage uses the bounded virtual structural fixture because real directory-picker evidence remains assisted.",
+    "Native picker permissions, permission revocation, refresh, browser restart, backgrounding, screen lock, and sleep were not exercised.",
+    "Local direct transfer completed, but forced local coturn relay exhausted safely with FS_ROUTE_EXHAUSTED; TURN and direct-to-relay recovery are not supported in this recorded Windows environment."
+  ]
+}

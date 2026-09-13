@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AuthProvider {
+  CLERK
+}
+
+enum RelationshipStatus {
+  INVITED
+  CONNECTED
+  BLOCKED
+}
+
+enum TransferDirection {
+  SENT
+  RECEIVED
+}
+
+enum TransferStatus {
+  WAITING_FOR_RECIPIENT
+  WAITING_FOR_SENDER
+  CONNECTING
+  TRANSFERRING
+  RECONNECTING
+  VERIFYING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+enum TransferSourceKind {
+  SINGLE_FILE
+  MULTIPLE_FILES
+  FOLDER
+}
+
+enum FailureCategory {
+  BROWSER
+  DESTINATION
+  INTEGRITY
+  NETWORK
+  SERVICE
+  SOURCE
+  UNKNOWN
+}
+
+model Account {
+  id              String              @id @default(uuid()) @db.Uuid
+  authProvider    AuthProvider
+  providerSubject String              @db.Text
+  displayName     String?             @db.Text
+  createdAt       DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime            @updatedAt @db.Timestamptz(3)
+  relationshipLow PersonRelationship[] @relation("RelationshipLow")
+  relationshipHigh PersonRelationship[] @relation("RelationshipHigh")
+  invitationsSent PersonRelationship[] @relation("RelationshipInitiator")
+  blocksPlaced    PersonRelationship[] @relation("RelationshipBlocker")
+  ownedTransfers  TransferRecord[]    @relation("TransferOwner")
+  peerTransfers   TransferRecord[]    @relation("TransferPeer")
+
+  @@unique([authProvider, providerSubject])
+}
+
+model PersonRelationship {
+  id                   String             @id @default(uuid()) @db.Uuid
+  accountLowId         String             @db.Uuid
+  accountHighId        String             @db.Uuid
+  initiatedByAccountId String?            @db.Uuid
+  blockedByAccountId   String?            @db.Uuid
+  status               RelationshipStatus
+  createdAt            DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime           @updatedAt @db.Timestamptz(3)
+  accountLow           Account            @relation("RelationshipLow", fields: [accountLowId], references: [id], onDelete: Restrict)
+  accountHigh          Account            @relation("RelationshipHigh", fields: [accountHighId], references: [id], onDelete: Restrict)
+  initiatedBy          Account?           @relation("RelationshipInitiator", fields: [initiatedByAccountId], references: [id], onDelete: Restrict)
+  blockedBy            Account?           @relation("RelationshipBlocker", fields: [blockedByAccountId], references: [id], onDelete: Restrict)
+
+  @@unique([accountLowId, accountHighId])
+  @@index([accountLowId, updatedAt])
+  @@index([accountHighId, updatedAt])
+}
+
+model TransferRecord {
+  id             String           @id @default(uuid()) @db.Uuid
+  ownerAccountId String           @db.Uuid
+  peerAccountId  String?          @db.Uuid
+  lifecycleKey   String           @db.VarChar(96)
+  direction      TransferDirection
+  status         TransferStatus
+  sourceKind     TransferSourceKind
+  totalBytes     BigInt?
+  fileCount      Int?
+  folderCount    Int?
+  failureCategory FailureCategory?
+  activeMetadata Json?
+  speedProof     Json?
+  startedAt      DateTime         @default(now()) @db.Timestamptz(3)
+  endedAt        DateTime?        @db.Timestamptz(3)
+  revision       Int              @default(0)
+  createdAt      DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime         @updatedAt @db.Timestamptz(3)
+  owner          Account          @relation("TransferOwner", fields: [ownerAccountId], references: [id], onDelete: Restrict)
+  peer           Account?         @relation("TransferPeer", fields: [peerAccountId], references: [id], onDelete: Restrict)
+
+  @@unique([ownerAccountId, lifecycleKey])
+  @@index([ownerAccountId, createdAt])
+  @@index([ownerAccountId, id])
+}

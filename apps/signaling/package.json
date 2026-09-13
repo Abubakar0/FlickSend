@@ -1,0 +1,21 @@
+{
+  "name": "@flicksend/signaling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "dev": "wrangler dev --local --port 8787",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@flicksend/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260904.1",
+    "vitest": "5.0.0",
+    "wrangler": "4.129.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M3",
+  "kind": "measurement",
+  "createdAt": "2026-09-05",
+  "datasetId": "zero-1g",
+  "datasetSizeBytes": 1073741824,
+  "environment": {
+    "senderHost": "HP ZBook Studio G5",
+    "receiverHost": "same Windows 10 Pro host",
+    "browser": "Codex in-app Chromium; exact browser version unavailable",
+    "route": "same-host WebRTC loopback; candidate diagnostics unavailable",
+    "sourceStorage": "local file source",
+    "destinationStorage": "Chromium OPFS benchmark destination"
+  },
+  "configuration": {
+    "framePayloadBytes": 262144,
+    "readAheadBytes": 1048576,
+    "sendLowWaterBytes": 4194304,
+    "sendHighWaterBytes": 16777216,
+    "receiveWindowBytes": 16777216,
+    "writeBatchBytes": 1048576,
+    "channelCount": 1,
+    "workerMode": "main-thread"
+  },
+  "transfer": {
+    "effectiveFramePayloadBytes": 262124,
+    "elapsedMs": 90290,
+    "frameCount": 4097,
+    "averageThroughputBps": 12071250,
+    "receiverAverageThroughputBps": 11905000,
+    "peakThroughputBps": 29565000,
+    "receiverPeakThroughputBps": 15080000,
+    "stalledMs": 0,
+    "timeToFirstDestinationWriteMs": 66.6,
+    "receiveQueueBytesAtFinalSnapshot": 0,
+    "senderBufferedAmountBytesAtFinalSnapshot": 0
+  },
+  "completionState": "COMPLETED",
+  "integrity": "VERIFIED",
+  "measurementSource": "Live Engine Lab metrics transcribed after verified completion.",
+  "limitations": [
+    "Same-host loopback evidence only.",
+    "OPFS is a benchmark destination, not the chosen-destination workflow.",
+    "CPU, memory, disk baseline, latency, and loss were not measured per transfer."
+  ],
+  "privacy": "No source filename, source path, or payload bytes are included."
+}

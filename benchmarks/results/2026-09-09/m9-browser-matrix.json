@@ -1,0 +1,738 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M9",
+  "generatedAt": "2026-09-09T14:43:51.771Z",
+  "host": {
+    "operatingSystem": "Windows_NT",
+    "operatingSystemVersion": "10.0.19045",
+    "architecture": "x64"
+  },
+  "evidencePolicy": {
+    "realBrowserOnly": true,
+    "webKitIsSafari": false,
+    "mobileEmulationIsRealDevice": false,
+    "unavailableEnvironment": "SKIPPED"
+  },
+  "records": [
+    {
+      "target": "m9-chrome-windows",
+      "platform": "Windows desktop",
+      "browser": {
+        "name": "CHROME",
+        "version": "152.0.7977.83",
+        "userAgentVersion": "152.0.0.0",
+        "engine": "BLINK",
+        "operatingSystem": "WINDOWS",
+        "operatingSystemVersion": "10.0",
+        "deviceClass": "DESKTOP",
+        "architecture": null
+      },
+      "supportTier": "SUPPORTED_WITH_LIMITATIONS",
+      "qualificationStatus": "PASS",
+      "evidence": [
+        "m9-chrome-windows.json",
+        "m9-chrome-turn.json",
+        "m9-chrome-route-recovery.json",
+        "m9-chrome-windows-lifecycle.json"
+      ],
+      "capabilities": {
+        "schemaVersion": 1,
+        "detectedAt": "2026-09-09T08:44:05.100Z",
+        "browser": "CHROME",
+        "browserVersion": "152.0.0.0",
+        "engine": "BLINK",
+        "operatingSystem": "WINDOWS",
+        "operatingSystemVersion": "10.0",
+        "deviceClass": "DESKTOP",
+        "architecture": null,
+        "webRtcDataChannel": "AVAILABLE",
+        "webRtcStats": "AVAILABLE",
+        "fileSelection": "AVAILABLE",
+        "directorySelection": "AVAILABLE",
+        "dragDropFiles": "AVAILABLE",
+        "dragDropDirectories": "AVAILABLE",
+        "directFileWrite": "AVAILABLE",
+        "directDirectoryWrite": "AVAILABLE",
+        "opfs": "AVAILABLE",
+        "persistentStorage": "AVAILABLE",
+        "persistentStorageState": "NOT_PERSISTED",
+        "storageEstimate": {
+          "availability": "AVAILABLE",
+          "quotaBytes": 5368709120,
+          "usageBytes": 0
+        },
+        "webCryptoSha256": "AVAILABLE",
+        "webWorkers": "AVAILABLE",
+        "routeStats": "AVAILABLE",
+        "rttStats": "UNKNOWN",
+        "availableOutgoingBitrate": "UNKNOWN",
+        "wakeLock": "AVAILABLE",
+        "backgroundBehavior": "UNKNOWN",
+        "supportedTransferModes": {
+          "canSendFiles": "AVAILABLE",
+          "canSendFolders": "AVAILABLE",
+          "canReceiveSingleFiles": "AVAILABLE",
+          "canReceiveFolders": "AVAILABLE",
+          "canResumeInSession": "AVAILABLE",
+          "canResumeAfterReload": "UNKNOWN",
+          "canUseDirectDestination": "AVAILABLE",
+          "canUseTurn": "AVAILABLE",
+          "canShowDetailedHealth": "AVAILABLE"
+        }
+      },
+      "qualificationResults": {
+        "m5SingleFile": {
+          "delivered": true,
+          "manifestRootVerified": true,
+          "route": "DIRECT / DIRECT_HOST / udp",
+          "health": {
+            "timestampMs": 7286.5,
+            "transferState": "DELIVERED",
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST",
+            "currentThroughputBps": 0,
+            "rollingThroughputBps": 2660094.498176629,
+            "averageThroughputBps": 2660094.498176629,
+            "peakThroughputBps": 20495010.996768333,
+            "senderReadBps": 1149124372.302496,
+            "receiverWriteBps": null,
+            "senderBufferedAmountBytes": 0,
+            "rollingAverageBufferedAmountBytes": 2611888.5714285714,
+            "peakBufferedAmountBytes": 8391168,
+            "percentTimeAboveHighWater": 0.14285714285714285,
+            "percentTimeBelowLowWater": 0.5714285714285714,
+            "receiveQueueBytes": 0,
+            "peakReceiveQueueBytes": null,
+            "percentTimeQueueNearLimit": 0,
+            "rttMs": 1,
+            "availableOutgoingBitrateBps": null,
+            "safeBytes": 8388608,
+            "totalBytes": 8388608,
+            "routeRecoveryCount": 0,
+            "integrityRetryCount": 0,
+            "routeChangeCount": 0,
+            "timeSinceLastRouteChangeMs": 3153.5,
+            "stallDurationMs": 0,
+            "stallCount": 0,
+            "etaMs": null,
+            "healthState": "UNKNOWN",
+            "bottleneck": "INSUFFICIENT_DATA",
+            "confidence": "LOW",
+            "reasons": [
+              {
+                "code": "MISSING_MEASUREMENTS",
+                "detail": "Transfer is not actively moving payload."
+              }
+            ],
+            "measurementAvailability": {
+              "applicationPayload": "OBSERVED",
+              "sourceRead": "OBSERVED",
+              "destinationWrite": "UNAVAILABLE",
+              "senderBufferedAmount": "OBSERVED",
+              "receiveQueue": "OBSERVED",
+              "rtt": "OBSERVED",
+              "availableOutgoingBitrate": "UNAVAILABLE",
+              "webRtcBytes": "OBSERVED",
+              "route": "OBSERVED"
+            },
+            "routeHistory": [
+              {
+                "routeType": "DIRECT",
+                "routeDetail": "DIRECT_SRFLX",
+                "startedAtMs": 4133,
+                "endedAtMs": null,
+                "averageThroughputBps": null
+              }
+            ],
+            "events": [
+              {
+                "atMs": 7188.100000023842,
+                "type": "HEALTH_DEGRADED",
+                "detail": "DEGRADED"
+              },
+              {
+                "atMs": 7245.699999928474,
+                "type": "BOTTLENECK_CHANGED",
+                "detail": "NONE_DETECTED"
+              },
+              {
+                "atMs": 7245.699999928474,
+                "type": "HEALTH_GOOD",
+                "detail": "GOOD"
+              }
+            ]
+          }
+        },
+        "m5Resume": {
+          "delivered": true,
+          "transferIdStable": true,
+          "safeBytesBeforeDisconnect": 8388608,
+          "remainingBytesAtResume": 8388608,
+          "resumedPayloadBytes": 8388608,
+          "duplicateRetransmittedBytes": 0,
+          "committedBlocksRetransmitted": 0,
+          "ambiguousInflightBytesRetransmitted": 0
+        },
+        "m5CorruptionRetry": {
+          "delivered": true,
+          "retries": 1,
+          "manifestRootVerified": true
+        },
+        "m6StructuralStreamPack": {
+          "delivered": true,
+          "files": 3,
+          "directories": 3,
+          "emptyDirectoryPreserved": true,
+          "finalTreeMatch": true,
+          "manifestRootVerified": true
+        },
+        "destinationStreaming": "LIMITED",
+        "turnRelay": "PASS",
+        "routeRecovery": "PASS",
+        "backgroundLifecycle": "NOT_TESTED",
+        "browserRestart": "NOT_SUPPORTED",
+        "permissionRevocation": "NOT_TESTED",
+        "pageRefresh": "NOT_SUPPORTED",
+        "permissionAfterPicker": "NOT_TESTED",
+        "ordinaryReconnect": "NOT_TESTED",
+        "screenLockSleep": "NOT_TESTED",
+        "background": {
+          "status": "NOT_TESTED",
+          "senderVisibility": "visible",
+          "receiverVisibility": "visible",
+          "dataChannelContinuity": true,
+          "delivered": true,
+          "manifestRootVerified": true,
+          "healthStateAtCompletion": "UNKNOWN",
+          "healthReasonsAtCompletion": [
+            "MISSING_MEASUREMENTS"
+          ],
+          "transferHealth": {
+            "applicationPayload": "OBSERVED",
+            "sourceRead": "OBSERVED",
+            "destinationWrite": "UNAVAILABLE",
+            "senderBufferedAmount": "OBSERVED",
+            "receiveQueue": "OBSERVED",
+            "rtt": "OBSERVED",
+            "availableOutgoingBitrate": "UNAVAILABLE",
+            "webRtcBytes": "OBSERVED",
+            "route": "OBSERVED"
+          }
+        },
+        "refresh": {
+          "status": "NOT_SUPPORTED",
+          "verifiedCheckpointBeforeInterruption": true,
+          "checkpointSurvives": false,
+          "sourceHandle": "NOT_TESTED",
+          "destinationHandle": "NOT_TESTED",
+          "repermissionRequired": "NOT_TESTED",
+          "resumeAbility": "NOT_SUPPORTED",
+          "deliveredAfterRefresh": false
+        },
+        "restart": {
+          "status": "NOT_SUPPORTED",
+          "verifiedCheckpointBeforeInterruption": true,
+          "checkpointSurvives": false,
+          "sourceHandle": "NOT_TESTED",
+          "destinationHandle": "NOT_TESTED",
+          "repermissionRequired": "NOT_TESTED",
+          "resumeAbility": "NOT_SUPPORTED",
+          "deliveredAfterRestart": false
+        }
+      },
+      "limitations": [
+        "The M9 harness proves bounded OPFS fixture writes only; OPFS is not a production giant-payload destination.",
+        "User-selected File System Access file and directory destinations are feature-detected but require an assisted real-user permission qualification.",
+        "TURN relay and route replacement require a separate browser-specific coturn run and are not inferred from this direct qualification.",
+        "The background scenario uses headed actual-browser tabs and records visibility state, not a performance claim.",
+        "Refresh and restart use the bounded OPFS benchmark fixture; no selected external source or destination handle was present.",
+        "Native picker permission, permission revocation, screen lock, and sleep require assisted real interaction and remain unqualified."
+      ],
+      "environment": {
+        "realBrowser": true,
+        "automated": true,
+        "emulated": false,
+        "hostOperatingSystem": "Windows_NT",
+        "hostOperatingSystemVersion": "10.0.19045",
+        "hostArchitecture": "x64"
+      }
+    },
+    {
+      "target": "m9-edge-windows",
+      "platform": "Windows desktop",
+      "browser": {
+        "name": "EDGE",
+        "version": "152.0.4191.66",
+        "userAgentVersion": "152.0.0.0",
+        "engine": "BLINK",
+        "operatingSystem": "WINDOWS",
+        "operatingSystemVersion": "10.0",
+        "deviceClass": "DESKTOP",
+        "architecture": null
+      },
+      "supportTier": "SUPPORTED_WITH_LIMITATIONS",
+      "qualificationStatus": "PASS",
+      "evidence": [
+        "m9-edge-windows.json",
+        "m9-edge-turn.json",
+        "m9-edge-route-recovery.json",
+        "m9-edge-windows-lifecycle.json"
+      ],
+      "capabilities": {
+        "schemaVersion": 1,
+        "detectedAt": "2026-09-09T08:44:47.168Z",
+        "browser": "EDGE",
+        "browserVersion": "152.0.0.0",
+        "engine": "BLINK",
+        "operatingSystem": "WINDOWS",
+        "operatingSystemVersion": "10.0",
+        "deviceClass": "DESKTOP",
+        "architecture": null,
+        "webRtcDataChannel": "AVAILABLE",
+        "webRtcStats": "AVAILABLE",
+        "fileSelection": "AVAILABLE",
+        "directorySelection": "AVAILABLE",
+        "dragDropFiles": "AVAILABLE",
+        "dragDropDirectories": "AVAILABLE",
+        "directFileWrite": "AVAILABLE",
+        "directDirectoryWrite": "AVAILABLE",
+        "opfs": "AVAILABLE",
+        "persistentStorage": "AVAILABLE",
+        "persistentStorageState": "NOT_PERSISTED",
+        "storageEstimate": {
+          "availability": "AVAILABLE",
+          "quotaBytes": 6442450944,
+          "usageBytes": 0
+        },
+        "webCryptoSha256": "AVAILABLE",
+        "webWorkers": "AVAILABLE",
+        "routeStats": "AVAILABLE",
+        "rttStats": "UNKNOWN",
+        "availableOutgoingBitrate": "UNKNOWN",
+        "wakeLock": "AVAILABLE",
+        "backgroundBehavior": "UNKNOWN",
+        "supportedTransferModes": {
+          "canSendFiles": "AVAILABLE",
+          "canSendFolders": "AVAILABLE",
+          "canReceiveSingleFiles": "AVAILABLE",
+          "canReceiveFolders": "AVAILABLE",
+          "canResumeInSession": "AVAILABLE",
+          "canResumeAfterReload": "UNKNOWN",
+          "canUseDirectDestination": "AVAILABLE",
+          "canUseTurn": "AVAILABLE",
+          "canShowDetailedHealth": "AVAILABLE"
+        }
+      },
+      "qualificationResults": {
+        "m5SingleFile": {
+          "delivered": true,
+          "manifestRootVerified": true,
+          "route": "DIRECT / DIRECT_HOST / udp",
+          "health": {
+            "timestampMs": 7028,
+            "transferState": "DELIVERED",
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST",
+            "currentThroughputBps": 0,
+            "rollingThroughputBps": 2360195.8247056482,
+            "averageThroughputBps": 2360195.8247056482,
+            "peakThroughputBps": 19784452.83018868,
+            "senderReadBps": 1165084436.7283952,
+            "receiverWriteBps": null,
+            "senderBufferedAmountBytes": 0,
+            "rollingAverageBufferedAmountBytes": 2800311.7333333334,
+            "peakBufferedAmountBytes": 8391168,
+            "percentTimeAboveHighWater": 0.13333333333333333,
+            "percentTimeBelowLowWater": 0.5333333333333333,
+            "receiveQueueBytes": 0,
+            "peakReceiveQueueBytes": null,
+            "percentTimeQueueNearLimit": 0,
+            "rttMs": 1,
+            "availableOutgoingBitrateBps": null,
+            "safeBytes": 8388608,
+            "totalBytes": 8388608,
+            "routeRecoveryCount": 0,
+            "integrityRetryCount": 0,
+            "routeChangeCount": 0,
+            "timeSinceLastRouteChangeMs": 3554.1999999284744,
+            "stallDurationMs": 3130.1999999284744,
+            "stallCount": 1,
+            "etaMs": null,
+            "healthState": "STALLED",
+            "bottleneck": "INSUFFICIENT_DATA",
+            "confidence": "LOW",
+            "reasons": [
+              {
+                "code": "MISSING_MEASUREMENTS",
+                "detail": "Transfer is not actively moving payload."
+              }
+            ],
+            "measurementAvailability": {
+              "applicationPayload": "OBSERVED",
+              "sourceRead": "OBSERVED",
+              "destinationWrite": "UNAVAILABLE",
+              "senderBufferedAmount": "OBSERVED",
+              "receiveQueue": "OBSERVED",
+              "rtt": "OBSERVED",
+              "availableOutgoingBitrate": "UNAVAILABLE",
+              "webRtcBytes": "OBSERVED",
+              "route": "OBSERVED"
+            },
+            "routeHistory": [
+              {
+                "routeType": "DIRECT",
+                "routeDetail": "DIRECT_SRFLX",
+                "startedAtMs": 3473.8000000715256,
+                "endedAtMs": null,
+                "averageThroughputBps": null
+              }
+            ],
+            "events": [
+              {
+                "atMs": 6526.399999976158,
+                "type": "HEALTH_DEGRADED",
+                "detail": "DEGRADED"
+              },
+              {
+                "atMs": 6929,
+                "type": "STALL_STARTED",
+                "detail": "No payload progress during active transfer."
+              }
+            ]
+          }
+        },
+        "m5Resume": {
+          "delivered": true,
+          "transferIdStable": true,
+          "safeBytesBeforeDisconnect": 8388608,
+          "remainingBytesAtResume": 8388608,
+          "resumedPayloadBytes": 8388608,
+          "duplicateRetransmittedBytes": 0,
+          "committedBlocksRetransmitted": 0,
+          "ambiguousInflightBytesRetransmitted": 0
+        },
+        "m5CorruptionRetry": {
+          "delivered": true,
+          "retries": 1,
+          "manifestRootVerified": true
+        },
+        "m6StructuralStreamPack": {
+          "delivered": true,
+          "files": 3,
+          "directories": 3,
+          "emptyDirectoryPreserved": true,
+          "finalTreeMatch": true,
+          "manifestRootVerified": true
+        },
+        "destinationStreaming": "LIMITED",
+        "turnRelay": "PASS",
+        "routeRecovery": "PASS",
+        "backgroundLifecycle": "NOT_TESTED",
+        "browserRestart": "NOT_SUPPORTED",
+        "permissionRevocation": "NOT_TESTED",
+        "pageRefresh": "NOT_SUPPORTED",
+        "permissionAfterPicker": "NOT_TESTED",
+        "ordinaryReconnect": "NOT_TESTED",
+        "screenLockSleep": "NOT_TESTED",
+        "background": {
+          "status": "NOT_TESTED",
+          "senderVisibility": "visible",
+          "receiverVisibility": "visible",
+          "dataChannelContinuity": true,
+          "delivered": true,
+          "manifestRootVerified": true,
+          "healthStateAtCompletion": "UNKNOWN",
+          "healthReasonsAtCompletion": [
+            "MISSING_MEASUREMENTS"
+          ],
+          "transferHealth": {
+            "applicationPayload": "OBSERVED",
+            "sourceRead": "OBSERVED",
+            "destinationWrite": "UNAVAILABLE",
+            "senderBufferedAmount": "OBSERVED",
+            "receiveQueue": "OBSERVED",
+            "rtt": "OBSERVED",
+            "availableOutgoingBitrate": "UNAVAILABLE",
+            "webRtcBytes": "OBSERVED",
+            "route": "OBSERVED"
+          }
+        },
+        "refresh": {
+          "status": "NOT_SUPPORTED",
+          "verifiedCheckpointBeforeInterruption": true,
+          "checkpointSurvives": false,
+          "sourceHandle": "NOT_TESTED",
+          "destinationHandle": "NOT_TESTED",
+          "repermissionRequired": "NOT_TESTED",
+          "resumeAbility": "NOT_SUPPORTED",
+          "deliveredAfterRefresh": false
+        },
+        "restart": {
+          "status": "NOT_SUPPORTED",
+          "verifiedCheckpointBeforeInterruption": true,
+          "checkpointSurvives": false,
+          "sourceHandle": "NOT_TESTED",
+          "destinationHandle": "NOT_TESTED",
+          "repermissionRequired": "NOT_TESTED",
+          "resumeAbility": "NOT_SUPPORTED",
+          "deliveredAfterRestart": false
+        }
+      },
+      "limitations": [
+        "The M9 harness proves bounded OPFS fixture writes only; OPFS is not a production giant-payload destination.",
+        "User-selected File System Access file and directory destinations are feature-detected but require an assisted real-user permission qualification.",
+        "TURN relay and route replacement require a separate browser-specific coturn run and are not inferred from this direct qualification.",
+        "The background scenario uses headed actual-browser tabs and records visibility state, not a performance claim.",
+        "Refresh and restart use the bounded OPFS benchmark fixture; no selected external source or destination handle was present.",
+        "Native picker permission, permission revocation, screen lock, and sleep require assisted real interaction and remain unqualified."
+      ],
+      "environment": {
+        "realBrowser": true,
+        "automated": true,
+        "emulated": false,
+        "hostOperatingSystem": "Windows_NT",
+        "hostOperatingSystemVersion": "10.0.19045",
+        "hostArchitecture": "x64"
+      }
+    },
+    {
+      "target": "m9-firefox-windows",
+      "platform": "Windows desktop",
+      "browser": {
+        "name": "FIREFOX",
+        "version": "155.0.1",
+        "userAgentVersion": "155.0",
+        "engine": "GECKO",
+        "operatingSystem": "WINDOWS",
+        "operatingSystemVersion": "10.0",
+        "deviceClass": "DESKTOP",
+        "architecture": null
+      },
+      "supportTier": "SUPPORTED_WITH_LIMITATIONS",
+      "qualificationStatus": "PASS",
+      "evidence": [
+        "m9-firefox-windows.json",
+        "m9-firefox-turn.json",
+        "m9-firefox-route-recovery.json"
+      ],
+      "capabilities": {
+        "schemaVersion": 1,
+        "detectedAt": "2026-09-09T12:45:15.963Z",
+        "browser": "FIREFOX",
+        "browserVersion": "155.0",
+        "engine": "GECKO",
+        "operatingSystem": "WINDOWS",
+        "operatingSystemVersion": "10.0",
+        "deviceClass": "DESKTOP",
+        "architecture": null,
+        "webRtcDataChannel": "AVAILABLE",
+        "webRtcStats": "AVAILABLE",
+        "fileSelection": "AVAILABLE",
+        "directorySelection": "UNAVAILABLE",
+        "dragDropFiles": "AVAILABLE",
+        "dragDropDirectories": "AVAILABLE",
+        "directFileWrite": "UNAVAILABLE",
+        "directDirectoryWrite": "UNAVAILABLE",
+        "opfs": "AVAILABLE",
+        "persistentStorage": "AVAILABLE",
+        "persistentStorageState": "NOT_PERSISTED",
+        "storageEstimate": {
+          "availability": "AVAILABLE",
+          "quotaBytes": 10737418240,
+          "usageBytes": 0
+        },
+        "webCryptoSha256": "AVAILABLE",
+        "webWorkers": "AVAILABLE",
+        "routeStats": "AVAILABLE",
+        "rttStats": "UNKNOWN",
+        "availableOutgoingBitrate": "UNKNOWN",
+        "wakeLock": "AVAILABLE",
+        "backgroundBehavior": "UNKNOWN",
+        "supportedTransferModes": {
+          "canSendFiles": "AVAILABLE",
+          "canSendFolders": "UNAVAILABLE",
+          "canReceiveSingleFiles": "UNAVAILABLE",
+          "canReceiveFolders": "UNAVAILABLE",
+          "canResumeInSession": "UNAVAILABLE",
+          "canResumeAfterReload": "UNKNOWN",
+          "canUseDirectDestination": "UNAVAILABLE",
+          "canUseTurn": "AVAILABLE",
+          "canShowDetailedHealth": "AVAILABLE"
+        }
+      },
+      "qualificationResults": {
+        "capabilityDetection": "PASS",
+        "directWebRtc": "PASS",
+        "directWebRtcTerminalError": null,
+        "turnRelay": "NOT_SUPPORTED",
+        "turnRelayTerminalError": "FS_ROUTE_EXHAUSTED",
+        "routeRecovery": "NOT_TESTED",
+        "m5SingleFile": {
+          "delivered": true,
+          "manifestRootVerified": true,
+          "route": "DIRECT / DIRECT_SRFLX / udp",
+          "health": {
+            "timestampMs": 2304,
+            "transferState": "DELIVERED",
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_SRFLX",
+            "currentThroughputBps": 11053216.46746348,
+            "rollingThroughputBps": 6641811.559778306,
+            "averageThroughputBps": 6641811.559778306,
+            "peakThroughputBps": 16100975.047984645,
+            "senderReadBps": 4194304000,
+            "receiverWriteBps": null,
+            "senderBufferedAmountBytes": 0,
+            "rollingAverageBufferedAmountBytes": 939636,
+            "peakBufferedAmountBytes": 8391168,
+            "percentTimeAboveHighWater": 0.1111111111111111,
+            "percentTimeBelowLowWater": 0.8888888888888888,
+            "receiveQueueBytes": 0,
+            "peakReceiveQueueBytes": null,
+            "percentTimeQueueNearLimit": 0,
+            "rttMs": 0,
+            "availableOutgoingBitrateBps": null,
+            "safeBytes": 8388608,
+            "totalBytes": 8388608,
+            "routeRecoveryCount": 0,
+            "integrityRetryCount": 0,
+            "routeChangeCount": 0,
+            "timeSinceLastRouteChangeMs": 1263,
+            "stallDurationMs": 0,
+            "stallCount": 0,
+            "etaMs": null,
+            "healthState": "UNKNOWN",
+            "bottleneck": "INSUFFICIENT_DATA",
+            "confidence": "LOW",
+            "reasons": [
+              {
+                "code": "MISSING_MEASUREMENTS",
+                "detail": "Transfer is not actively moving payload."
+              }
+            ],
+            "measurementAvailability": {
+              "applicationPayload": "OBSERVED",
+              "sourceRead": "OBSERVED",
+              "destinationWrite": "UNAVAILABLE",
+              "senderBufferedAmount": "OBSERVED",
+              "receiveQueue": "OBSERVED",
+              "rtt": "OBSERVED",
+              "availableOutgoingBitrate": "UNAVAILABLE",
+              "webRtcBytes": "OBSERVED",
+              "route": "OBSERVED"
+            },
+            "routeHistory": [
+              {
+                "routeType": "DIRECT",
+                "routeDetail": "DIRECT_SRFLX",
+                "startedAtMs": 1041,
+                "endedAtMs": null,
+                "averageThroughputBps": null
+              }
+            ],
+            "events": []
+          },
+          "source": "AUTOMATION_GENERATED_FILE",
+          "destination": "BOUNDED_OPFS_FIXTURE"
+        },
+        "m5Resume": {
+          "delivered": true,
+          "transferIdStable": true,
+          "safeBytesBeforeDisconnect": 8388608,
+          "remainingBytesAtResume": 8388608,
+          "resumedPayloadBytes": 8388608,
+          "duplicateRetransmittedBytes": 0,
+          "committedBlocksRetransmitted": 0,
+          "ambiguousInflightBytesRetransmitted": 0
+        },
+        "m5CorruptionRetry": {
+          "delivered": true,
+          "retries": 1,
+          "manifestRootVerified": true
+        },
+        "m6StructuralStreamPack": {
+          "delivered": true,
+          "files": 3,
+          "directories": 3,
+          "emptyDirectoryPreserved": true,
+          "finalTreeMatch": true,
+          "manifestRootVerified": true,
+          "source": "VIRTUAL_STRUCTURAL_FIXTURE",
+          "destination": "BOUNDED_OPFS_FIXTURE"
+        },
+        "destinationStreaming": "LIMITED",
+        "backgroundLifecycle": "NOT_TESTED",
+        "pageRefresh": "NOT_TESTED",
+        "browserRestart": "NOT_TESTED",
+        "permissionAfterPicker": "NOT_TESTED",
+        "ordinaryReconnect": "NOT_TESTED",
+        "permissionRevocation": "NOT_TESTED",
+        "screenLockSleep": "NOT_TESTED"
+      },
+      "limitations": [
+        "Firefox stable was automated through its standard WebDriver BiDi endpoint, not Playwright's patched Firefox protocol.",
+        "The local Firefox direct route was available before the separate direct-to-relay recovery qualification.",
+        "File input uses a deterministic automation fixture; no native source picker interaction occurred.",
+        "Firefox lacks a qualified selected streaming external destination in this run; bounded OPFS remains fixture infrastructure only.",
+        "StreamPack coverage uses the bounded virtual structural fixture because real directory-picker evidence remains assisted.",
+        "Native picker permissions, permission revocation, refresh, browser restart, backgrounding, screen lock, and sleep were not exercised.",
+        "Local direct transfer completed, but forced local coturn relay exhausted safely with FS_ROUTE_EXHAUSTED; TURN and direct-to-relay recovery are not supported in this recorded Windows environment."
+      ],
+      "environment": {
+        "realBrowser": true,
+        "automated": true,
+        "emulated": false,
+        "automationProtocol": "WEBDRIVER_BIDI",
+        "headless": true,
+        "hostOperatingSystem": "Windows_NT",
+        "hostOperatingSystemVersion": "10.0.19045",
+        "hostArchitecture": "x64"
+      }
+    },
+    {
+      "target": "m9-chrome-macos",
+      "browser": "CHROME",
+      "platform": "macOS desktop",
+      "supportTier": "NOT_TESTED",
+      "qualificationStatus": "SKIPPED",
+      "reason": "No matching real host or device environment is available to this qualification run.",
+      "evidence": []
+    },
+    {
+      "target": "m9-firefox-macos",
+      "browser": "FIREFOX",
+      "platform": "macOS desktop",
+      "supportTier": "NOT_TESTED",
+      "qualificationStatus": "SKIPPED",
+      "reason": "No matching real host or device environment is available to this qualification run.",
+      "evidence": []
+    },
+    {
+      "target": "m9-safari-macos",
+      "browser": "SAFARI",
+      "platform": "macOS desktop",
+      "supportTier": "NOT_TESTED",
+      "qualificationStatus": "SKIPPED",
+      "reason": "No matching real host or device environment is available to this qualification run.",
+      "evidence": []
+    },
+    {
+      "target": "m9-chrome-android",
+      "browser": "CHROME",
+      "platform": "Android device",
+      "supportTier": "NOT_TESTED",
+      "qualificationStatus": "SKIPPED",
+      "reason": "No matching real host or device environment is available to this qualification run.",
+      "evidence": []
+    },
+    {
+      "target": "m9-safari-ios",
+      "browser": "SAFARI",
+      "platform": "iOS/iPadOS device",
+      "supportTier": "NOT_TESTED",
+      "qualificationStatus": "SKIPPED",
+      "reason": "No matching real host or device environment is available to this qualification run.",
+      "evidence": []
+    }
+  ]
+}

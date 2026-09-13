@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M6",
+  "kind": "browser-webrtc-closeout-qualification",
+  "result": "PASS",
+  "protocolVersion": 5,
+  "environment": {
+    "runner": "Playwright Chromium",
+    "topology": "two isolated browser contexts",
+    "application": "local Engine Lab with local Wrangler signaling",
+    "qualificationType": "functional correctness, not physical performance"
+  },
+  "command": "pnpm test:e2e",
+  "testResult": {
+    "total": 18,
+    "passed": 13,
+    "skipped": 5,
+    "duration": "6.8m"
+  },
+  "rawArtifacts": "The eight m6-browser-*.json files beside this record are verbatim copies of test-results/m6-evidence from the passing run.",
+  "qualifications": [
+    {
+      "artifact": "m6-browser-structural.json",
+      "scenario": "browser-webrtc-structural-folder",
+      "generatedAt": "2026-09-07T21:05:39.888Z",
+      "files": 3,
+      "directories": 3,
+      "payloadBytes": 8,
+      "delivered": true,
+      "manifestRootVerified": true,
+      "finalTreeMatch": true
+    },
+    {
+      "artifact": "m6-browser-10k.json",
+      "scenario": "browser-webrtc-10000-files-opfs",
+      "generatedAt": "2026-09-07T21:09:32.119Z",
+      "files": 10000,
+      "directories": 103,
+      "payloadBytes": 49598976,
+      "manifestBytes": 1147646,
+      "writerPeak": 16,
+      "delivered": true,
+      "manifestRootVerified": true,
+      "finalTreeMatch": true
+    },
+    {
+      "artifact": "m6-browser-mixed.json",
+      "scenario": "browser-webrtc-mixed-folder-opfs",
+      "generatedAt": "2026-09-07T21:09:42.320Z",
+      "files": 131,
+      "directories": 5,
+      "payloadBytes": 17304188,
+      "manifestBytes": 14563,
+      "writerPeak": 16,
+      "delivered": true,
+      "manifestRootVerified": true,
+      "finalTreeMatch": true
+    },
+    {
+      "artifact": "m6-browser-corruption-retry.json",
+      "scenario": "browser-webrtc-payload-corruption-retry",
+      "generatedAt": "2026-09-07T21:09:44.626Z",
+      "integrityRetries": 1,
+      "delivered": true,
+      "manifestRootVerified": true
+    },
+    {
+      "artifact": "m6-browser-single-resume.json",
+      "scenario": "browser-webrtc-mixed-folder-resume",
+      "generatedAt": "2026-09-07T21:10:04.120Z",
+      "transferIdStable": true,
+      "reconnectCount": 1,
+      "reconciliationMs": 591.8,
+      "haveVerifiedBlocksObserved": true,
+      "safeBytesBeforeDisconnect": 8388608,
+      "remainingBytesAtResume": 8915580,
+      "resumedPayloadBytes": 8915580,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 8388608,
+      "delivered": true,
+      "manifestRootVerified": true,
+      "finalTreeMatch": true
+    },
+    {
+      "artifact": "m6-browser-multi-resume.json",
+      "scenario": "browser-webrtc-folder-multi-interruption",
+      "generatedAt": "2026-09-07T21:10:51.023Z",
+      "transferIdStable": true,
+      "reconnectCount": 3,
+      "reconciliationMs": 1188.5,
+      "interruptionSafeByteThresholds": [8388608, 25165824, 41943040],
+      "safeBytesBeforeDisconnect": 41943040,
+      "remainingBytesAtResume": 6818428,
+      "resumedPayloadBytes": 55579896,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 23595644,
+      "delivered": true,
+      "manifestRootVerified": true,
+      "finalTreeMatch": true
+    },
+    {
+      "artifact": "m6-browser-source-mutation.json",
+      "scenario": "browser-webrtc-source-mutation-after-interruption",
+      "generatedAt": "2026-09-07T21:11:05.842Z",
+      "expectedFailure": "FS_STREAMPACK_SOURCE_CHANGED",
+      "delivered": false
+    },
+    {
+      "artifact": "m6-browser-destination-mutation.json",
+      "scenario": "browser-webrtc-destination-mutation-after-interruption",
+      "generatedAt": "2026-09-07T21:11:21.276Z",
+      "expectedFailure": "FS_STREAMPACK_DESTINATION_CHANGED",
+      "delivered": false
+    }
+  ],
+  "skippedQualifications": [
+    {
+      "test": "m2-large.spec.ts",
+      "reason": "FLICKSEND_M2_BENCHMARK_FILE was not supplied.",
+      "classification": "manual physical large-file benchmark; not M6 functional evidence"
+    },
+    {
+      "test": "m4b-large.spec.ts",
+      "reason": "A supported 1 or 10 GiB fixture, expected byte size, and 10/50/90% interruption point were not supplied.",
+      "classification": "environment-provisioned M4B long-run qualification; not M6 functional evidence"
+    },
+    {
+      "test": "m4b-multi-interruption.spec.ts",
+      "reason": "FLICKSEND_M4B_MULTI_BENCHMARK_FILE was not supplied.",
+      "classification": "environment-provisioned 1 GiB M4B qualification; not M6 functional evidence"
+    },
+    {
+      "test": "m5-qualification.spec.ts: normal 1 GiB",
+      "reason": "FLICKSEND_M5_BENCHMARK_FILE was not supplied.",
+      "classification": "environment-provisioned M5 long-run integrity qualification; not M6 functional evidence"
+    },
+    {
+      "test": "m5-qualification.spec.ts: 1 GiB resume",
+      "reason": "FLICKSEND_M5_BENCHMARK_FILE was not supplied.",
+      "classification": "environment-provisioned M5 long-run integrity qualification; not M6 functional evidence"
+    }
+  ],
+  "limitations": [
+    "M3 physical performance qualification remains deferred.",
+    "M4 10 GiB long-run qualification remains environmental-timeout/deferred evidence.",
+    "This record makes no throughput, memory, cross-browser, NAT, TURN, or Internet-route claim."
+  ]
+}

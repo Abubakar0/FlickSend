@@ -1,0 +1,34 @@
+{
+  "name": "@flicksend/engine-lab",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint . --max-warnings 0",
+    "predev": "pnpm --filter @flicksend/database build && pnpm --filter @flicksend/engine-core build && pnpm --filter @flicksend/ui build",
+    "start": "next start",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "7.9.2",
+    "@flicksend/browser-capabilities": "workspace:*",
+    "@flicksend/database": "workspace:*",
+    "@flicksend/engine-core": "workspace:*",
+    "@flicksend/filesystem-browser": "workspace:*",
+    "@flicksend/protocol": "workspace:*",
+    "@flicksend/resume": "workspace:*",
+    "@flicksend/shared": "workspace:*",
+    "@flicksend/stream-pack": "workspace:*",
+    "@flicksend/ui": "workspace:*",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "vitest": "5.0.0"
+  }
+}

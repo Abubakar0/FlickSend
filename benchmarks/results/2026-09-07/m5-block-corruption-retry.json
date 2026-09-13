@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M5",
+  "protocolVersion": 4,
+  "datasetSizeBytes": 8388608,
+  "blockBytes": 8388608,
+  "integrityAlgorithm": "SHA256",
+  "blockCount": 1,
+  "blocksVerified": 1,
+  "integrityMismatchCount": 1,
+  "integrityRetryCount": 1,
+  "manifestRootMatch": true,
+  "deliveryState": "DELIVERED",
+  "result": "PASS"
+}

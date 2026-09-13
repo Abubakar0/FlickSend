@@ -1,0 +1,7 @@
+{
+  "generatedAt": "2026-09-07T21:11:05.842Z",
+  "scenario": "browser-webrtc-source-mutation-after-interruption",
+  "protocolVersion": 5,
+  "expectedFailure": "FS_STREAMPACK_SOURCE_CHANGED",
+  "delivered": false
+}

@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M8",
+  "createdAt": "2026-09-08T16:59:46.518Z",
+  "scenarios": [
+    {
+      "name": "source-read-limited",
+      "inputMode": "deterministic aggregate measurement simulation; not a physical network claim",
+      "snapshot": {
+        "timestampMs": 4000,
+        "transferState": "SENDING",
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_HOST_UDP",
+        "currentThroughputBps": 10485760,
+        "rollingThroughputBps": 10485760,
+        "averageThroughputBps": 10485760,
+        "peakThroughputBps": 10485760,
+        "senderReadBps": 10485760,
+        "receiverWriteBps": 41943040,
+        "senderBufferedAmountBytes": 1048576,
+        "rollingAverageBufferedAmountBytes": 1048576,
+        "peakBufferedAmountBytes": 1048576,
+        "percentTimeAboveHighWater": 0,
+        "percentTimeBelowLowWater": 1,
+        "receiveQueueBytes": 1048576,
+        "peakReceiveQueueBytes": 1048576,
+        "percentTimeQueueNearLimit": 0,
+        "rttMs": 10,
+        "availableOutgoingBitrateBps": 83886080,
+        "safeBytes": 0,
+        "totalBytes": 134217728,
+        "routeRecoveryCount": 0,
+        "integrityRetryCount": 0,
+        "routeChangeCount": 0,
+        "timeSinceLastRouteChangeMs": 4000,
+        "stallDurationMs": 0,
+        "stallCount": 0,
+        "etaMs": 9336.25,
+        "healthState": "DEGRADED",
+        "bottleneck": "LIKELY_SOURCE_READ_LIMIT",
+        "confidence": "HIGH",
+        "reasons": [
+          {
+            "code": "SOURCE_TRACKS_PAYLOAD",
+            "detail": "Observed source read rate closely tracks payload throughput."
+          },
+          {
+            "code": "DESTINATION_HAS_HEADROOM",
+            "detail": "Destination writes are materially above payload throughput."
+          },
+          {
+            "code": "BUFFER_DRAINS",
+            "detail": "The sender queue frequently drains below its low-water band."
+          },
+          {
+            "code": "BROWSER_BITRATE_ESTIMATE",
+            "detail": "The browser estimate is above payload throughput."
+          }
+        ],
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "OBSERVED",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "ESTIMATED",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        },
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST_UDP",
+            "startedAtMs": 0,
+            "endedAtMs": null,
+            "averageThroughputBps": null
+          }
+        ],
+        "events": [
+          {
+            "atMs": 3000,
+            "type": "HEALTH_DEGRADED",
+            "detail": "DEGRADED"
+          },
+          {
+            "atMs": 4000,
+            "type": "BOTTLENECK_CHANGED",
+            "detail": "LIKELY_SOURCE_READ_LIMIT"
+          }
+        ]
+      },
+      "speedProof": {
+        "schemaVersion": 1,
+        "transferId": "fs_tr_m8_controlled",
+        "durationMs": 4000,
+        "payloadBytes": 41943040,
+        "averageThroughputBps": 10485760,
+        "peakThroughputBps": 10485760,
+        "averageSourceReadBps": 10485760,
+        "averageDestinationWriteBps": 41943040,
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST_UDP",
+            "startedAtMs": 0,
+            "endedAtMs": null,
+            "averageThroughputBps": 10485760
+          }
+        ],
+        "routeChangeCount": 0,
+        "stallCount": 0,
+        "stallDurationMs": 0,
+        "integrityRetryCount": 0,
+        "reconnectCount": 0,
+        "dominantBottleneck": "LIKELY_SOURCE_READ_LIMIT",
+        "bottleneckConfidence": "HIGH",
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "OBSERVED",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "ESTIMATED",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        }
+      }
+    },
+    {
+      "name": "destination-write-limited",
+      "inputMode": "deterministic aggregate measurement simulation; not a physical network claim",
+      "snapshot": {
+        "timestampMs": 4000,
+        "transferState": "SENDING",
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_HOST_UDP",
+        "currentThroughputBps": 10485760,
+        "rollingThroughputBps": 10485760,
+        "averageThroughputBps": 10485760,
+        "peakThroughputBps": 10485760,
+        "senderReadBps": 41943040,
+        "receiverWriteBps": 10485760,
+        "senderBufferedAmountBytes": 1048576,
+        "rollingAverageBufferedAmountBytes": 1048576,
+        "peakBufferedAmountBytes": 1048576,
+        "percentTimeAboveHighWater": 0,
+        "percentTimeBelowLowWater": 1,
+        "receiveQueueBytes": 15728640,
+        "peakReceiveQueueBytes": 15728640,
+        "percentTimeQueueNearLimit": 1,
+        "rttMs": 10,
+        "availableOutgoingBitrateBps": 83886080,
+        "safeBytes": 0,
+        "totalBytes": 134217728,
+        "routeRecoveryCount": 0,
+        "integrityRetryCount": 0,
+        "routeChangeCount": 0,
+        "timeSinceLastRouteChangeMs": 4000,
+        "stallDurationMs": 0,
+        "stallCount": 0,
+        "etaMs": 9336.25,
+        "healthState": "DEGRADED",
+        "bottleneck": "LIKELY_DESTINATION_WRITE_LIMIT",
+        "confidence": "MEDIUM",
+        "reasons": [
+          {
+            "code": "DESTINATION_TRACKS_PAYLOAD",
+            "detail": "Completed destination writes closely track payload throughput."
+          },
+          {
+            "code": "SOURCE_HAS_HEADROOM",
+            "detail": "Observed source production is materially above payload throughput."
+          },
+          {
+            "code": "RECEIVE_QUEUE_PRESSURE",
+            "detail": "The receiver backlog frequently approaches its bounded limit."
+          }
+        ],
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "OBSERVED",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "ESTIMATED",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        },
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST_UDP",
+            "startedAtMs": 0,
+            "endedAtMs": null,
+            "averageThroughputBps": null
+          }
+        ],
+        "events": [
+          {
+            "atMs": 3000,
+            "type": "HEALTH_DEGRADED",
+            "detail": "DEGRADED"
+          },
+          {
+            "atMs": 4000,
+            "type": "BOTTLENECK_CHANGED",
+            "detail": "LIKELY_DESTINATION_WRITE_LIMIT"
+          }
+        ]
+      },
+      "speedProof": {
+        "schemaVersion": 1,
+        "transferId": "fs_tr_m8_controlled",
+        "durationMs": 4000,
+        "payloadBytes": 41943040,
+        "averageThroughputBps": 10485760,
+        "peakThroughputBps": 10485760,
+        "averageSourceReadBps": 41943040,
+        "averageDestinationWriteBps": 10485760,
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST_UDP",
+            "startedAtMs": 0,
+            "endedAtMs": null,
+            "averageThroughputBps": 10485760
+          }
+        ],
+        "routeChangeCount": 0,
+        "stallCount": 0,
+        "stallDurationMs": 0,
+        "integrityRetryCount": 0,
+        "reconnectCount": 0,
+        "dominantBottleneck": "LIKELY_DESTINATION_WRITE_LIMIT",
+        "bottleneckConfidence": "MEDIUM",
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "OBSERVED",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "ESTIMATED",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        }
+      }
+    },
+    {
+      "name": "network-backpressure-limited",
+      "inputMode": "deterministic aggregate measurement simulation; not a physical network claim",
+      "snapshot": {
+        "timestampMs": 4000,
+        "transferState": "SENDING",
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_HOST_UDP",
+        "currentThroughputBps": 10485760,
+        "rollingThroughputBps": 10485760,
+        "averageThroughputBps": 10485760,
+        "peakThroughputBps": 10485760,
+        "senderReadBps": 41943040,
+        "receiverWriteBps": 41943040,
+        "senderBufferedAmountBytes": 15728640,
+        "rollingAverageBufferedAmountBytes": 15728640,
+        "peakBufferedAmountBytes": 15728640,
+        "percentTimeAboveHighWater": 1,
+        "percentTimeBelowLowWater": 0,
+        "receiveQueueBytes": 1048576,
+        "peakReceiveQueueBytes": 1048576,
+        "percentTimeQueueNearLimit": 0,
+        "rttMs": 10,
+        "availableOutgoingBitrateBps": 11534336,
+        "safeBytes": 0,
+        "totalBytes": 134217728,
+        "routeRecoveryCount": 0,
+        "integrityRetryCount": 0,
+        "routeChangeCount": 0,
+        "timeSinceLastRouteChangeMs": 4000,
+        "stallDurationMs": 0,
+        "stallCount": 0,
+        "etaMs": 9336.25,
+        "healthState": "DEGRADED",
+        "bottleneck": "LIKELY_NETWORK_LIMIT",
+        "confidence": "HIGH",
+        "reasons": [
+          {
+            "code": "SOURCE_HAS_HEADROOM",
+            "detail": "Observed source production is materially above payload throughput."
+          },
+          {
+            "code": "DESTINATION_HAS_HEADROOM",
+            "detail": "Completed destination writes are materially above payload throughput."
+          },
+          {
+            "code": "BUFFER_PRESSURE",
+            "detail": "The sender DataChannel queue frequently approaches high water."
+          },
+          {
+            "code": "BROWSER_BITRATE_ESTIMATE",
+            "detail": "A browser-provided capacity estimate is available for this route."
+          }
+        ],
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "OBSERVED",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "ESTIMATED",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        },
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST_UDP",
+            "startedAtMs": 0,
+            "endedAtMs": null,
+            "averageThroughputBps": null
+          }
+        ],
+        "events": [
+          {
+            "atMs": 3000,
+            "type": "HEALTH_DEGRADED",
+            "detail": "DEGRADED"
+          },
+          {
+            "atMs": 4000,
+            "type": "BOTTLENECK_CHANGED",
+            "detail": "LIKELY_NETWORK_LIMIT"
+          }
+        ]
+      },
+      "speedProof": {
+        "schemaVersion": 1,
+        "transferId": "fs_tr_m8_controlled",
+        "durationMs": 4000,
+        "payloadBytes": 41943040,
+        "averageThroughputBps": 10485760,
+        "peakThroughputBps": 10485760,
+        "averageSourceReadBps": 41943040,
+        "averageDestinationWriteBps": 41943040,
+        "routeHistory": [
+          {
+            "routeType": "DIRECT",
+            "routeDetail": "DIRECT_HOST_UDP",
+            "startedAtMs": 0,
+            "endedAtMs": null,
+            "averageThroughputBps": 10485760
+          }
+        ],
+        "routeChangeCount": 0,
+        "stallCount": 0,
+        "stallDurationMs": 0,
+        "integrityRetryCount": 0,
+        "reconnectCount": 0,
+        "dominantBottleneck": "LIKELY_NETWORK_LIMIT",
+        "bottleneckConfidence": "HIGH",
+        "measurementAvailability": {
+          "applicationPayload": "OBSERVED",
+          "sourceRead": "OBSERVED",
+          "destinationWrite": "OBSERVED",
+          "senderBufferedAmount": "OBSERVED",
+          "receiveQueue": "OBSERVED",
+          "rtt": "OBSERVED",
+          "availableOutgoingBitrate": "ESTIMATED",
+          "webRtcBytes": "OBSERVED",
+          "route": "OBSERVED"
+        }
+      }
+    }
+  ]
+}

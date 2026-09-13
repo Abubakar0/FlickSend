@@ -1,0 +1,1349 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "recordType": "SAME_HOST_BROWSER_TRANSFER",
+  "capturedAt": "2026-09-10T08:26:40.071Z",
+  "evidenceClass": "SAME_HOST_PHYSICAL_BROWSER",
+  "topology": "SINGLE_MACHINE_ONLY",
+  "scenario": "resume",
+  "fixtureSizeClass": "10_GIB",
+  "healthObserver": "ENABLED",
+  "route": "DIRECT",
+  "transfer": {
+    "senderDelivered": true,
+    "receiverDelivered": true,
+    "senderManifestRootObserved": false,
+    "receiverManifestRootVerified": true,
+    "receiverFixtureBytesVerified": true,
+    "destinationFixtureMatch": true,
+    "continuity": {
+      "safeBytesBeforeDisconnect": 5368709120,
+      "remainingBytesAtResume": 5368709120,
+      "resumedPayloadBytes": 5368709120,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "senderIntegrity": {
+      "blocksVerified": 1280,
+      "integrityRetryCount": 0,
+      "integrityMismatchCount": 0,
+      "manifestRootVerified": false
+    },
+    "receiverIntegrity": {
+      "blocksVerified": 1280,
+      "integrityRetryCount": 0,
+      "integrityMismatchCount": 0,
+      "manifestRootVerified": true
+    }
+  },
+  "measurement": {
+    "durationMs": 1205530.6448000001,
+    "averagePayloadBytesPerSecond": 8906798.252135148,
+    "senderHealth": {
+      "state": "STALLED",
+      "routeType": "DIRECT",
+      "rttMs": 1,
+      "averageThroughputBps": 10247526.019085001,
+      "peakThroughputBps": 23464869.41872716,
+      "sourceReadBps": 143517673.226808,
+      "destinationWriteBps": null,
+      "senderBufferedAmountBytes": 0,
+      "receiveQueueBytes": 0,
+      "availableOutgoingBitrateBps": null,
+      "stallCount": 2,
+      "bottleneck": "INSUFFICIENT_DATA",
+      "confidence": "LOW",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "UNAVAILABLE",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "receiverHealth": {
+      "state": "UNKNOWN",
+      "routeType": "DIRECT",
+      "rttMs": 1,
+      "averageThroughputBps": 10238761.028246924,
+      "peakThroughputBps": 218453335.50347224,
+      "sourceReadBps": null,
+      "destinationWriteBps": 31828307.12451498,
+      "senderBufferedAmountBytes": 0,
+      "receiveQueueBytes": 0,
+      "availableOutgoingBitrateBps": null,
+      "stallCount": 1,
+      "bottleneck": "INSUFFICIENT_DATA",
+      "confidence": "LOW",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "UNAVAILABLE",
+        "destinationWrite": "OBSERVED",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "speedProof": {
+      "schemaVersion": 1,
+      "durationMs": 1048596.1999999993,
+      "averageThroughputBps": 10247802.584064301,
+      "peakThroughputBps": 23464869.41872716,
+      "averageSourceReadBps": 148644655.75157753,
+      "averageDestinationWriteBps": null,
+      "routeChangeCount": 0,
+      "stallCount": 2,
+      "stallDurationMs": 17860.199999999255,
+      "integrityRetryCount": 0,
+      "reconnectCount": 1,
+      "dominantBottleneck": "INSUFFICIENT_DATA",
+      "bottleneckConfidence": "LOW",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "UNAVAILABLE",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "recoveryReconciliationMs": 0.1
+  },
+  "externalBrowserProcess": {
+    "scope": "SAME_HOST_SHARED_BROWSER_PROCESS_TREE",
+    "sampleIntervalMs": 5000,
+    "sampleCount": 200,
+    "initialMemoryBytes": 1812611072,
+    "averageMemoryBytes": 1995758940.16,
+    "peakMemoryBytes": 2547650560,
+    "finalMemoryBytes": 2028863488,
+    "averageCpuPercent": 24.454611638513533,
+    "peakCpuPercent": 30.765163414903,
+    "memoryTrend": "NO_CLEAR_TREND",
+    "browserProcessCountRange": {
+      "minimum": 23,
+      "maximum": 23
+    },
+    "samples": [
+      {
+        "elapsedMs": 899,
+        "memoryBytes": 1812611072,
+        "cpuPercent": null,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 6974,
+        "memoryBytes": 1847808000,
+        "cpuPercent": 16.13940329218107,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 13046,
+        "memoryBytes": 1834778624,
+        "cpuPercent": 25.947312801932366,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 19081,
+        "memoryBytes": 1826422784,
+        "cpuPercent": 25.049192212096106,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 25176,
+        "memoryBytes": 1880702976,
+        "cpuPercent": 25.550314465408803,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 31207,
+        "memoryBytes": 1897762816,
+        "cpuPercent": 24.115852816006193,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 37349,
+        "memoryBytes": 1947017216,
+        "cpuPercent": 28.513547432975145,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 43361,
+        "memoryBytes": 1962053632,
+        "cpuPercent": 27.224197438456418,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 49449,
+        "memoryBytes": 1929400320,
+        "cpuPercent": 28.894786191414806,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 55498,
+        "memoryBytes": 1962196992,
+        "cpuPercent": 26.17512536507412,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 61576,
+        "memoryBytes": 1952305152,
+        "cpuPercent": 25.878852692771744,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 67639,
+        "memoryBytes": 1958334464,
+        "cpuPercent": 26.32944361977019,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 73698,
+        "memoryBytes": 1928507392,
+        "cpuPercent": 23.91844776365737,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 79698,
+        "memoryBytes": 1962024960,
+        "cpuPercent": 26.19357638888889,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 85774,
+        "memoryBytes": 1900777472,
+        "cpuPercent": 25.994520792187842,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 91898,
+        "memoryBytes": 1937584128,
+        "cpuPercent": 25.450583768778575,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 97995,
+        "memoryBytes": 1955385344,
+        "cpuPercent": 30.06943305450768,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 104027,
+        "memoryBytes": 1917386752,
+        "cpuPercent": 25.989859637488948,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 110103,
+        "memoryBytes": 1949159424,
+        "cpuPercent": 28.287524687294276,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 116099,
+        "memoryBytes": 1893990400,
+        "cpuPercent": 26.2979138870358,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 122145,
+        "memoryBytes": 1928753152,
+        "cpuPercent": 25.218980868894036,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 128197,
+        "memoryBytes": 1928101888,
+        "cpuPercent": 25.9254860652126,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 134257,
+        "memoryBytes": 1920094208,
+        "cpuPercent": 24.795448294829484,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 140290,
+        "memoryBytes": 1927172096,
+        "cpuPercent": 23.719369854688107,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 146352,
+        "memoryBytes": 1929277440,
+        "cpuPercent": 21.243160947981966,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 152387,
+        "memoryBytes": 1932668928,
+        "cpuPercent": 26.73208367854184,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 158531,
+        "memoryBytes": 1959153664,
+        "cpuPercent": 27.063157823350693,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 164583,
+        "memoryBytes": 1916289024,
+        "cpuPercent": 28.48576228244107,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 170601,
+        "memoryBytes": 1931485184,
+        "cpuPercent": 28.27887864185222,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 176806,
+        "memoryBytes": 1922650112,
+        "cpuPercent": 26.923012355627183,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 182870,
+        "memoryBytes": 1941458944,
+        "cpuPercent": 28.042889731750222,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 188968,
+        "memoryBytes": 1976758272,
+        "cpuPercent": 28.420349568164426,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 195023,
+        "memoryBytes": 1927503872,
+        "cpuPercent": 27.93404211395541,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 201098,
+        "memoryBytes": 1967267840,
+        "cpuPercent": 26.920438957475994,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 207163,
+        "memoryBytes": 1943916544,
+        "cpuPercent": 28.875549601538882,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 213205,
+        "memoryBytes": 1950470144,
+        "cpuPercent": 26.89506785832506,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 219270,
+        "memoryBytes": 1927122944,
+        "cpuPercent": 27.802109095905468,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 225269,
+        "memoryBytes": 1979871232,
+        "cpuPercent": 26.545222814913597,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 231411,
+        "memoryBytes": 1936056320,
+        "cpuPercent": 27.644361228698575,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 237454,
+        "memoryBytes": 1962078208,
+        "cpuPercent": 29.433159578575765,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 243518,
+        "memoryBytes": 1927811072,
+        "cpuPercent": 27.377246866754618,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 249558,
+        "memoryBytes": 1961066496,
+        "cpuPercent": 29.059740618101543,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 255621,
+        "memoryBytes": 1964658688,
+        "cpuPercent": 26.565678432019354,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 261682,
+        "memoryBytes": 1938178048,
+        "cpuPercent": 26.939655172413794,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 267735,
+        "memoryBytes": 1981526016,
+        "cpuPercent": 27.83571507241588,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 273699,
+        "memoryBytes": 1935659008,
+        "cpuPercent": 26.308021741560477,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 279850,
+        "memoryBytes": 1939095552,
+        "cpuPercent": 25.931589714409583,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 285948,
+        "memoryBytes": 1984065536,
+        "cpuPercent": 28.292233792500273,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 291999,
+        "memoryBytes": 1945784320,
+        "cpuPercent": 28.49046989478323,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 298039,
+        "memoryBytes": 1992663040,
+        "cpuPercent": 29.40466335540839,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 304077,
+        "memoryBytes": 1958875136,
+        "cpuPercent": 28.939977365573586,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 310143,
+        "memoryBytes": 1975975936,
+        "cpuPercent": 29.64353912517859,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 316230,
+        "memoryBytes": 1951232000,
+        "cpuPercent": 27.80858112918241,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 322348,
+        "memoryBytes": 1959493632,
+        "cpuPercent": 26.30557371690095,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 328454,
+        "memoryBytes": 2001633280,
+        "cpuPercent": 29.193450431269792,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 334541,
+        "memoryBytes": 1979166720,
+        "cpuPercent": 29.092054104375446,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 340577,
+        "memoryBytes": 1934589952,
+        "cpuPercent": 28.518127347028937,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 346590,
+        "memoryBytes": 1974992896,
+        "cpuPercent": 29.10360884749709,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 352638,
+        "memoryBytes": 1960427520,
+        "cpuPercent": 30.765163414903,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 358722,
+        "memoryBytes": 1971949568,
+        "cpuPercent": 27.58687404120096,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 364722,
+        "memoryBytes": 1928826880,
+        "cpuPercent": 28.190104166666668,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 370783,
+        "memoryBytes": 1965449216,
+        "cpuPercent": 27.562661551999117,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 376852,
+        "memoryBytes": 1933553664,
+        "cpuPercent": 29.049610040094468,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 382872,
+        "memoryBytes": 1969913856,
+        "cpuPercent": 29.026508859357694,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 388893,
+        "memoryBytes": 1935077376,
+        "cpuPercent": 28.243162819022313,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 395042,
+        "memoryBytes": 1971544064,
+        "cpuPercent": 28.756369599392855,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 401112,
+        "memoryBytes": 1928810496,
+        "cpuPercent": 28.894666392092258,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 407123,
+        "memoryBytes": 1988022272,
+        "cpuPercent": 29.568187489602394,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 413183,
+        "memoryBytes": 1984888832,
+        "cpuPercent": 28.963833883388336,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 419185,
+        "memoryBytes": 1945858048,
+        "cpuPercent": 29.352195101632788,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 425239,
+        "memoryBytes": 1988075520,
+        "cpuPercent": 29.379680101310427,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 431252,
+        "memoryBytes": 1952907264,
+        "cpuPercent": 27.977576362326072,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 437269,
+        "memoryBytes": 1985327104,
+        "cpuPercent": 29.62526314331616,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 443313,
+        "memoryBytes": 1961013248,
+        "cpuPercent": 28.760444242223695,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 449382,
+        "memoryBytes": 1945161728,
+        "cpuPercent": 27.612147800296587,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 455433,
+        "memoryBytes": 1976770560,
+        "cpuPercent": 29.308172202941662,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 461508,
+        "memoryBytes": 1959112704,
+        "cpuPercent": 29.06378600823045,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 467532,
+        "memoryBytes": 1986527232,
+        "cpuPercent": 29.569223107569723,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 473681,
+        "memoryBytes": 1955188736,
+        "cpuPercent": 29.201055727218517,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 479694,
+        "memoryBytes": 1983471616,
+        "cpuPercent": 29.211881201840455,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 485782,
+        "memoryBytes": 1958440960,
+        "cpuPercent": 26.07160945028471,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 491852,
+        "memoryBytes": 2003091456,
+        "cpuPercent": 29.688358045030203,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 498028,
+        "memoryBytes": 1952989184,
+        "cpuPercent": 29.157727493523314,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 504093,
+        "memoryBytes": 1997910016,
+        "cpuPercent": 28.424704589172848,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 510153,
+        "memoryBytes": 1950593024,
+        "cpuPercent": 29.95221397139714,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 516226,
+        "memoryBytes": 1952350208,
+        "cpuPercent": 30.059621823371206,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 522144,
+        "memoryBytes": 1962594304,
+        "cpuPercent": 26.18248000450603,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 528146,
+        "memoryBytes": 1958846464,
+        "cpuPercent": 15.576405087193159,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 534142,
+        "memoryBytes": 1985900544,
+        "cpuPercent": 27.29684372915277,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 540185,
+        "memoryBytes": 2014224384,
+        "cpuPercent": 29.00222019968007,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 546241,
+        "memoryBytes": 1983242240,
+        "cpuPercent": 28.918462406428887,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 552325,
+        "memoryBytes": 2022576128,
+        "cpuPercent": 27.672481097961867,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 558345,
+        "memoryBytes": 1977348096,
+        "cpuPercent": 28.507405869324472,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 564501,
+        "memoryBytes": 1964883968,
+        "cpuPercent": 28.512156162009962,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 570996,
+        "memoryBytes": 1975656448,
+        "cpuPercent": 27.38484731845009,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 577101,
+        "memoryBytes": 1989709824,
+        "cpuPercent": 28.771669396669395,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 583199,
+        "memoryBytes": 2029641728,
+        "cpuPercent": 28.82604952443424,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 589282,
+        "memoryBytes": 1979150336,
+        "cpuPercent": 29.517884541618717,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 595275,
+        "memoryBytes": 2008723456,
+        "cpuPercent": 28.983466822403916,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 601373,
+        "memoryBytes": 1971429376,
+        "cpuPercent": 25.92209194271346,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 607444,
+        "memoryBytes": 2019282944,
+        "cpuPercent": 30.19821006973041,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 613532,
+        "memoryBytes": 1996201984,
+        "cpuPercent": 29.301152540516863,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 619572,
+        "memoryBytes": 2007502848,
+        "cpuPercent": 29.40466335540839,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 625640,
+        "memoryBytes": 1989263360,
+        "cpuPercent": 28.947106405185675,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 631681,
+        "memoryBytes": 2014167040,
+        "cpuPercent": 28.88249737902113,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 637644,
+        "memoryBytes": 2018398208,
+        "cpuPercent": 27.295055620772544,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 643899,
+        "memoryBytes": 2010714112,
+        "cpuPercent": 29.726219024780175,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 649963,
+        "memoryBytes": 2037907456,
+        "cpuPercent": 29.30975841029024,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 656000,
+        "memoryBytes": 2009542656,
+        "cpuPercent": 28.211446082491303,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 662084,
+        "memoryBytes": 1979850752,
+        "cpuPercent": 26.623794652640807,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 668178,
+        "memoryBytes": 1988595712,
+        "cpuPercent": 27.09290559019801,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 674230,
+        "memoryBytes": 2021421056,
+        "cpuPercent": 29.0021205111258,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 680276,
+        "memoryBytes": 1997971456,
+        "cpuPercent": 29.00936569632815,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 686363,
+        "memoryBytes": 1985040384,
+        "cpuPercent": 27.97971085920815,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 692562,
+        "memoryBytes": 2029826048,
+        "cpuPercent": 27.810265096520947,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 698715,
+        "memoryBytes": 1999974400,
+        "cpuPercent": 28.737675388699277,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 704722,
+        "memoryBytes": 1960394752,
+        "cpuPercent": 29.522848343599136,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 710737,
+        "memoryBytes": 1993408512,
+        "cpuPercent": 28.81251731781657,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 716741,
+        "memoryBytes": 1983561728,
+        "cpuPercent": 29.125548245614038,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 722798,
+        "memoryBytes": 2029326336,
+        "cpuPercent": 27.387389246601728,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 728840,
+        "memoryBytes": 2018050048,
+        "cpuPercent": 26.550259296038842,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 734902,
+        "memoryBytes": 1989029888,
+        "cpuPercent": 27.45071758495546,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 740823,
+        "memoryBytes": 2005250048,
+        "cpuPercent": 26.10324128807071,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 746755,
+        "memoryBytes": 1997242368,
+        "cpuPercent": 26.910892897280288,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 752851,
+        "memoryBytes": 2022047744,
+        "cpuPercent": 26.293710356517934,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 758860,
+        "memoryBytes": 1994133504,
+        "cpuPercent": 29.838055416874685,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 764942,
+        "memoryBytes": 2017398784,
+        "cpuPercent": 28.173983338813986,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 771012,
+        "memoryBytes": 2055585792,
+        "cpuPercent": 27.307283086216362,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 777079,
+        "memoryBytes": 1993883648,
+        "cpuPercent": 26.93447475413439,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 783145,
+        "memoryBytes": 2010927104,
+        "cpuPercent": 26.59547065611606,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 789183,
+        "memoryBytes": 1968369664,
+        "cpuPercent": 27.62452384895661,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 795124,
+        "memoryBytes": 1995915264,
+        "cpuPercent": 25.62086208831285,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 801165,
+        "memoryBytes": 2011406336,
+        "cpuPercent": 25.02431302764443,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 807234,
+        "memoryBytes": 1996926976,
+        "cpuPercent": 28.191423628274837,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 813247,
+        "memoryBytes": 2015215616,
+        "cpuPercent": 25.119186207661176,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 819319,
+        "memoryBytes": 1982160896,
+        "cpuPercent": 28.177495059288535,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 825316,
+        "memoryBytes": 1994231808,
+        "cpuPercent": 26.18496748374187,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 831373,
+        "memoryBytes": 1984016384,
+        "cpuPercent": 27.88182406031589,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 837427,
+        "memoryBytes": 2003968000,
+        "cpuPercent": 26.196522960026428,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 843371,
+        "memoryBytes": 1995304960,
+        "cpuPercent": 25.257437471960518,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 849588,
+        "memoryBytes": 1976422400,
+        "cpuPercent": 27.080484960591928,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 855687,
+        "memoryBytes": 2003034112,
+        "cpuPercent": 27.561724599661147,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 861760,
+        "memoryBytes": 2005479424,
+        "cpuPercent": 26.757780339206324,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 867791,
+        "memoryBytes": 1973948416,
+        "cpuPercent": 29.146285856408554,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 873827,
+        "memoryBytes": 2013167616,
+        "cpuPercent": 27.202237961122155,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 879833,
+        "memoryBytes": 1977016320,
+        "cpuPercent": 26.16740897990898,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 886310,
+        "memoryBytes": 2001506304,
+        "cpuPercent": 27.68208661417323,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 892389,
+        "memoryBytes": 2010284032,
+        "cpuPercent": 26.045950540110763,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 898470,
+        "memoryBytes": 1978855424,
+        "cpuPercent": 28.56403826125089,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 904487,
+        "memoryBytes": 1988341760,
+        "cpuPercent": 26.335971691319042,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 910478,
+        "memoryBytes": 1992339456,
+        "cpuPercent": 26.080787848439325,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 916691,
+        "memoryBytes": 2040381440,
+        "cpuPercent": 26.406325446644132,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 922800,
+        "memoryBytes": 2009141248,
+        "cpuPercent": 28.624945435695967,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 928848,
+        "memoryBytes": 2011328512,
+        "cpuPercent": 25.189112103174605,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 934930,
+        "memoryBytes": 1995550720,
+        "cpuPercent": 28.04553052723885,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 940992,
+        "memoryBytes": 2012434432,
+        "cpuPercent": 26.11899263169471,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 947071,
+        "memoryBytes": 1966370816,
+        "cpuPercent": 28.723371442671493,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 953161,
+        "memoryBytes": 2006626304,
+        "cpuPercent": 26.640325670498086,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 959136,
+        "memoryBytes": 1975709696,
+        "cpuPercent": 27.676080892608088,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 965302,
+        "memoryBytes": 1984184320,
+        "cpuPercent": 24.91823440371932,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 971309,
+        "memoryBytes": 2009698304,
+        "cpuPercent": 24.949191221352866,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 977377,
+        "memoryBytes": 1994727424,
+        "cpuPercent": 27.23045072511536,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 983431,
+        "memoryBytes": 2003746816,
+        "cpuPercent": 27.164374793524942,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 989507,
+        "memoryBytes": 1979375616,
+        "cpuPercent": 27.216027540048277,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 995640,
+        "memoryBytes": 2003230720,
+        "cpuPercent": 28.30062095766074,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1001643,
+        "memoryBytes": 1992282112,
+        "cpuPercent": 27.915729635182412,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1007717,
+        "memoryBytes": 2016059392,
+        "cpuPercent": 29.561621940511472,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1013816,
+        "memoryBytes": 2020048896,
+        "cpuPercent": 26.878552494944525,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1019869,
+        "memoryBytes": 1987252224,
+        "cpuPercent": 27.556067239385428,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1025885,
+        "memoryBytes": 2009239552,
+        "cpuPercent": 25.38802775930851,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1031951,
+        "memoryBytes": 2030960640,
+        "cpuPercent": 28.140970161556215,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1037779,
+        "memoryBytes": 2015444992,
+        "cpuPercent": 21.805650880805306,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1043580,
+        "memoryBytes": 1995182080,
+        "cpuPercent": 9.270133023042005,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1049430,
+        "memoryBytes": 1971650560,
+        "cpuPercent": 9.125712250712251,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1055317,
+        "memoryBytes": 1978286080,
+        "cpuPercent": 2.2560302361134705,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1061142,
+        "memoryBytes": 1957343232,
+        "cpuPercent": 1.5423819742489269,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1066969,
+        "memoryBytes": 1947697152,
+        "cpuPercent": 1.7653094788627655,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1072918,
+        "memoryBytes": 1947295744,
+        "cpuPercent": 1.7291071328514596,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1078955,
+        "memoryBytes": 2008875008,
+        "cpuPercent": 5.672484953895423,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1084955,
+        "memoryBytes": 2025926656,
+        "cpuPercent": 6.532118055555556,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1090982,
+        "memoryBytes": 2177347584,
+        "cpuPercent": 7.259001161440185,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1097029,
+        "memoryBytes": 2217717760,
+        "cpuPercent": 7.041198114767654,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1103094,
+        "memoryBytes": 2163982336,
+        "cpuPercent": 6.848550425941192,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1109124,
+        "memoryBytes": 2068611072,
+        "cpuPercent": 6.73714759535655,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1115184,
+        "memoryBytes": 2071601152,
+        "cpuPercent": 7.069066281628163,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1121215,
+        "memoryBytes": 2139840512,
+        "cpuPercent": 6.023565743657769,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1127249,
+        "memoryBytes": 2159374336,
+        "cpuPercent": 7.013209866313114,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1133280,
+        "memoryBytes": 2115485696,
+        "cpuPercent": 7.2757765434145805,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1139297,
+        "memoryBytes": 2015580160,
+        "cpuPercent": 6.405462301257548,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1145413,
+        "memoryBytes": 2532696064,
+        "cpuPercent": 7.06820906910835,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1151555,
+        "memoryBytes": 2378563584,
+        "cpuPercent": 7.377482904591338,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1157560,
+        "memoryBytes": 2175381504,
+        "cpuPercent": 7.589161809603109,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1163591,
+        "memoryBytes": 2170793984,
+        "cpuPercent": 7.103057812413641,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1169647,
+        "memoryBytes": 2483666944,
+        "cpuPercent": 6.450214663143989,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1175685,
+        "memoryBytes": 2280251392,
+        "cpuPercent": 7.978980346693166,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1181719,
+        "memoryBytes": 2013343744,
+        "cpuPercent": 6.495311291569993,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1187751,
+        "memoryBytes": 2547650560,
+        "cpuPercent": 6.173670977011494,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1193774,
+        "memoryBytes": 2277961728,
+        "cpuPercent": 6.247751674138026,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1199789,
+        "memoryBytes": 2005204992,
+        "cpuPercent": 6.40759213078415,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 1205531,
+        "memoryBytes": 2028863488,
+        "cpuPercent": 1.2925592128178336,
+        "browserProcessCount": 23
+      }
+    ]
+  },
+  "physicalNetworkUtilization": null,
+  "privacy": {
+    "transferIdRetained": false,
+    "fileNameRetained": false,
+    "filePathRetained": false,
+    "browserProcessIdRetained": false,
+    "payloadRetained": false
+  }
+}

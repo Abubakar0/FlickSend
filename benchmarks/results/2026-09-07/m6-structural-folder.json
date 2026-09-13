@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M6",
+  "kind": "browser-webrtc-attempt",
+  "protocolVersion": 5,
+  "transferKind": "STREAM_PACK",
+  "fixtureId": "engine-lab-m6-structural",
+  "fileCount": 3,
+  "directoryCount": 3,
+  "payloadBytes": 8,
+  "blockBytes": 8388608,
+  "blockCount": 1,
+  "deliveryState": "NOT_RUN",
+  "finalTreeMatchesFixture": null,
+  "environment": "Playwright Chromium, local Wrangler signaling",
+  "result": "FAIL",
+  "failure": "WebRTC DataChannel remained closed; local signaling reported Network connection lost before FSTP v5 payload setup.",
+  "limitations": [
+    "No folder payload, root, or tree result was observed.",
+    "This failure is retained as evidence and is not converted to a pass."
+  ]
+}

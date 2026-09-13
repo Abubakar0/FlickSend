@@ -1,0 +1,17 @@
+node_modules/
+.pnpm-store/
+.turbo/
+dist/
+.next/
+.wrangler/
+playwright-report/
+test-results/
+coverage/
+packages/db/src/generated/
+benchmarks/fixtures/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+apps/signaling/.dev.vars
+services/turn/.m7.env

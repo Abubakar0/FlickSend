@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "recordType": "SAME_HOST_BROWSER_TRANSFER",
+  "capturedAt": "2026-09-10T07:44:29.160Z",
+  "evidenceClass": "SAME_HOST_PHYSICAL_BROWSER",
+  "topology": "SINGLE_MACHINE_ONLY",
+  "scenario": "normal",
+  "fixtureSizeClass": "OTHER_SIZE",
+  "healthObserver": "DISABLED",
+  "route": "DIRECT",
+  "transfer": {
+    "senderDelivered": true,
+    "receiverDelivered": true,
+    "senderManifestRootObserved": false,
+    "receiverManifestRootVerified": true,
+    "receiverFixtureBytesVerified": true,
+    "destinationFixtureMatch": true,
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 8388608,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "senderIntegrity": {
+      "blocksVerified": 1,
+      "integrityRetryCount": 0,
+      "integrityMismatchCount": 0,
+      "manifestRootVerified": false
+    },
+    "receiverIntegrity": {
+      "blocksVerified": 1,
+      "integrityRetryCount": 0,
+      "integrityMismatchCount": 0,
+      "manifestRootVerified": true
+    }
+  },
+  "measurement": {
+    "durationMs": 7150.132,
+    "averagePayloadBytesPerSecond": 1173210.2288461248,
+    "senderHealth": null,
+    "receiverHealth": null,
+    "speedProof": null,
+    "recoveryReconciliationMs": null
+  },
+  "externalBrowserProcess": {
+    "scope": "SAME_HOST_SHARED_BROWSER_PROCESS_TREE",
+    "sampleIntervalMs": 5000,
+    "sampleCount": 2,
+    "initialMemoryBytes": 1778413568,
+    "averageMemoryBytes": 1791821824,
+    "peakMemoryBytes": 1805230080,
+    "finalMemoryBytes": 1805230080,
+    "averageCpuPercent": 5.6528531491531,
+    "peakCpuPercent": 5.6528531491531,
+    "memoryTrend": "NO_CLEAR_TREND",
+    "browserProcessCountRange": {
+      "minimum": 23,
+      "maximum": 23
+    },
+    "samples": [
+      {
+        "elapsedMs": 1069,
+        "memoryBytes": 1778413568,
+        "cpuPercent": null,
+        "browserProcessCount": 23
+      },
+      {
+        "elapsedMs": 7150,
+        "memoryBytes": 1805230080,
+        "cpuPercent": 5.6528531491531,
+        "browserProcessCount": 23
+      }
+    ]
+  },
+  "physicalNetworkUtilization": null,
+  "privacy": {
+    "transferIdRetained": false,
+    "fileNameRetained": false,
+    "filePathRetained": false,
+    "browserProcessIdRetained": false,
+    "payloadRetained": false
+  }
+}

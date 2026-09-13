@@ -1,0 +1,120 @@
+.engine-lab-page {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 46rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 12vh 2rem;
+}
+
+.engine-lab-page .eyebrow {
+  margin: 0;
+  color: var(--fs-accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.engine-lab-page h1,
+.engine-lab-page h2,
+.engine-lab-page p {
+  margin: 0;
+}
+
+.engine-lab-page h1 {
+  font-size: clamp(3rem, 10vw, 6rem);
+  letter-spacing: -0.08em;
+  line-height: 0.9;
+}
+
+.engine-lab-page .lede {
+  color: var(--fs-text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.engine-lab-page section {
+  padding: 1.25rem;
+  border: 1px solid var(--fs-border-default);
+  border-radius: 1rem;
+  background: var(--fs-surface);
+}
+
+.engine-lab-page section p {
+  margin-top: 0.5rem;
+  color: var(--fs-text-secondary);
+  line-height: 1.5;
+}
+
+.engine-lab-page .lab {
+  display: grid;
+  gap: 1rem;
+}
+
+.engine-lab-page .controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem;
+}
+
+.engine-lab-page .tuning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.engine-lab-page .tuning-grid button {
+  min-height: 2.7rem;
+}
+
+.engine-lab-page button,
+.engine-lab-page input,
+.engine-lab-page select {
+  border: 1px solid var(--fs-border-strong);
+  border-radius: 0.5rem;
+  font: inherit;
+  padding: 0.65rem 0.8rem;
+}
+
+.engine-lab-page button {
+  border-color: var(--fs-text-primary);
+  background: var(--fs-text-primary);
+  color: var(--fs-surface);
+  cursor: pointer;
+}
+
+.engine-lab-page label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--fs-text-secondary);
+  font-size: 0.85rem;
+}
+
+.engine-lab-page .diagnostics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.engine-lab-page .diagnostics div {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--fs-surface-muted);
+}
+
+.engine-lab-page dt {
+  color: var(--fs-text-secondary);
+  font-size: 0.8rem;
+}
+
+.engine-lab-page dd {
+  margin: 0.2rem 0 0;
+  font-weight: 700;
+}
+
+.engine-lab-page .error {
+  color: var(--fs-danger);
+}

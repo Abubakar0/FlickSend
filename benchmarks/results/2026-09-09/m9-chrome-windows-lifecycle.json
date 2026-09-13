@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M9",
+  "kind": "browser-lifecycle-qualification",
+  "generatedAt": "2026-09-09T12:57:34.754Z",
+  "target": "m9-chrome-windows-lifecycle",
+  "environment": {
+    "realBrowser": true,
+    "automated": true,
+    "emulated": false,
+    "headed": true,
+    "hostOperatingSystem": "Windows_NT",
+    "hostOperatingSystemVersion": "10.0.19045",
+    "hostArchitecture": "x64"
+  },
+  "browser": {
+    "name": "CHROME",
+    "version": "152.0.7977.83",
+    "userAgentVersion": "152.0.0.0",
+    "engine": "BLINK",
+    "operatingSystem": "WINDOWS",
+    "operatingSystemVersion": "10.0",
+    "deviceClass": "DESKTOP",
+    "architecture": null
+  },
+  "qualificationResults": {
+    "backgroundLifecycle": "NOT_TESTED",
+    "pageRefresh": "NOT_SUPPORTED",
+    "browserRestart": "NOT_SUPPORTED",
+    "permissionAfterPicker": "NOT_TESTED",
+    "ordinaryReconnect": "NOT_TESTED",
+    "permissionRevocation": "NOT_TESTED",
+    "screenLockSleep": "NOT_TESTED",
+    "background": {
+      "status": "NOT_TESTED",
+      "senderVisibility": "visible",
+      "receiverVisibility": "visible",
+      "dataChannelContinuity": true,
+      "delivered": true,
+      "manifestRootVerified": true,
+      "healthStateAtCompletion": "UNKNOWN",
+      "healthReasonsAtCompletion": [
+        "MISSING_MEASUREMENTS"
+      ],
+      "transferHealth": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "UNAVAILABLE",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "refresh": {
+      "status": "NOT_SUPPORTED",
+      "verifiedCheckpointBeforeInterruption": true,
+      "checkpointSurvives": false,
+      "sourceHandle": "NOT_TESTED",
+      "destinationHandle": "NOT_TESTED",
+      "repermissionRequired": "NOT_TESTED",
+      "resumeAbility": "NOT_SUPPORTED",
+      "deliveredAfterRefresh": false
+    },
+    "restart": {
+      "status": "NOT_SUPPORTED",
+      "verifiedCheckpointBeforeInterruption": true,
+      "checkpointSurvives": false,
+      "sourceHandle": "NOT_TESTED",
+      "destinationHandle": "NOT_TESTED",
+      "repermissionRequired": "NOT_TESTED",
+      "resumeAbility": "NOT_SUPPORTED",
+      "deliveredAfterRestart": false
+    }
+  },
+  "limitations": [
+    "The background scenario uses headed actual-browser tabs and records visibility state, not a performance claim.",
+    "Refresh and restart use the bounded OPFS benchmark fixture; no selected external source or destination handle was present.",
+    "Native picker permission, permission revocation, screen lock, and sleep require assisted real interaction and remain unqualified."
+  ]
+}

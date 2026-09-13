@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M7",
+  "scenario": "forced-turn-folder",
+  "createdAt": "2026-09-08T18:48:27.788Z",
+  "browser": "Chromium Playwright",
+  "senderRoute": {
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "localCandidateType": "relay",
+    "remoteCandidateType": "relay",
+    "protocol": "udp",
+    "transportProtocol": "udp",
+    "relayProtocol": "udp",
+    "candidatePairState": "succeeded",
+    "rttMs": 3,
+    "availableOutgoingBitrate": null,
+    "bytesSent": 2308,
+    "bytesReceived": 2392,
+    "policy": "RELAY_ONLY",
+    "state": "RELAY",
+    "routeGeneration": 2,
+    "routeChangeCount": 0,
+    "directConnectionAttempts": 0,
+    "relayConnectionAttempts": 1,
+    "iceRestartCount": 0,
+    "peerConnectionReplacementCount": 0,
+    "routeRecoveryMs": null,
+    "routeRecoveryToFirstPayloadMs": null,
+    "failureCode": null
+  },
+  "receiverRoute": {
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "localCandidateType": "relay",
+    "remoteCandidateType": "relay",
+    "protocol": "udp",
+    "transportProtocol": "udp",
+    "relayProtocol": "udp",
+    "candidatePairState": "succeeded",
+    "rttMs": 4,
+    "availableOutgoingBitrate": null,
+    "bytesSent": 2392,
+    "bytesReceived": 2308,
+    "policy": "RELAY_ONLY",
+    "state": "RELAY",
+    "routeGeneration": 2,
+    "routeChangeCount": 0,
+    "directConnectionAttempts": 0,
+    "relayConnectionAttempts": 1,
+    "iceRestartCount": 0,
+    "peerConnectionReplacementCount": 0,
+    "routeRecoveryMs": null,
+    "routeRecoveryToFirstPayloadMs": null,
+    "failureCode": null
+  },
+  "senderRecovery": {
+    "transferId": "fs_tr_ef32a351-ffcc-4d6f-b4f2-3f2f95250706",
+    "state": "DELIVERED",
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 8,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "integrity": {
+      "manifestRootMatch": true,
+      "integrityRetryCount": 0
+    }
+  },
+  "receiverRecovery": {
+    "transferId": "fs_tr_ef32a351-ffcc-4d6f-b4f2-3f2f95250706",
+    "state": "DELIVERED",
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 0,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "integrity": {
+      "manifestRootMatch": true,
+      "integrityRetryCount": 0
+    }
+  },
+  "senderHealth": {
+    "timestampMs": 2774.0999999046326,
+    "transferState": "DELIVERED",
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "currentThroughputBps": 18.744142457576828,
+    "rollingThroughputBps": 18.744142457576828,
+    "averageThroughputBps": 18.744142457576828,
+    "peakThroughputBps": 26.263952722829345,
+    "senderReadBps": 79999.98092651821,
+    "receiverWriteBps": null,
+    "senderBufferedAmountBytes": 0,
+    "rollingAverageBufferedAmountBytes": 1.4,
+    "peakBufferedAmountBytes": 28,
+    "percentTimeAboveHighWater": 0,
+    "percentTimeBelowLowWater": 1,
+    "receiveQueueBytes": 0,
+    "peakReceiveQueueBytes": null,
+    "percentTimeQueueNearLimit": 0,
+    "rttMs": 3,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 0,
+    "totalBytes": 8,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 426.7999999523163,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "OBSERVED",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    },
+    "routeHistory": [
+      {
+        "routeType": "RELAY",
+        "routeDetail": "RELAY_UDP",
+        "startedAtMs": 2347.2999999523163,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": []
+  },
+  "receiverHealth": {
+    "timestampMs": 2392.7999999523163,
+    "transferState": "DELIVERED",
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "currentThroughputBps": 26.20373403619224,
+    "rollingThroughputBps": 26.20373403619224,
+    "averageThroughputBps": 26.20373403619224,
+    "peakThroughputBps": 30.23431594587739,
+    "senderReadBps": null,
+    "receiverWriteBps": 20000.001192092972,
+    "senderBufferedAmountBytes": 0,
+    "rollingAverageBufferedAmountBytes": 0,
+    "peakBufferedAmountBytes": null,
+    "percentTimeAboveHighWater": 0,
+    "percentTimeBelowLowWater": 1,
+    "receiveQueueBytes": 0,
+    "peakReceiveQueueBytes": 8,
+    "percentTimeQueueNearLimit": 0,
+    "rttMs": 4,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 8,
+    "totalBytes": 8,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 305.2999999523163,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "OBSERVED",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    },
+    "routeHistory": [
+      {
+        "routeType": "RELAY",
+        "routeDetail": "RELAY_UDP",
+        "startedAtMs": 2087.5,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": []
+  },
+  "delivered": true,
+  "finalTreeMatches": true
+}

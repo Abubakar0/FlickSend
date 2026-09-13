@@ -1,0 +1,141 @@
+.p5-receive-page {
+  max-width: 68rem;
+  padding: clamp(1.5rem, 4vw, 4rem);
+}
+
+.p5-receive-card,
+.p5-terminal {
+  max-width: 52rem;
+}
+
+.p5-sr-status {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.p5-receive-action,
+.p5-transfer-heading,
+.p5-destination-summary,
+.p5-source-overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fs-space-md);
+}
+
+.p5-review-metrics,
+.p5-transfer-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--fs-space-sm);
+}
+
+.p5-transfer-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.p5-incoming-summary {
+  display: grid;
+  gap: var(--fs-space-md);
+}
+
+.p5-incoming-summary--compact {
+  gap: var(--fs-space-sm);
+}
+
+.p5-source-overview,
+.p5-destination-summary {
+  padding: var(--fs-space-md);
+  border: 1px solid var(--fs-border-default);
+  border-radius: var(--fs-radius-md);
+  background: var(--fs-surface-muted);
+}
+
+.p5-source-overview span {
+  font-size: var(--fs-font-size-small);
+}
+
+.p5-development-destination {
+  display: grid;
+  gap: var(--fs-space-sm);
+  color: var(--fs-text-secondary);
+  font-size: var(--fs-font-size-small);
+}
+
+.p5-development-destination[open] {
+  padding-top: var(--fs-space-sm);
+  border-top: 1px solid var(--fs-border-default);
+}
+
+.p8-recovery-notice {
+  max-width: 52rem;
+  overflow-wrap: anywhere;
+}
+
+.p8-recovery-notice--info {
+  border-inline-start: 3px solid var(--fs-accent);
+}
+
+.p8-recovery-notice--warning {
+  border-inline-start: 3px solid var(--fs-warning);
+}
+
+.p8-recovery-notice--danger {
+  border-inline-start: 3px solid var(--fs-danger);
+}
+
+.p8-recovery-notice__details {
+  color: var(--fs-text-secondary);
+  font-size: var(--fs-font-size-small);
+}
+
+.p8-recovery-notice__details dl {
+  display: grid;
+  gap: var(--fs-space-xs);
+  margin: var(--fs-space-sm) 0 0;
+}
+
+.p8-recovery-notice__details dl div {
+  display: flex;
+  gap: var(--fs-space-sm);
+  justify-content: space-between;
+}
+
+.p8-recovery-notice__details dd {
+  margin: 0;
+  text-align: end;
+}
+
+@media (max-width: 48rem) {
+  .p5-receive-page {
+    padding: var(--fs-space-md);
+  }
+
+  .p5-receive-action,
+  .p5-transfer-heading,
+  .p5-destination-summary,
+  .p5-source-overview {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .p5-review-metrics,
+  .p5-transfer-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .p8-recovery-notice__details dl div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .p8-recovery-notice__details dd {
+    text-align: start;
+  }
+}

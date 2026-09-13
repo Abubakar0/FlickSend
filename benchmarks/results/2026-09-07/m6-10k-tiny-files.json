@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M6",
+  "kind": "fixture-generation-and-manifest-unit-qualification",
+  "protocolVersion": 5,
+  "transferKind": "STREAM_PACK",
+  "fixtureId": "m6-tiny-many",
+  "fileCount": 10000,
+  "directoryCount": 103,
+  "payloadBytes": 49599068,
+  "manifestBytes": null,
+  "blockBytes": 8388608,
+  "blockCount": null,
+  "deliveryState": "NOT_RUN",
+  "finalTreeMatchesFixture": null,
+  "environment": "local Windows fixture generator and Vitest",
+  "limitations": [
+    "This records actual fixture generation and 10,000-entry virtual mapping unit coverage only.",
+    "It is not browser/WebRTC transfer qualification evidence."
+  ]
+}

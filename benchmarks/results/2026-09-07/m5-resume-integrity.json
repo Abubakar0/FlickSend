@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M5",
+  "protocolVersion": 4,
+  "datasetSizeBytes": 1073741824,
+  "datasetPattern": "indexed-byte-mod-251-v1",
+  "blockBytes": 8388608,
+  "integrityAlgorithm": "SHA256",
+  "blockCount": 128,
+  "interruption": "after receiver persisted at least 536870912 safe bytes",
+  "transferIdStable": true,
+  "committedBlocksRetransmitted": 0,
+  "duplicateRetransmittedBytes": 0,
+  "manifestRootMatch": true,
+  "finalDestinationMatchesFixture": true,
+  "deliveryState": "DELIVERED",
+  "result": "PASS"
+}

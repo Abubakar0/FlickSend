@@ -1,0 +1,10 @@
+# Captured browser qualification artifacts are immutable evidence.
+benchmarks/results/**
+benchmarks/results/**/m6-browser-10k.json
+benchmarks/results/**/m6-browser-corruption-retry.json
+benchmarks/results/**/m6-browser-destination-mutation.json
+benchmarks/results/**/m6-browser-mixed.json
+benchmarks/results/**/m6-browser-multi-resume.json
+benchmarks/results/**/m6-browser-single-resume.json
+benchmarks/results/**/m6-browser-source-mutation.json
+benchmarks/results/**/m6-browser-structural.json

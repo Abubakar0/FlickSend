@@ -1,0 +1,53 @@
+{
+  "name": "flicksend",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=11.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "benchmark:fixture": "node benchmarks/runner/generate-fixture.mjs",
+    "benchmark:folder-fixture": "node benchmarks/runner/generate-folder-fixture.mjs",
+    "qualification:m7": "node benchmarks/runner/qualification-m7.mjs",
+    "qualification:m8": "node benchmarks/runner/qualification-m8.mjs",
+    "qualification:m9": "node benchmarks/runner/qualification-m9.mjs",
+    "qualification:m9:turn": "node benchmarks/runner/qualification-m9-turn.mjs",
+    "qualification:m9:assisted": "node benchmarks/runner/m9-assisted-evidence.mjs",
+    "qualification:m9:macos": "node benchmarks/runner/qualification-m9-macos.mjs",
+    "qualification:m10": "node benchmarks/runner/qualification-m10.mjs",
+    "qualification:m10:sender": "node benchmarks/runner/m10-cli.mjs environment --role=SENDER",
+    "qualification:m10:receiver": "node benchmarks/runner/m10-cli.mjs environment --role=RECEIVER",
+    "qualification:m10:network": "node benchmarks/runner/m10-cli.mjs network",
+    "qualification:m10:disk": "node benchmarks/runner/m10-cli.mjs disk",
+    "qualification:m10:sample": "node benchmarks/runner/m10-cli.mjs sample",
+    "qualification:m10:retain": "node benchmarks/runner/m10-cli.mjs retain",
+    "qualification:p11": "node tests/p11/run-postgres-qualification.mjs",
+    "bench:m3:compare": "node benchmarks/runner/m3-compare.mjs benchmarks/results",
+    "bench:m3:plan": "node benchmarks/runner/m3-plan.mjs",
+    "dev:engine-lab": "pnpm --filter @flicksend/engine-lab dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "turbo run test",
+    "test:e2e": "playwright test",
+    "test:e2e:clerk": "playwright test -c playwright.p10-clerk.config.ts",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@clerk/backend": "3.17.2",
+    "@clerk/testing": "2.2.34",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.62.1",
+    "@types/node": "26.4.1",
+    "eslint": "10.9.1",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.6",
+    "turbo": "2.10.12",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.69.0"
+  }
+}

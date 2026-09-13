@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-09-07T21:10:04.120Z",
+  "scenario": "browser-webrtc-mixed-folder-resume",
+  "protocolVersion": 5,
+  "transferId": "fs_tr_b7dc639c-62c1-4fdf-a03a-97514357402e",
+  "transferIdStable": true,
+  "reconnectCount": 1,
+  "reconciliationMs": 591.8,
+  "haveVerifiedBlocksObserved": true,
+  "delivered": true,
+  "manifestRootVerified": true,
+  "finalTreeMatch": true,
+  "continuity": {
+    "safeBytesBeforeDisconnect": 8388608,
+    "remainingBytesAtResume": 8915580,
+    "resumedPayloadBytes": 8915580,
+    "duplicateRetransmittedBytes": 0,
+    "committedBlocksRetransmitted": 0,
+    "ambiguousInflightBytesRetransmitted": 8388608
+  }
+}

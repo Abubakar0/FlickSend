@@ -1,0 +1,26 @@
+services:
+  coturn:
+    # Pinned to the current coturn security release selected for M7. Update only with an ADR and requalification.
+    image: coturn/coturn:4.17.2-r0
+    restart: "no"
+    command:
+      - -n
+      - --log-file=stdout
+      - --realm=${TURN_REALM}
+      - --use-auth-secret
+      - --static-auth-secret=${TURN_SHARED_SECRET}
+      - --lt-cred-mech
+      - --fingerprint
+      - --no-cli
+      - --no-multicast-peers
+      - --external-ip=${TURN_EXTERNAL_IP}
+      - --min-port=49160
+      - --max-port=49200
+      # Local qualification has no trusted certificate. Production must terminate TLS with a valid certificate.
+      - --no-tls
+      - --no-dtls
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+      - "49160-49200:49160-49200/tcp"
+      - "49160-49200:49160-49200/udp"

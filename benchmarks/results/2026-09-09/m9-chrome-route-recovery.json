@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M9",
+  "kind": "browser-route-recovery-qualification",
+  "generatedAt": "2026-09-09T08:22:24.480Z",
+  "target": "m9-chrome-route-recovery",
+  "environment": {
+    "realBrowser": true,
+    "automated": true,
+    "emulated": false,
+    "hostOperatingSystem": "Windows_NT",
+    "hostOperatingSystemVersion": "10.0.19045",
+    "hostArchitecture": "x64"
+  },
+  "browser": {
+    "name": "CHROME",
+    "version": "152.0.7977.83",
+    "userAgentVersion": "152.0.0.0",
+    "engine": "BLINK",
+    "operatingSystem": "WINDOWS",
+    "operatingSystemVersion": "10.0",
+    "deviceClass": "DESKTOP",
+    "architecture": null
+  },
+  "qualificationResults": {
+    "routeBefore": "DIRECT",
+    "routeAfter": "RELAY",
+    "transferIdStable": true,
+    "safeBytesBeforeDisconnect": 8388608,
+    "remainingBytesAtResume": 33554432,
+    "resumedPayloadBytes": 41943040,
+    "duplicateRetransmittedBytes": 0,
+    "committedBlocksRetransmitted": 0,
+    "ambiguousInflightBytesRetransmitted": 0,
+    "manifestRootVerified": true,
+    "delivered": true,
+    "transferHealth": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "OBSERVED",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    }
+  },
+  "limitations": [
+    "This local coturn qualification proves the selected browser's relay path only; production TURN deployment remains deferred."
+  ]
+}

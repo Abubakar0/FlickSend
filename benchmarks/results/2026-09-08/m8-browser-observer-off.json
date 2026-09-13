@@ -1,0 +1,10 @@
+{
+  "createdAt": "2026-09-08T18:42:23.675Z",
+  "schemaVersion": 1,
+  "milestone": "M8",
+  "scenario": "browser-webrtc-m5-observer-off-comparison",
+  "payloadBytes": 16777216,
+  "delivered": true,
+  "completionElapsedMs": 3490.428,
+  "note": "Same-host comparison sample only; not a physical performance claim."
+}

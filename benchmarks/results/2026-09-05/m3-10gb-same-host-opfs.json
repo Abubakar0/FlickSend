@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M3",
+  "kind": "measurement",
+  "createdAt": "2026-09-05",
+  "datasetId": "zero-10g",
+  "datasetSizeBytes": 10737418240,
+  "environment": {
+    "senderHost": "HP ZBook Studio G5",
+    "receiverHost": "same Windows 10 Pro host",
+    "browser": "Codex in-app Chromium; exact browser version unavailable",
+    "route": "same-host WebRTC loopback; candidate diagnostics unavailable",
+    "networkBaseline": "NOT_TESTED; no iperf3 available",
+    "sourceStorage": "D: local file source",
+    "destinationStorage": "Chromium OPFS benchmark destination on C:"
+  },
+  "configuration": {
+    "framePayloadBytes": 65536,
+    "readAheadBytes": 262144,
+    "sendLowWaterBytes": 2097152,
+    "sendHighWaterBytes": 8388608,
+    "receiveWindowBytes": 8388608,
+    "writeBatchBytes": 262144,
+    "uiSnapshotIntervalMs": 125,
+    "throughputWindowMs": 1000,
+    "channelCount": 1,
+    "workerMode": "main-thread"
+  },
+  "transfer": {
+    "effectiveFramePayloadBytes": 65536,
+    "elapsedMs": 961420,
+    "frameCount": 163840,
+    "averageThroughputBps": 11168750,
+    "receiverAverageThroughputBps": 11161250,
+    "peakThroughputBps": 23375000,
+    "receiverPeakThroughputBps": 24295000,
+    "stalledMs": 626.5,
+    "timeToFirstDestinationWriteMs": 39.6,
+    "receiveQueueBytesAtFinalSnapshot": 0,
+    "senderBufferedAmountBytesAtFinalSnapshot": 6863396
+  },
+  "completionState": "COMPLETED",
+  "integrity": "VERIFIED",
+  "memory": "NOT_TESTED per transfer; host Chrome processes were shared with unrelated tabs.",
+  "cpu": "NOT_TESTED per transfer; host Chrome processes were shared with unrelated tabs.",
+  "limitations": [
+    "This is same-host loopback evidence, not a remote network throughput result.",
+    "OPFS is an Engine Lab benchmark destination, not the chosen-destination workflow.",
+    "The source was a real 10 GiB local file selected directly by Chromium's file-input bridge; it was not Playwright-staged.",
+    "The sender bufferedAmount final value was stale in the pre-fix UI snapshot. M3 now refreshes it on TRANSFER_VERIFY_OK."
+  ],
+  "privacy": "No source filename, source path, or payload bytes are included."
+}

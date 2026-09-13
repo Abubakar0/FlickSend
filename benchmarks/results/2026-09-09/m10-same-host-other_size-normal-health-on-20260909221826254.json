@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "recordType": "SAME_HOST_BROWSER_TRANSFER",
+  "capturedAt": "2026-09-09T22:18:26.251Z",
+  "evidenceClass": "SAME_HOST_PHYSICAL_BROWSER",
+  "topology": "SINGLE_MACHINE_ONLY",
+  "scenario": "normal",
+  "fixtureSizeClass": "OTHER_SIZE",
+  "healthObserver": "ENABLED",
+  "route": "DIRECT",
+  "transfer": {
+    "senderDelivered": true,
+    "receiverDelivered": true,
+    "senderManifestRootObserved": false,
+    "receiverManifestRootVerified": true,
+    "receiverFixtureBytesVerified": true,
+    "destinationFixtureMatch": true,
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 8388608,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "senderIntegrity": {
+      "blocksVerified": 1,
+      "integrityRetryCount": 0,
+      "integrityMismatchCount": 0,
+      "manifestRootVerified": false
+    },
+    "receiverIntegrity": {
+      "blocksVerified": 1,
+      "integrityRetryCount": 0,
+      "integrityMismatchCount": 0,
+      "manifestRootVerified": true
+    }
+  },
+  "measurement": {
+    "durationMs": 4360.1224,
+    "averagePayloadBytesPerSecond": 1923938.6490617786,
+    "senderHealth": {
+      "state": "UNKNOWN",
+      "routeType": "DIRECT",
+      "rttMs": 1,
+      "averageThroughputBps": 3303121.7514259126,
+      "peakThroughputBps": 27990016.67889667,
+      "sourceReadBps": 911805212.6654065,
+      "destinationWriteBps": null,
+      "senderBufferedAmountBytes": 0,
+      "receiveQueueBytes": 0,
+      "availableOutgoingBitrateBps": null,
+      "stallCount": 0,
+      "bottleneck": "INSUFFICIENT_DATA",
+      "confidence": "LOW",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "UNAVAILABLE",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "receiverHealth": {
+      "state": "UNKNOWN",
+      "routeType": "DIRECT",
+      "rttMs": 1,
+      "averageThroughputBps": 3451391.8946718783,
+      "peakThroughputBps": 8463730.289297396,
+      "sourceReadBps": null,
+      "destinationWriteBps": 27329103.30808397,
+      "senderBufferedAmountBytes": 0,
+      "receiveQueueBytes": 0,
+      "availableOutgoingBitrateBps": null,
+      "stallCount": 0,
+      "bottleneck": "INSUFFICIENT_DATA",
+      "confidence": "LOW",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "UNAVAILABLE",
+        "destinationWrite": "OBSERVED",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "speedProof": {
+      "schemaVersion": 1,
+      "durationMs": 2515.5,
+      "averageThroughputBps": 3334767.640628106,
+      "peakThroughputBps": 27990016.67889667,
+      "averageSourceReadBps": 911805212.6654065,
+      "averageDestinationWriteBps": null,
+      "routeChangeCount": 0,
+      "stallCount": 0,
+      "stallDurationMs": 0,
+      "integrityRetryCount": 0,
+      "reconnectCount": 0,
+      "dominantBottleneck": "INSUFFICIENT_DATA",
+      "bottleneckConfidence": "LOW",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "UNAVAILABLE",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "OBSERVED",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    },
+    "recoveryReconciliationMs": null
+  },
+  "externalBrowserProcess": {
+    "scope": "SAME_HOST_SHARED_BROWSER_PROCESS_TREE",
+    "sampleIntervalMs": 500,
+    "sampleCount": 5,
+    "initialMemoryBytes": 1091883008,
+    "averageMemoryBytes": 1154502656,
+    "peakMemoryBytes": 1179209728,
+    "finalMemoryBytes": 1178439680,
+    "averageCpuPercent": 6.131363622803287,
+    "peakCpuPercent": 13.14484126984127,
+    "memoryTrend": "NO_CLEAR_TREND",
+    "browserProcessCountRange": {
+      "minimum": 10,
+      "maximum": 10
+    },
+    "samples": [
+      {
+        "elapsedMs": 633,
+        "memoryBytes": 1091883008,
+        "cpuPercent": null,
+        "browserProcessCount": 10
+      },
+      {
+        "elapsedMs": 1692,
+        "memoryBytes": 1160372224,
+        "cpuPercent": 8.114966949952786,
+        "browserProcessCount": 10
+      },
+      {
+        "elapsedMs": 2752,
+        "memoryBytes": 1162608640,
+        "cpuPercent": 2.3339229559748427,
+        "browserProcessCount": 10
+      },
+      {
+        "elapsedMs": 3802,
+        "memoryBytes": 1179209728,
+        "cpuPercent": 13.14484126984127,
+        "browserProcessCount": 10
+      },
+      {
+        "elapsedMs": 4361,
+        "memoryBytes": 1178439680,
+        "cpuPercent": 0.9317233154442457,
+        "browserProcessCount": 10
+      }
+    ]
+  },
+  "physicalNetworkUtilization": null,
+  "privacy": {
+    "transferIdRetained": false,
+    "fileNameRetained": false,
+    "filePathRetained": false,
+    "browserProcessIdRetained": false,
+    "payloadRetained": false
+  }
+}

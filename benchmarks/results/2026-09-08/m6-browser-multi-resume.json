@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-09-07T21:10:51.023Z",
+  "scenario": "browser-webrtc-folder-multi-interruption",
+  "protocolVersion": 5,
+  "transferId": "fs_tr_850ac098-aa69-4ae9-afe7-5ea0799f63cc",
+  "transferIdStable": true,
+  "reconnectCount": 3,
+  "reconciliationMs": 1188.5,
+  "interruptionSafeByteThresholds": [
+    8388608,
+    25165824,
+    41943040
+  ],
+  "delivered": true,
+  "manifestRootVerified": true,
+  "finalTreeMatch": true,
+  "continuity": {
+    "safeBytesBeforeDisconnect": 41943040,
+    "remainingBytesAtResume": 6818428,
+    "resumedPayloadBytes": 55579896,
+    "duplicateRetransmittedBytes": 0,
+    "committedBlocksRetransmitted": 0,
+    "ambiguousInflightBytesRetransmitted": 23595644
+  }
+}

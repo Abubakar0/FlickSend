@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M4B",
+  "kind": "browser-resume",
+  "createdAt": "2026-09-05",
+  "execution": {
+    "runner": "Playwright",
+    "command": "pnpm exec playwright test tests/e2e/m4b-resume.spec.ts --reporter=line",
+    "browser": "Chromium",
+    "route": "same-host WebRTC DataChannel",
+    "destination": "OPFS browser-backed writable destination"
+  },
+  "dataset": {
+    "id": "deterministic-16m-browser-fixture",
+    "sizeBytes": 16777216,
+    "contents": "Deterministic test fixture; no filename, path, or user payload is recorded."
+  },
+  "configuration": {
+    "protocolVersion": 3,
+    "resumeBlockBytes": 8388608,
+    "framePayloadBytes": 65536,
+    "sendLowWaterBytes": 2097152,
+    "sendHighWaterBytes": 8388608,
+    "readAheadBytes": 262144,
+    "receiveWindowBytes": 8388608,
+    "writeBatchBytes": 262144,
+    "channelCount": 1,
+    "workerMode": "main-thread"
+  },
+  "interruption": {
+    "disconnectAtPercent": 50,
+    "safeBytesBeforeDisconnect": 8388608,
+    "committedBlocksBeforeDisconnect": 1,
+    "reconnectCount": 1,
+    "resumeReconciliationMs": 0,
+    "resumeReconciliationResolution": "UI display is rounded to 0.1 ms.",
+    "retransmittedBytes": 8388608,
+    "committedBlocksRetransmitted": 0
+  },
+  "completion": {
+    "transferIdStable": true,
+    "completionState": "TRANSFER_BYTES_COMPLETE",
+    "finalDestinationSha256MatchesFixture": true,
+    "delivered": false,
+    "integrity": "M5_BLOCK_DIGEST_AND_MANIFEST_ROOT_NOT_IMPLEMENTED"
+  },
+  "limitations": [
+    "This is a CI-safe same-host browser functional test, not a physical network or performance qualification.",
+    "The required 1 GiB 10/50/90%, 10 GiB, multi-interruption, and page-reload qualification runs are not represented here."
+  ]
+}

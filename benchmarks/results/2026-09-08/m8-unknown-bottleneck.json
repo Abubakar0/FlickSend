@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M8",
+  "scenario": "ambiguous-insufficient-measurements",
+  "createdAt": "2026-09-08T19:04:48.324Z",
+  "result": {
+    "timestampMs": 750,
+    "transferState": "SENDING",
+    "routeType": "UNKNOWN",
+    "routeDetail": "UNKNOWN",
+    "currentThroughputBps": 131072,
+    "rollingThroughputBps": 131072,
+    "averageThroughputBps": 131072,
+    "peakThroughputBps": 131072,
+    "senderReadBps": null,
+    "receiverWriteBps": null,
+    "senderBufferedAmountBytes": null,
+    "rollingAverageBufferedAmountBytes": null,
+    "peakBufferedAmountBytes": null,
+    "percentTimeAboveHighWater": null,
+    "percentTimeBelowLowWater": null,
+    "receiveQueueBytes": null,
+    "peakReceiveQueueBytes": null,
+    "percentTimeQueueNearLimit": null,
+    "rttMs": null,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 0,
+    "totalBytes": 1048576,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 750,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "STARTING",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "WARMUP",
+        "detail": "Waiting for the configured observation period and payload minimum."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "UNAVAILABLE",
+      "receiveQueue": "UNAVAILABLE",
+      "rtt": "UNAVAILABLE",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "UNAVAILABLE",
+      "route": "UNAVAILABLE"
+    },
+    "routeHistory": [
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 0,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": []
+  },
+  "speedProof": {
+    "schemaVersion": 1,
+    "transferId": "fs_tr_m8_unknown",
+    "durationMs": 750,
+    "payloadBytes": 98304,
+    "averageThroughputBps": 131072,
+    "peakThroughputBps": 131072,
+    "averageSourceReadBps": null,
+    "averageDestinationWriteBps": null,
+    "routeHistory": [
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 0,
+        "endedAtMs": null,
+        "averageThroughputBps": 131072
+      }
+    ],
+    "routeChangeCount": 0,
+    "stallCount": 0,
+    "stallDurationMs": 0,
+    "integrityRetryCount": 0,
+    "reconnectCount": 0,
+    "dominantBottleneck": "INSUFFICIENT_DATA",
+    "bottleneckConfidence": "LOW",
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "UNAVAILABLE",
+      "receiveQueue": "UNAVAILABLE",
+      "rtt": "UNAVAILABLE",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "UNAVAILABLE",
+      "route": "UNAVAILABLE"
+    }
+  }
+}

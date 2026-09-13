@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "kind": "flicksend-m4c-browser-resume-qualification",
+  "fixture": {
+    "sizeBytes": 1073741824,
+    "pattern": "indexed-byte-mod-251-v1",
+    "sha256": "9cc5601236c455c6af19a76e64d2d95953a93b10eeb8b8b756a57090e1499b3e"
+  },
+  "protocolVersion": 3,
+  "blockBytes": 8388608,
+  "singleInterruptions": [
+    {
+      "percent": 10,
+      "safeBytesBeforeDisconnect": 109051904,
+      "remainingBytesAtResume": 964689920,
+      "resumedPayloadBytes": 964689920,
+      "duplicateRetransmittedBytes": 0,
+      "ambiguousInflightBytesRetransmitted": 0,
+      "committedBlocks": 13,
+      "legacyRetransmittedBytes": 964689920,
+      "legacyRetransmittedBytesStatus": "deprecated",
+      "committedBlocksRetransmitted": 0,
+      "reconnectCount": 1,
+      "finalDestinationMatchesFixture": true
+    },
+    {
+      "percent": 50,
+      "safeBytesBeforeDisconnect": 545259520,
+      "remainingBytesAtResume": 528482304,
+      "resumedPayloadBytes": 528482304,
+      "duplicateRetransmittedBytes": 0,
+      "ambiguousInflightBytesRetransmitted": 0,
+      "committedBlocks": 65,
+      "legacyRetransmittedBytes": 528482304,
+      "legacyRetransmittedBytesStatus": "deprecated",
+      "committedBlocksRetransmitted": 0,
+      "reconnectCount": 1,
+      "finalDestinationMatchesFixture": true
+    },
+    {
+      "percent": 90,
+      "safeBytesBeforeDisconnect": 973078528,
+      "remainingBytesAtResume": 100663296,
+      "resumedPayloadBytes": 100663296,
+      "duplicateRetransmittedBytes": 0,
+      "ambiguousInflightBytesRetransmitted": 0,
+      "committedBlocks": 116,
+      "legacyRetransmittedBytes": 100663296,
+      "legacyRetransmittedBytesStatus": "deprecated",
+      "committedBlocksRetransmitted": 0,
+      "reconnectCount": 1,
+      "finalDestinationMatchesFixture": true
+    }
+  ],
+  "multiInterruption": {
+    "percents": [15, 40, 70, 90],
+    "reconnectCount": 4,
+    "transferIdStable": true,
+    "resumedPayloadBytes": 929436794.88,
+    "duplicateRetransmittedBytes": 0,
+    "ambiguousInflightBytesRetransmitted": "not separately captured by legacy multi-run telemetry",
+    "legacyRetransmittedBytes": 929436794.88,
+    "legacyRetransmittedBytesStatus": "deprecated",
+    "retransmissionBudgetBytes": 1946157056,
+    "committedBlocksRetransmitted": 0,
+    "finalDestinationMatchesFixture": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@flicksend/filesystem-browser",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@flicksend/integrity": "workspace:*",
+    "@flicksend/resume": "workspace:*",
+    "@flicksend/stream-pack": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "5.0.0"
+  }
+}

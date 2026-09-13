@@ -1,0 +1,11 @@
+{
+  "createdAt": "2026-09-08T19:04:24.714Z",
+  "schemaVersion": 2,
+  "milestone": "M8",
+  "measurementSchema": "M8_WORK_RATE_V2",
+  "scenario": "browser-webrtc-m5-observer-off-comparison",
+  "payloadBytes": 16777216,
+  "delivered": true,
+  "completionElapsedMs": 3470.400099999999,
+  "note": "Same-host comparison sample only; not a physical performance claim."
+}

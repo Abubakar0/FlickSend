@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M5",
+  "protocolVersion": 4,
+  "datasetSizeBytes": 1073741824,
+  "datasetPattern": "indexed-byte-mod-251-v1",
+  "blockBytes": 8388608,
+  "integrityAlgorithm": "SHA256",
+  "blockCount": 128,
+  "blocksVerified": 128,
+  "integrityMismatchCount": 0,
+  "integrityRetryCount": 0,
+  "manifestRootMatch": true,
+  "finalDestinationMatchesFixture": true,
+  "verificationState": "VERIFIED",
+  "deliveryState": "DELIVERED",
+  "environment": "Chromium, two local browser contexts, WebRTC DataChannel, OPFS destination",
+  "timingCapture": "The passing qualification did not persist individual hashing and manifest timings; no timing value is asserted.",
+  "result": "PASS"
+}

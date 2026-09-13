@@ -1,0 +1,166 @@
+{
+  "generatedAt": "2026-09-08T16:52:10.197Z",
+  "scenario": "browser-webrtc-mixed-folder-opfs",
+  "protocolVersion": 5,
+  "files": 131,
+  "directories": 5,
+  "payloadBytes": 17304188,
+  "delivered": true,
+  "manifestRootVerified": true,
+  "finalTreeMatch": true,
+  "receiverMetrics": "Manifest entries\n136\nFiles / folders\n131 / 5\nManifest bytes\n14,563\nWriter peak\n16",
+  "senderHealth": {
+    "timestampMs": 8086.299999952316,
+    "transferState": "DELIVERED",
+    "routeType": "DIRECT",
+    "routeDetail": "DIRECT_HOST",
+    "currentThroughputBps": 0,
+    "rollingThroughputBps": 3765213.174927872,
+    "averageThroughputBps": 2983223.5152142057,
+    "peakThroughputBps": 16717034.676757932,
+    "senderReadBps": 3009593894.736842,
+    "receiverWriteBps": null,
+    "senderBufferedAmountBytes": 0,
+    "rollingAverageBufferedAmountBytes": 1270446.08,
+    "peakBufferedAmountBytes": 8391168,
+    "percentTimeAboveHighWater": 0.04,
+    "percentTimeBelowLowWater": 0.8,
+    "receiveQueueBytes": 0,
+    "peakReceiveQueueBytes": null,
+    "percentTimeQueueNearLimit": 0,
+    "rttMs": 1,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 0,
+    "totalBytes": 17304188,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 5800.5,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "OBSERVED",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    },
+    "routeHistory": [
+      {
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_SRFLX",
+        "startedAtMs": 2285.7999999523163,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": [
+      {
+        "atMs": 5798.399999976158,
+        "type": "HEALTH_DEGRADED",
+        "detail": "DEGRADED"
+      },
+      {
+        "atMs": 5983.5,
+        "type": "BOTTLENECK_CHANGED",
+        "detail": "NONE_DETECTED"
+      },
+      {
+        "atMs": 5983.5,
+        "type": "HEALTH_GOOD",
+        "detail": "GOOD"
+      }
+    ]
+  },
+  "receiverHealth": {
+    "timestampMs": 7344.799999952316,
+    "transferState": "DELIVERED",
+    "routeType": "DIRECT",
+    "routeDetail": "DIRECT_HOST",
+    "currentThroughputBps": 1369778.2656421515,
+    "rollingThroughputBps": 3549358.6036078287,
+    "averageThroughputBps": 3186305.5167106017,
+    "peakThroughputBps": 8882441.913439635,
+    "senderReadBps": null,
+    "receiverWriteBps": 7227389.869726317,
+    "senderBufferedAmountBytes": 0,
+    "rollingAverageBufferedAmountBytes": 0,
+    "peakBufferedAmountBytes": null,
+    "percentTimeAboveHighWater": 0,
+    "percentTimeBelowLowWater": 1,
+    "receiveQueueBytes": 0,
+    "peakReceiveQueueBytes": 2752512,
+    "percentTimeQueueNearLimit": 0,
+    "rttMs": 1,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 17304188,
+    "totalBytes": 17304188,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 5430.799999952316,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "OBSERVED",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    },
+    "routeHistory": [
+      {
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_HOST",
+        "startedAtMs": 1914,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": [
+      {
+        "atMs": 4965,
+        "type": "HEALTH_DEGRADED",
+        "detail": "DEGRADED"
+      },
+      {
+        "atMs": 5218.100000023842,
+        "type": "BOTTLENECK_CHANGED",
+        "detail": "NONE_DETECTED"
+      },
+      {
+        "atMs": 5218.100000023842,
+        "type": "HEALTH_GOOD",
+        "detail": "GOOD"
+      }
+    ]
+  }
+}

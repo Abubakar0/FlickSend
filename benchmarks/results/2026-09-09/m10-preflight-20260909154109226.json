@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "recordType": "PREFLIGHT",
+  "capturedAt": "2026-09-09T15:41:09.218Z",
+  "status": "INCOMPLETE",
+  "topology": "SINGLE_HOST_ONLY",
+  "environmentArtifact": "m10-environment-local-precheck-20260909154109203.json",
+  "available": {
+    "iperf3": false,
+    "secondMachine": false,
+    "physicalNetworkBaseline": false
+  },
+  "missingForCompletion": [
+    "Two distinct physical machines",
+    "iperf3 baseline in both TCP directions",
+    "Physical 1 GiB and 10 GiB direct transfers",
+    "External sender and receiver CPU/memory samples",
+    "Physical interruption/resume evidence"
+  ],
+  "claims": {
+    "throughput": "NOT_QUALIFIED",
+    "utilization": "NOT_QUALIFIED",
+    "disk": "NOT_QUALIFIED",
+    "CPU": "NOT_QUALIFIED",
+    "memory": "NOT_QUALIFIED"
+  },
+  "privacy": {
+    "hostnameRetained": false,
+    "addressRetained": false,
+    "pathRetained": false
+  }
+}

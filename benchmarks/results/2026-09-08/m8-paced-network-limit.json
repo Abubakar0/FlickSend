@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M8",
+  "scenario": "LIKELY_NETWORK_LIMIT",
+  "evidenceMode": "Real M5 engine transfer with deterministic test-only source, destination, or transport pacing.",
+  "createdAt": "2026-09-08T19:04:48.026Z",
+  "adapterPacing": {
+    "sourceReadDelayMs": 0,
+    "destinationWriteDelayMs": 0,
+    "sendWaitMs": 8
+  },
+  "result": {
+    "delivered": true,
+    "transferIdStable": true,
+    "manifestRootVerified": true,
+    "fixtureMatch": true,
+    "integrityRetryCount": 0,
+    "maxReceiveQueueBytes": 65536,
+    "maxBufferedAmountBytes": 524288,
+    "observedDiagnosis": {
+      "timestampMs": 21333.5256,
+      "transferState": "RECEIVING",
+      "routeType": "DIRECT",
+      "routeDetail": "TEST_PACED_TRANSPORT",
+      "currentThroughputBps": 7674559.374193644,
+      "rollingThroughputBps": 7285543.990110928,
+      "averageThroughputBps": 7216603.701874592,
+      "peakThroughputBps": 7799316.00588587,
+      "senderReadBps": 2107226424.3193197,
+      "receiverWriteBps": 631089652.3946999,
+      "senderBufferedAmountBytes": 524288,
+      "rollingAverageBufferedAmountBytes": 524288,
+      "peakBufferedAmountBytes": 524288,
+      "percentTimeAboveHighWater": 1,
+      "percentTimeBelowLowWater": 0,
+      "receiveQueueBytes": 65536,
+      "peakReceiveQueueBytes": 65536,
+      "percentTimeQueueNearLimit": 0,
+      "rttMs": null,
+      "availableOutgoingBitrateBps": null,
+      "safeBytes": 25165824,
+      "totalBytes": 33554432,
+      "routeRecoveryCount": 0,
+      "integrityRetryCount": 0,
+      "routeChangeCount": 0,
+      "timeSinceLastRouteChangeMs": 4622.371600000002,
+      "stallDurationMs": 0,
+      "stallCount": 0,
+      "etaMs": 84.62835359554526,
+      "healthState": "DEGRADED",
+      "bottleneck": "LIKELY_NETWORK_LIMIT",
+      "confidence": "MEDIUM",
+      "reasons": [
+        {
+          "code": "SOURCE_HAS_HEADROOM",
+          "detail": "Observed source production is materially above payload throughput."
+        },
+        {
+          "code": "DESTINATION_HAS_HEADROOM",
+          "detail": "Completed destination writes are materially above payload throughput."
+        },
+        {
+          "code": "BUFFER_PRESSURE",
+          "detail": "The sender DataChannel queue frequently approaches high water."
+        }
+      ],
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "OBSERVED",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "UNAVAILABLE",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      },
+      "routeHistory": [
+        {
+          "routeType": "DIRECT",
+          "routeDetail": "TEST_PACED_TRANSPORT",
+          "startedAtMs": 16711.154,
+          "endedAtMs": null,
+          "averageThroughputBps": null
+        }
+      ],
+      "events": [
+        {
+          "atMs": 16970.4797,
+          "type": "BOTTLENECK_CHANGED",
+          "detail": "LIKELY_NETWORK_LIMIT"
+        },
+        {
+          "atMs": 16970.4797,
+          "type": "HEALTH_DEGRADED",
+          "detail": "DEGRADED"
+        }
+      ]
+    },
+    "speedProof": {
+      "schemaVersion": 1,
+      "transferId": "fs_tr_102db0a9-c5f2-43c6-a13b-bd8424fb29c0",
+      "durationMs": 4640.182800000002,
+      "payloadBytes": 33554432,
+      "averageThroughputBps": 7231273.733439981,
+      "peakThroughputBps": 7799316.00588587,
+      "averageSourceReadBps": 2105384803.316482,
+      "averageDestinationWriteBps": 599618319.9009175,
+      "routeHistory": [
+        {
+          "routeType": "DIRECT",
+          "routeDetail": "TEST_PACED_TRANSPORT",
+          "startedAtMs": 16711.154,
+          "endedAtMs": null,
+          "averageThroughputBps": 7255036.59103445
+        }
+      ],
+      "routeChangeCount": 0,
+      "stallCount": 0,
+      "stallDurationMs": 0,
+      "integrityRetryCount": 0,
+      "reconnectCount": 0,
+      "dominantBottleneck": "LIKELY_NETWORK_LIMIT",
+      "bottleneckConfidence": "MEDIUM",
+      "measurementAvailability": {
+        "applicationPayload": "OBSERVED",
+        "sourceRead": "OBSERVED",
+        "destinationWrite": "OBSERVED",
+        "senderBufferedAmount": "OBSERVED",
+        "receiveQueue": "OBSERVED",
+        "rtt": "UNAVAILABLE",
+        "availableOutgoingBitrate": "UNAVAILABLE",
+        "webRtcBytes": "OBSERVED",
+        "route": "OBSERVED"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M4",
+  "kind": "recovery-engine-simulation",
+  "createdAt": "2026-09-05",
+  "execution": {
+    "runner": "Vitest",
+    "command": "pnpm test",
+    "scope": "@flicksend/engine-core",
+    "transport": "in-process encoded FSTP v3 frames",
+    "route": "NOT_APPLICABLE",
+    "browser": "NOT_TESTED"
+  },
+  "dataset": {
+    "id": "deterministic-10m-fixture",
+    "sizeBytes": 10485760,
+    "contents": "Deterministic test fixture; no filename, path, or user payload is recorded."
+  },
+  "configuration": {
+    "protocolVersion": 3,
+    "resumeBlockBytes": 1048576,
+    "networkFrameBytes": 65536,
+    "blockCount": 10,
+    "destination": "in-memory random-access test destination",
+    "recoveryStore": "in-memory validated RecoveryStore"
+  },
+  "scenarios": [
+    {
+      "interruptionAfterCommittedBlocks": 1,
+      "interruptionPercent": 10,
+      "resumedReadStartsAtByte": 1048576,
+      "committedBlocksRetransmitted": 0,
+      "result": "PASS"
+    },
+    {
+      "interruptionAfterCommittedBlocks": 5,
+      "interruptionPercent": 50,
+      "resumedReadStartsAtByte": 5242880,
+      "committedBlocksRetransmitted": 0,
+      "result": "PASS"
+    },
+    {
+      "interruptionAfterCommittedBlocks": 9,
+      "interruptionPercent": 90,
+      "resumedReadStartsAtByte": 9437184,
+      "committedBlocksRetransmitted": 0,
+      "result": "PASS"
+    }
+  ],
+  "completion": {
+    "destinationBytesEqualFixture": true,
+    "recoveryRecordPersistsCommittedRanges": true,
+    "blockAcknowledgementFollowsPersistence": true,
+    "delivered": false,
+    "integrity": "M5_BLOCK_DIGEST_AND_MANIFEST_ROOT_NOT_IMPLEMENTED"
+  },
+  "limitations": [
+    "This is deterministic engine-test evidence, not a browser-to-browser or physical-network benchmark.",
+    "No WebRTC reconnection, page reload, OPFS persistence, chosen-destination recovery, CPU, memory, disk, throughput, latency, or loss measurement was performed.",
+    "M4 frame handling is implemented in a dedicated FSTP v3 pipeline and is not yet wired into the Engine Lab SingleFileTransfer UI."
+  ]
+}

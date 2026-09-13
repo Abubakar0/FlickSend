@@ -1,0 +1,16 @@
+name: flicksend-p11
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: flicksend_p11
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      interval: 2s
+      retries: 30
+      start_period: 5s
+      test: ["CMD-SHELL", "pg_isready -U postgres -d flicksend_p11"]
+      timeout: 2s
+    ports:
+      - "127.0.0.1:54329:5432"

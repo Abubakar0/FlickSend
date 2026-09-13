@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M3",
+  "kind": "benchmark-plan",
+  "createdAt": "2026-09-05T10:47:01.486Z",
+  "datasetId": "local-loopback-unqualified",
+  "datasetSizeBytes": 10737418240,
+  "configuration": {
+    "framePayloadBytes": 65536,
+    "readAheadBytes": 262144,
+    "sendLowWaterBytes": 2097152,
+    "sendHighWaterBytes": 8388608,
+    "receiveWindowBytes": 8388608,
+    "writeBatchBytes": 262144,
+    "uiSnapshotIntervalMs": 125,
+    "throughputWindowMs": 1000,
+    "channelCount": 1,
+    "workerMode": "main-thread"
+  },
+  "requiredMeasurements": [
+    "averageThroughputBps",
+    "peakThroughputBps",
+    "sourceReadBps",
+    "destinationWriteBps",
+    "bufferedAmountBytes",
+    "receiveQueueBytes",
+    "timeToFirstByteMs",
+    "memory",
+    "cpu",
+    "integrity"
+  ],
+  "status": "PLANNED",
+  "privacy": "Dataset identifier and size only. Never record source paths, filenames, or file bytes."
+}

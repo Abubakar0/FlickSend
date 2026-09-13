@@ -1,0 +1,13 @@
+{
+  "milestone": "M2",
+  "result": "NOT_TESTED",
+  "fileSizeBytes": 10737418240,
+  "source": "D:\\FlickSendBench\\flicksend-10gb-zero.bin",
+  "receiver": "OPFS benchmark destination",
+  "environment": "same-host Chromium Playwright",
+  "failureBoundary": "source selection",
+  "reason": "Playwright setInputFiles stages the selected file through its automation transport and exceeded the 30 second test timeout before the transfer began.",
+  "transferBytes": 0,
+  "verification": "NOT_RUN",
+  "note": "This is an automation-harness limitation, not evidence of M2 large-file transfer success or failure."
+}

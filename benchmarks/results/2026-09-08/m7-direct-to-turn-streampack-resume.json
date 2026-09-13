@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M7",
+  "scenario": "direct-to-turn-m6-resume",
+  "createdAt": "2026-09-08T18:49:19.868Z",
+  "browser": "Chromium Playwright",
+  "senderRoute": {
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "localCandidateType": "relay",
+    "remoteCandidateType": "prflx",
+    "protocol": "udp",
+    "transportProtocol": "udp",
+    "relayProtocol": "udp",
+    "candidatePairState": "succeeded",
+    "rttMs": 4,
+    "availableOutgoingBitrate": null,
+    "bytesSent": 18348240,
+    "bytesReceived": 500100,
+    "policy": "RELAY_ONLY",
+    "state": "RELAY",
+    "routeGeneration": 3,
+    "routeChangeCount": 1,
+    "directConnectionAttempts": 1,
+    "relayConnectionAttempts": 1,
+    "iceRestartCount": 0,
+    "peerConnectionReplacementCount": 1,
+    "routeRecoveryMs": 519.5,
+    "routeRecoveryToFirstPayloadMs": 301.5,
+    "failureCode": null
+  },
+  "receiverRoute": {
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "localCandidateType": "prflx",
+    "remoteCandidateType": "relay",
+    "protocol": "udp",
+    "transportProtocol": "udp",
+    "relayProtocol": "udp",
+    "candidatePairState": "succeeded",
+    "rttMs": 4,
+    "availableOutgoingBitrate": null,
+    "bytesSent": 500100,
+    "bytesReceived": 18323876,
+    "policy": "AUTO",
+    "state": "RELAY",
+    "routeGeneration": 3,
+    "routeChangeCount": 1,
+    "directConnectionAttempts": 2,
+    "relayConnectionAttempts": 0,
+    "iceRestartCount": 0,
+    "peerConnectionReplacementCount": 1,
+    "routeRecoveryMs": null,
+    "routeRecoveryToFirstPayloadMs": null,
+    "failureCode": null
+  },
+  "senderRecovery": {
+    "transferId": "fs_tr_bfa0d298-11ae-43c0-a8d6-f6f56e52636a",
+    "state": "DELIVERED",
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 17304188,
+      "resumedPayloadBytes": 17304188,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 8388608
+    },
+    "integrity": {
+      "manifestRootMatch": true,
+      "integrityRetryCount": 0
+    }
+  },
+  "receiverRecovery": {
+    "transferId": "fs_tr_bfa0d298-11ae-43c0-a8d6-f6f56e52636a",
+    "state": "DELIVERED",
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 0,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "integrity": {
+      "manifestRootMatch": true,
+      "integrityRetryCount": 0
+    }
+  },
+  "senderHealth": {
+    "timestampMs": 9446.399999976158,
+    "transferState": "DELIVERED",
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "currentThroughputBps": 0,
+    "rollingThroughputBps": 3816225.095252138,
+    "averageThroughputBps": 2221447.5711476654,
+    "peakThroughputBps": 17657709.499726612,
+    "senderReadBps": 296923218.5235054,
+    "receiverWriteBps": null,
+    "senderBufferedAmountBytes": 0,
+    "rollingAverageBufferedAmountBytes": 879306.72,
+    "peakBufferedAmountBytes": 8391168,
+    "percentTimeAboveHighWater": 0,
+    "percentTimeBelowLowWater": 0.8,
+    "receiveQueueBytes": 0,
+    "peakReceiveQueueBytes": null,
+    "percentTimeQueueNearLimit": 0,
+    "rttMs": 4,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 0,
+    "totalBytes": 17304188,
+    "routeRecoveryCount": 1,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 1,
+    "timeSinceLastRouteChangeMs": 6529.199999928474,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "OBSERVED",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    },
+    "routeHistory": [
+      {
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_SRFLX",
+        "startedAtMs": 1656.8000000715256,
+        "endedAtMs": 2403.3000000715256,
+        "averageThroughputBps": 11316077.162470784
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 2403.3000000715256,
+        "endedAtMs": 2917.2000000476837,
+        "averageThroughputBps": 0
+      },
+      {
+        "routeType": "RELAY",
+        "routeDetail": "RELAY_TCP",
+        "startedAtMs": 2917.2000000476837,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": [
+      {
+        "atMs": 2403.3000000715256,
+        "type": "ROUTE_CHANGED",
+        "detail": "DIRECT to UNKNOWN"
+      },
+      {
+        "atMs": 2917.2000000476837,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to RELAY"
+      },
+      {
+        "atMs": 6649.399999976158,
+        "type": "HEALTH_DEGRADED",
+        "detail": "DEGRADED"
+      },
+      {
+        "atMs": 7440.300000071526,
+        "type": "BOTTLENECK_CHANGED",
+        "detail": "LIKELY_RELAY_LIMIT"
+      }
+    ]
+  },
+  "receiverHealth": {
+    "timestampMs": 9221.199999928474,
+    "transferState": "DELIVERED",
+    "routeType": "RELAY",
+    "routeDetail": "RELAY_UDP",
+    "currentThroughputBps": 0,
+    "rollingThroughputBps": 3059680.555303289,
+    "averageThroughputBps": 2205703.8699023305,
+    "peakThroughputBps": 7733291.772733911,
+    "senderReadBps": null,
+    "receiverWriteBps": 5577915.550522919,
+    "senderBufferedAmountBytes": 0,
+    "rollingAverageBufferedAmountBytes": 0,
+    "peakBufferedAmountBytes": null,
+    "percentTimeAboveHighWater": 0,
+    "percentTimeBelowLowWater": 1,
+    "receiveQueueBytes": 0,
+    "peakReceiveQueueBytes": 5439488,
+    "percentTimeQueueNearLimit": 0,
+    "rttMs": 4,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 17304188,
+    "totalBytes": 17304188,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 1,
+    "timeSinceLastRouteChangeMs": 6666,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "OBSERVED",
+      "senderBufferedAmount": "OBSERVED",
+      "receiveQueue": "OBSERVED",
+      "rtt": "OBSERVED",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "OBSERVED",
+      "route": "OBSERVED"
+    },
+    "routeHistory": [
+      {
+        "routeType": "DIRECT",
+        "routeDetail": "DIRECT_HOST",
+        "startedAtMs": 1376,
+        "endedAtMs": 2135.5999999046326,
+        "averageThroughputBps": 634160.9068497644
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 2135.5999999046326,
+        "endedAtMs": 2555.1999999284744,
+        "averageThroughputBps": 156373.18061625335
+      },
+      {
+        "routeType": "RELAY",
+        "routeDetail": "RELAY_UDP",
+        "startedAtMs": 2555.1999999284744,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": [
+      {
+        "atMs": 2135.5999999046326,
+        "type": "ROUTE_CHANGED",
+        "detail": "DIRECT to UNKNOWN"
+      },
+      {
+        "atMs": 2555.1999999284744,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to RELAY"
+      },
+      {
+        "atMs": 5579.599999904633,
+        "type": "HEALTH_DEGRADED",
+        "detail": "DEGRADED"
+      },
+      {
+        "atMs": 5763.5,
+        "type": "BOTTLENECK_CHANGED",
+        "detail": "NONE_DETECTED"
+      },
+      {
+        "atMs": 5763.5,
+        "type": "HEALTH_GOOD",
+        "detail": "GOOD"
+      }
+    ]
+  },
+  "routeBefore": "DIRECT",
+  "routeAfter": "RELAY",
+  "transferIdStable": true,
+  "delivered": true,
+  "finalTreeMatches": true
+}

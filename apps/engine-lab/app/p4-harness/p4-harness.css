@@ -1,0 +1,15 @@
+.p4-harness-page {
+  max-width: 42rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+.p4-harness-page output {
+  display: block;
+  padding: var(--fs-space-sm);
+  border-radius: var(--fs-radius-sm);
+  background: var(--fs-surface-muted);
+  color: var(--fs-text-secondary);
+  font-size: var(--fs-font-size-small);
+}

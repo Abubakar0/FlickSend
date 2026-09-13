@@ -1,0 +1,8 @@
+{
+  "generatedAt": "2026-09-07T21:09:44.626Z",
+  "scenario": "browser-webrtc-payload-corruption-retry",
+  "protocolVersion": 5,
+  "delivered": true,
+  "manifestRootVerified": true,
+  "integrityMetrics": "Integrity\nSHA256\nBlocks verified\n0\nIntegrity retries\n1\nMismatches\n0\nManifest\nverified"
+}

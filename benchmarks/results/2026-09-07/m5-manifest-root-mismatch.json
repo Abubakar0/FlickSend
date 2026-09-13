@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M5",
+  "protocolVersion": 4,
+  "datasetSizeBytes": 8388608,
+  "blockCount": 1,
+  "blocksVerified": 1,
+  "manifestRootMatch": false,
+  "verificationState": "INTEGRITY_FAILED",
+  "deliveryState": "NOT_DELIVERED",
+  "error": "FS_MANIFEST_INTEGRITY_FAILED",
+  "result": "PASS"
+}

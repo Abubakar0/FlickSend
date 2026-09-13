@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-07T21:09:32.119Z",
+  "scenario": "browser-webrtc-10000-files-opfs",
+  "protocolVersion": 5,
+  "files": 10000,
+  "directories": 103,
+  "payloadBytes": 49598976,
+  "delivered": true,
+  "manifestRootVerified": true,
+  "finalTreeMatch": true,
+  "receiverMetrics": "Manifest entries\n10103\nFiles / folders\n10000 / 103\nManifest bytes\n1,147,646\nWriter peak\n16"
+}

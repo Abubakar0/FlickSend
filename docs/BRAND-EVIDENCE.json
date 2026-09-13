@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-10T17:56:46.976+05:00",
+  "purpose": "P2 public research evidence for a product-risk assessment; not legal advice or a clearance opinion.",
+  "workingIdentity": {
+    "name": "FlickSend",
+    "tagline": "Send files like messages.",
+    "mentalModel": "Person -> file/folder -> send"
+  },
+  "evidence": [
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "USPTO Trademark Search",
+      "jurisdictionOrPlatform": "United States",
+      "query": "FLICKSEND; Wordmark",
+      "result": "NO_MATCH_FOUND_IN_THIS_SEARCH: 0 live and 0 dead results.",
+      "evidenceUrl": "https://tmsearch.uspto.gov/search/search-information"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "USPTO Trademark Search",
+      "jurisdictionOrPlatform": "United States",
+      "query": "FLICK SEND; Wordmark",
+      "result": "BROAD TOKEN SEARCH ONLY: 1,562 results. It is not evidence of an exact phrase match and requires counsel filtering, especially in classes 009, 038, and 042.",
+      "evidenceUrl": "https://tmsearch.uspto.gov/search/search-information"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "WIPO Global Brand Database",
+      "jurisdictionOrPlatform": "International",
+      "query": "FLICKSEND and required variants",
+      "result": "NOT VERIFIED: the public interface presented a CAPTCHA challenge. Manual or counsel search is required.",
+      "evidenceUrl": "https://branddb.wipo.int/"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "EUIPO eSearch plus",
+      "jurisdictionOrPlatform": "European Union",
+      "query": "FLICKSEND and required variants",
+      "result": "NOT VERIFIED: the official search surface was reached, but a repeatable result set was not obtained during this research. Manual or counsel search is required.",
+      "evidenceUrl": "https://euipo.europa.eu/eSearch/"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "UK IPO trademark search",
+      "jurisdictionOrPlatform": "United Kingdom",
+      "query": "FLICKSEND and required variants",
+      "result": "NOT VERIFIED: the direct register endpoint returned an access block. Manual or counsel search is required.",
+      "evidenceUrl": "https://www.gov.uk/search-for-trademark"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "IPO Pakistan",
+      "jurisdictionOrPlatform": "Pakistan",
+      "query": "FLICKSEND and required variants",
+      "result": "NOT VERIFIED: no public, repeatable official trademark result was available in this research. Manual registry or counsel search is required.",
+      "evidenceUrl": "https://ipo.gov.pk/"
+    },
+    {
+      "checkedAt": "2026-09-10T17:53:42.953+05:00",
+      "sourceType": "AUTHORITATIVE_PROTOCOL/RDAP",
+      "source": "Verisign RDAP",
+      "jurisdictionOrPlatform": ".com registry",
+      "query": "flicksend.com",
+      "result": "REGISTERED. The returned domain object has a 2011 registration event and a 2026 expiration event. A registered domain is not evidence that it is for sale or available to acquire.",
+      "evidenceUrl": "https://rdap.verisign.com/com/v1/domain/flicksend.com"
+    },
+    {
+      "checkedAt": "2026-09-10T17:54:54.278+05:00",
+      "sourceType": "THIRD_PARTY_ARCHIVE",
+      "source": "Internet Archive Wayback Machine",
+      "jurisdictionOrPlatform": "Public web archive",
+      "query": "flicksend.com historical captures",
+      "result": "HISTORICAL DOMAIN-ONLY/PARKED OR MANAGED USE: 2011 GoDaddy parking and 2013-2014 managed-domain pages were recovered. No historical FlickSend software product was identified in those captures.",
+      "evidenceUrl": "https://web.archive.org/cdx/search/cdx?url=flicksend.com&output=json&fl=timestamp,statuscode,original&filter=statuscode:200&collapse=digest"
+    },
+    {
+      "checkedAt": "2026-09-10T17:53:42.953+05:00",
+      "sourceType": "PUBLIC_PLATFORM",
+      "source": "Apple App Store",
+      "jurisdictionOrPlatform": "Apple App Store, United States",
+      "query": "FlickSend; Flick file sharing",
+      "result": "NO EXACT FLICKSEND LISTING FOUND IN THE API SEARCH. A public product named Flick by ydangle is listed for local file sharing; it is a meaningful similar-name, same-category product collision for counsel review.",
+      "evidenceUrl": "https://apps.apple.com/us/app/flick/id644265534"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "UK Companies House",
+      "jurisdictionOrPlatform": "United Kingdom",
+      "query": "Flick Send",
+      "result": "REGISTERED BUSINESS: FLICK SEND LOGISTICS LIMITED, active, freight transport by road. This is an unrelated-industry company-name result, not a trademark determination.",
+      "evidenceUrl": "https://find-and-update.company-information.service.gov.uk/company/16390097"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "OFFICIAL_REGISTRY",
+      "source": "SECP LEAP company name search",
+      "jurisdictionOrPlatform": "Pakistan",
+      "query": "FlickSend; Flick Send",
+      "result": "NO MATCH FOUND IN THIS SEARCH: 0 results for each exact query. The SECP interface itself states that search results do not establish a right to reserve a name.",
+      "evidenceUrl": "https://leap.secp.gov.pk/"
+    },
+    {
+      "checkedAt": "2026-09-10T17:56:46.976+05:00",
+      "sourceType": "AUTHORITATIVE_PROTOCOL/RDAP",
+      "source": "RDAP registry responses",
+      "jurisdictionOrPlatform": "Candidate domain registries",
+      "query": "flicksend.app, flicksend.io, flicksend.co, flicksend.net, getflicksend.com, useflicksend.com, flicksendhq.com",
+      "result": "NO RDAP DOMAIN OBJECT FOUND at check time for each candidate. This is a registration signal, not a purchase recommendation or a guarantee of registrar checkout availability.",
+      "evidenceUrl": "https://rdap.org/"
+    },
+    {
+      "checkedAt": "2026-09-10T17:56:46.976+05:00",
+      "sourceType": "PUBLIC_PLATFORM",
+      "source": "GitHub, npm, and PyPI public endpoints",
+      "jurisdictionOrPlatform": "Developer ecosystems",
+      "query": "flicksend",
+      "result": "NO PUBLIC EXACT PROFILE/PACKAGE FOUND: GitHub user API, npm registry, and PyPI JSON endpoints each returned 404. This does not reserve a namespace or establish availability.",
+      "evidenceUrl": "https://api.github.com/users/flicksend"
+    },
+    {
+      "checkedAt": "2026-09-10T17:56:46.976+05:00",
+      "sourceType": "UNVERIFIED",
+      "source": "Public social profile routes",
+      "jurisdictionOrPlatform": "X, Instagram, LinkedIn, YouTube, TikTok, Facebook",
+      "query": "@flicksend",
+      "result": "NOT VERIFIED: unauthenticated route responses are not reliable evidence that a handle is available or taken. No social account was created or claimed.",
+      "evidenceUrl": "https://x.com/flicksend"
+    },
+    {
+      "checkedAt": "2026-09-10T17:50:29.336+05:00",
+      "sourceType": "SEARCH_ENGINE_DISCOVERY",
+      "source": "Public web search",
+      "jurisdictionOrPlatform": "Web, Google Play, Chrome Web Store, Microsoft Store, and financial-context queries",
+      "query": "FlickSend/Flick Send variants; file transfer; fintech; exact tagline",
+      "result": "NO EXACT FLICKSEND PRODUCT, FINTECH, OR TAGLINE MATCH WAS IDENTIFIED IN THE LIMITED SEARCHES. The root word Flick is crowded across software and fintech-adjacent uses; this is not a rights determination.",
+      "evidenceUrl": "https://www.google.com/"
+    }
+  ]
+}

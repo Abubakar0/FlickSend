@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M3",
+  "kind": "negative-compatibility-evidence",
+  "createdAt": "2026-09-05",
+  "datasetId": "zero-1g",
+  "datasetSizeBytes": 1073741824,
+  "environment": {
+    "senderHost": "HP ZBook Studio G5",
+    "receiverHost": "same Windows 10 Pro host",
+    "browser": "Codex in-app Chromium; exact browser version unavailable",
+    "route": "same-host WebRTC loopback"
+  },
+  "configuration": {
+    "framePayloadBytes": 262144,
+    "effectiveFramePayloadBytes": 262124,
+    "sendLowWaterBytes": 4194304,
+    "sendHighWaterBytes": 33554432,
+    "readAheadBytes": 1048576,
+    "receiveWindowBytes": 33554432,
+    "writeBatchBytes": 1048576
+  },
+  "transfer": {
+    "senderBytesBeforeFailure": 19659300,
+    "receiverBytesBeforeFailure": 2883364,
+    "senderError": "SOURCE_OR_TRANSPORT_FAILED",
+    "receiverError": "SOURCE_OR_TRANSPORT_FAILED"
+  },
+  "completionState": "FAILED",
+  "integrity": "NOT_VERIFIED",
+  "finding": "Chromium rejected a queued data-channel send before the 32 MiB application high-water check could run. M3 now rejects watermarks above 16 MiB.",
+  "privacy": "No source filename, source path, or payload bytes are included."
+}

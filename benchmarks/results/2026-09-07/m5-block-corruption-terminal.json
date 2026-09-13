@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M5",
+  "protocolVersion": 4,
+  "datasetSizeBytes": 8388608,
+  "blockBytes": 8388608,
+  "integrityAlgorithm": "SHA256",
+  "integrityMismatchCount": 4,
+  "integrityRetryCount": 3,
+  "verificationState": "INTEGRITY_FAILED",
+  "deliveryState": "NOT_DELIVERED",
+  "error": "FS_BLOCK_INTEGRITY_FAILED",
+  "result": "PASS"
+}

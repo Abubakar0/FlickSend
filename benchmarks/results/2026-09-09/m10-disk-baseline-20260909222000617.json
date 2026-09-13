@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "recordType": "DISK_BASELINE",
+  "capturedAt": "2026-09-09T22:21:31.100Z",
+  "status": "OBSERVED_CACHE_STATE_UNKNOWN",
+  "method": "bounded 8 MiB sequential Node.js read/write with SHA-256 verification",
+  "cacheState": "UNKNOWN_LIKELY_CACHED",
+  "sourceSequentialRead": null,
+  "destinationSequentialWrite": {
+    "bytes": 10737418240,
+    "durationMs": 90480.16780000001,
+    "bytesPerSecond": 118671511.12865198,
+    "sha256": "009d7d80864b5fa227327bf7e57320455efacb216c562e8b715a189e1200dfe9"
+  },
+  "privacy": {
+    "inputPathRetained": false,
+    "outputPathRetained": false
+  }
+}

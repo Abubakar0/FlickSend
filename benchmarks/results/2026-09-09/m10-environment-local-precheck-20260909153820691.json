@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M10",
+  "recordType": "ENVIRONMENT",
+  "capturedAt": "2026-09-09T15:38:20.689Z",
+  "evidenceClass": "SAME_HOST_PHYSICAL_BROWSER",
+  "machine": {
+    "role": "SAME_HOST",
+    "label": "LOCAL_PRECHECK",
+    "cpu": {
+      "model": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "physicalCores": null,
+      "logicalCores": 12,
+      "reportedLogicalCores": 12
+    },
+    "memoryBytes": 34157072384,
+    "operatingSystem": {
+      "platform": "win32",
+      "release": "10.0.19045",
+      "version": "10.0.19045",
+      "family": "Microsoft Windows 10 Pro"
+    },
+    "browser": {
+      "browser": "UNSPECIFIED",
+      "version": "UNSPECIFIED"
+    },
+    "storage": {
+      "classes": [
+        "SSD/NVMe"
+      ],
+      "health": [
+        "Healthy"
+      ]
+    },
+    "network": [
+      {
+        "interfaceClass": "NATIVE 802.11",
+        "adapterModel": "Intel(R) Wireless-AC 9560 160MHz",
+        "nominalLinkSpeedBitsPerSecond": 526500000
+      }
+    ],
+    "powerMode": "BATTERY"
+  },
+  "systemLowLoad": {
+    "scope": "WHOLE_SYSTEM",
+    "methodology": "six 500 ms OS CPU and memory samples",
+    "summary": {
+      "sampleCount": 6,
+      "initialMemoryBytes": 15300681728,
+      "averageMemoryBytes": 15286365525.333334,
+      "peakMemoryBytes": 15300681728,
+      "finalMemoryBytes": 15280144384,
+      "averageCpuPercent": 5.850164136286975,
+      "peakCpuPercent": 12.813230872034747,
+      "memoryTrend": "NO_CLEAR_TREND"
+    }
+  },
+  "privacy": {
+    "excluded": [
+      "hostname",
+      "username",
+      "IP address",
+      "MAC address",
+      "Wi-Fi name",
+      "filesystem path",
+      "payload"
+    ],
+    "twoMachineAttestation": "NOT_APPLICABLE"
+  }
+}

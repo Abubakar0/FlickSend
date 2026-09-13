@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "kind": "flicksend-m4c-browser-resume-qualification",
+  "result": "environmental-timeout-before-controlled-disconnect",
+  "fixture": {
+    "sizeBytes": 10737418240,
+    "pattern": "indexed-byte-mod-251-v1",
+    "sha256": "009d7d80864b5fa227327bf7e57320455efacb216c562e8b715a189e1200dfe9"
+  },
+  "interruption": {
+    "percent": 50,
+    "targetSafeBytes": 5368709120,
+    "timeoutMs": 1800000
+  },
+  "metrics": {
+    "transferIdStable": null,
+    "safeBytesBeforeDisconnect": null,
+    "remainingBytesAtResume": null,
+    "resumedPayloadBytes": null,
+    "duplicateRetransmittedBytes": null,
+    "ambiguousInflightBytesRetransmitted": null,
+    "committedBlocksRetransmitted": null,
+    "reconnectCount": null,
+    "reconciliationMs": null,
+    "finalFixtureHashMatch": null
+  },
+  "reason": "The local Chromium/OPFS run did not reach the required persisted-safe threshold before the 30-minute qualification ceiling. Playwright teardown reset the page snapshot, so no terminal transfer metrics were captured."
+}

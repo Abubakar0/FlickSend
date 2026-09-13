@@ -1,0 +1,25 @@
+.p10-auth-page,
+.p10-account-page {
+  width: min(100%, 64rem);
+  margin-inline: auto;
+}
+
+.p10-auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 8vw, 5rem);
+}
+
+.p10-auth-page > .fs-stack {
+  width: min(100%, 28rem);
+}
+
+.p10-auth-card,
+.p10-account-card {
+  max-width: 38rem;
+}
+
+.p10-account-page {
+  padding: clamp(1.25rem, 4vw, 3rem);
+}

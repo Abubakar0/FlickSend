@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M7",
+  "scenario": "unreachable-turn",
+  "createdAt": "2026-09-08T18:51:17.945Z",
+  "browser": "Chromium Playwright",
+  "senderRoute": {
+    "routeType": "UNKNOWN",
+    "routeDetail": "UNKNOWN",
+    "localCandidateType": "unknown",
+    "remoteCandidateType": "unknown",
+    "protocol": "unknown",
+    "transportProtocol": "unknown",
+    "relayProtocol": null,
+    "candidatePairState": null,
+    "rttMs": null,
+    "availableOutgoingBitrate": null,
+    "bytesSent": null,
+    "bytesReceived": null,
+    "policy": "RELAY_ONLY",
+    "state": "FAILED",
+    "routeGeneration": 4,
+    "routeChangeCount": 0,
+    "directConnectionAttempts": 0,
+    "relayConnectionAttempts": 3,
+    "iceRestartCount": 0,
+    "peerConnectionReplacementCount": 2,
+    "routeRecoveryMs": null,
+    "routeRecoveryToFirstPayloadMs": null,
+    "failureCode": "FS_ROUTE_EXHAUSTED"
+  },
+  "receiverRoute": {
+    "routeType": "UNKNOWN",
+    "routeDetail": "UNKNOWN",
+    "localCandidateType": "unknown",
+    "remoteCandidateType": "unknown",
+    "protocol": "unknown",
+    "transportProtocol": "unknown",
+    "relayProtocol": null,
+    "candidatePairState": null,
+    "rttMs": null,
+    "availableOutgoingBitrate": null,
+    "bytesSent": null,
+    "bytesReceived": null,
+    "policy": "RELAY_ONLY",
+    "state": "CONNECTING",
+    "routeGeneration": 4,
+    "routeChangeCount": 0,
+    "directConnectionAttempts": 0,
+    "relayConnectionAttempts": 3,
+    "iceRestartCount": 0,
+    "peerConnectionReplacementCount": 2,
+    "routeRecoveryMs": null,
+    "routeRecoveryToFirstPayloadMs": null,
+    "failureCode": null
+  },
+  "senderRecovery": {
+    "transferId": null,
+    "state": "IDLE",
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 0,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "integrity": {
+      "manifestRootMatch": null,
+      "integrityRetryCount": 0
+    }
+  },
+  "receiverRecovery": {
+    "transferId": null,
+    "state": "IDLE",
+    "continuity": {
+      "safeBytesBeforeDisconnect": 0,
+      "remainingBytesAtResume": 0,
+      "resumedPayloadBytes": 0,
+      "duplicateRetransmittedBytes": 0,
+      "committedBlocksRetransmitted": 0,
+      "ambiguousInflightBytesRetransmitted": 0
+    },
+    "integrity": {
+      "manifestRootMatch": null,
+      "integrityRetryCount": 0
+    }
+  },
+  "senderHealth": {
+    "timestampMs": 48004.200000047684,
+    "transferState": "IDLE",
+    "routeType": "UNKNOWN",
+    "routeDetail": "UNKNOWN",
+    "currentThroughputBps": null,
+    "rollingThroughputBps": null,
+    "averageThroughputBps": 0,
+    "peakThroughputBps": 0,
+    "senderReadBps": null,
+    "receiverWriteBps": null,
+    "senderBufferedAmountBytes": null,
+    "rollingAverageBufferedAmountBytes": null,
+    "peakBufferedAmountBytes": null,
+    "percentTimeAboveHighWater": null,
+    "percentTimeBelowLowWater": null,
+    "receiveQueueBytes": null,
+    "peakReceiveQueueBytes": null,
+    "percentTimeQueueNearLimit": null,
+    "rttMs": null,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 0,
+    "totalBytes": 0,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 15078.399999976158,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "UNAVAILABLE",
+      "receiveQueue": "UNAVAILABLE",
+      "rtt": "UNAVAILABLE",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "UNAVAILABLE",
+      "route": "UNAVAILABLE"
+    },
+    "routeHistory": [
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 1122.2000000476837,
+        "endedAtMs": 1166.1000000238419,
+        "averageThroughputBps": 0
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 1166.1000000238419,
+        "endedAtMs": 16845.5,
+        "averageThroughputBps": 0
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 16845.5,
+        "endedAtMs": 32925.800000071526,
+        "averageThroughputBps": null
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 32925.800000071526,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": [
+      {
+        "atMs": 1122.2000000476837,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      },
+      {
+        "atMs": 1166.1000000238419,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      },
+      {
+        "atMs": 16845.5,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      },
+      {
+        "atMs": 32925.800000071526,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      }
+    ]
+  },
+  "receiverHealth": {
+    "timestampMs": 32634.600000023842,
+    "transferState": "IDLE",
+    "routeType": "UNKNOWN",
+    "routeDetail": "UNKNOWN",
+    "currentThroughputBps": null,
+    "rollingThroughputBps": null,
+    "averageThroughputBps": 0,
+    "peakThroughputBps": 0,
+    "senderReadBps": null,
+    "receiverWriteBps": null,
+    "senderBufferedAmountBytes": null,
+    "rollingAverageBufferedAmountBytes": null,
+    "peakBufferedAmountBytes": null,
+    "percentTimeAboveHighWater": null,
+    "percentTimeBelowLowWater": null,
+    "receiveQueueBytes": null,
+    "peakReceiveQueueBytes": null,
+    "percentTimeQueueNearLimit": null,
+    "rttMs": null,
+    "availableOutgoingBitrateBps": null,
+    "safeBytes": 0,
+    "totalBytes": 0,
+    "routeRecoveryCount": 0,
+    "integrityRetryCount": 0,
+    "routeChangeCount": 0,
+    "timeSinceLastRouteChangeMs": 0,
+    "stallDurationMs": 0,
+    "stallCount": 0,
+    "etaMs": null,
+    "healthState": "UNKNOWN",
+    "bottleneck": "INSUFFICIENT_DATA",
+    "confidence": "LOW",
+    "reasons": [
+      {
+        "code": "MISSING_MEASUREMENTS",
+        "detail": "Transfer is not actively moving payload."
+      }
+    ],
+    "measurementAvailability": {
+      "applicationPayload": "OBSERVED",
+      "sourceRead": "UNAVAILABLE",
+      "destinationWrite": "UNAVAILABLE",
+      "senderBufferedAmount": "UNAVAILABLE",
+      "receiveQueue": "UNAVAILABLE",
+      "rtt": "UNAVAILABLE",
+      "availableOutgoingBitrate": "UNAVAILABLE",
+      "webRtcBytes": "UNAVAILABLE",
+      "route": "UNAVAILABLE"
+    },
+    "routeHistory": [
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 918.7000000476837,
+        "endedAtMs": 955.7000000476837,
+        "averageThroughputBps": 0
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 955.7000000476837,
+        "endedAtMs": 16556.899999976158,
+        "averageThroughputBps": null
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 16556.899999976158,
+        "endedAtMs": 32634.600000023842,
+        "averageThroughputBps": null
+      },
+      {
+        "routeType": "UNKNOWN",
+        "routeDetail": "UNKNOWN",
+        "startedAtMs": 32634.600000023842,
+        "endedAtMs": null,
+        "averageThroughputBps": null
+      }
+    ],
+    "events": [
+      {
+        "atMs": 918.7000000476837,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      },
+      {
+        "atMs": 955.7000000476837,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      },
+      {
+        "atMs": 16556.899999976158,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      },
+      {
+        "atMs": 32634.600000023842,
+        "type": "ROUTE_CHANGED",
+        "detail": "UNKNOWN to UNKNOWN"
+      }
+    ]
+  },
+  "delivered": false,
+  "terminalError": "FS_TURN_UNREACHABLE"
+}
