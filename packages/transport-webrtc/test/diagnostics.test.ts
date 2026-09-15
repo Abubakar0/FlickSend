@@ -178,6 +178,25 @@ describe("HttpIceConfigurationProvider", () => {
     ).rejects.toEqual(new TurnCredentialError("FS_TURN_AUTH_FAILED"));
   });
 
+  it("does not call the legacy endpoint without its required session code", async () => {
+    let requested = false;
+    const provider = new HttpIceConfigurationProvider(
+      "https://signal.test/turn-credentials",
+      async () => {
+        requested = true;
+        return Response.json({});
+      }
+    );
+
+    await expect(
+      provider.getConfiguration({
+        peerId: crypto.randomUUID(),
+        policy: "AUTO"
+      })
+    ).rejects.toEqual(new TurnCredentialError("FS_TURN_CREDENTIAL_UNAVAILABLE"));
+    expect(requested).toBe(false);
+  });
+
   it("requests fresh credentials for each replacement configuration", async () => {
     let requests = 0;
     const provider = new HttpIceConfigurationProvider(

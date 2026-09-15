@@ -79,6 +79,9 @@ importers:
       "@flicksend/stream-pack":
         specifier: workspace:*
         version: link:../../packages/stream-pack
+      "@flicksend/transport-webrtc":
+        specifier: workspace:*
+        version: link:../../packages/transport-webrtc
       "@flicksend/ui":
         specifier: workspace:*
         version: link:../../packages/ui

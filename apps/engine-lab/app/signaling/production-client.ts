@@ -1,6 +1,7 @@
 "use client";
 
 import type { AuthorizedSignallingSession } from "@flicksend/engine-core";
+import { parsePublicWorkerUrl } from "@flicksend/config";
 
 export type IssuedProductionSignallingSession = {
   receiverPath: string;
@@ -10,15 +11,8 @@ export type IssuedProductionSignallingSession = {
 const capabilityPattern = /^fsst1\.[A-Za-z0-9_-]{1,1024}\.[A-Za-z0-9_-]{43}$/;
 
 function configuredWorkerUrl(): string | null {
-  const raw = process.env.NEXT_PUBLIC_PRODUCTION_SIGNALING_URL;
-  try {
-    const url = raw ? new URL(raw) : null;
-    if (!url || !["ws:", "wss:"].includes(url.protocol) || url.username || url.password)
-      return null;
-    return url.toString().replace(/\/$/, "");
-  } catch {
-    return null;
-  }
+  const configured = parsePublicWorkerUrl(process.env.NEXT_PUBLIC_PRODUCTION_SIGNALING_URL);
+  return configured?.replace(/\/$/, "") ?? null;
 }
 
 export function productionWorkerUrl(): string | null {

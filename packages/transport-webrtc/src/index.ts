@@ -40,7 +40,8 @@ export type RouteDiagnostics = {
 };
 
 export type IceConfigurationRequest = {
-  sessionCode: string;
+  /** Present only for the legacy session-code credential endpoint. */
+  sessionCode?: string;
   peerId: string;
   policy: IceRoutePolicy;
   /** Development-only negative qualification hook; production callers must omit it. */
@@ -72,6 +73,7 @@ export class HttpIceConfigurationProvider implements IceConfigurationProvider {
   }
 
   async getConfiguration(request: IceConfigurationRequest): Promise<RTCConfiguration> {
+    if (!request.sessionCode) throw new TurnCredentialError("FS_TURN_CREDENTIAL_UNAVAILABLE");
     let response: Response;
     try {
       response = await this.fetcher(this.endpoint, {
