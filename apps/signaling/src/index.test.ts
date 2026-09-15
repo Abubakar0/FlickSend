@@ -43,6 +43,25 @@ describe("P13 Worker request boundary", () => {
     });
   });
 
+  it("keeps the development-only legacy session fixture available without the P12 secret", async () => {
+    const directory = {
+      fetch: async () => Response.json({ code: "123456" })
+    } as unknown as DurableObjectStub;
+    const response = await worker.fetch(
+      new Request("https://worker.example/sessions", { method: "POST" }),
+      {
+        ...env,
+        SESSION_DIRECTORY: {
+          get: () => directory,
+          idFromName: () => "directory"
+        } as unknown as DurableObjectNamespace,
+        SIGNALING_CAPABILITY_SECRET: undefined
+      }
+    );
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({ code: "123456" });
+  });
+
   it("rejects an untrusted browser origin before Durable Object access", async () => {
     const response = await worker.fetch(
       new Request("https://worker.example/v2/session", {

@@ -248,20 +248,21 @@ export default {
     if (url.pathname === "/health")
       return healthConfig ? createHealthResponse(healthConfig) : safeOperationError(503);
     const config = resolveWorkerEnvironment(env);
-    if (!config) return safeOperationError(503);
+    if (!healthConfig) return safeOperationError(503);
+    const p12Route = url.pathname.startsWith("/v2/");
+    if (p12Route && !config) return safeOperationError(503);
     if (request.method === "OPTIONS") {
-      if (!hasConfiguredBrowserOrigin(request, config)) return safeOperationError(403);
-      return withConfiguredCors(request, new Response(null, { status: 204 }), config);
+      if (!hasConfiguredBrowserOrigin(request, healthConfig)) return safeOperationError(403);
+      return withConfiguredCors(request, new Response(null, { status: 204 }), healthConfig);
     }
-    if (!validateBrowserOrigin(request, config)) return safeOperationError(403);
-    if (url.pathname.startsWith("/v2/") && !productionOperationLimiter.allow())
-      return safeOperationError(429);
+    if (!validateBrowserOrigin(request, healthConfig)) return safeOperationError(403);
+    if (p12Route && !productionOperationLimiter.allow()) return safeOperationError(429);
     if (url.pathname === "/sessions" && request.method === "POST") {
       const directory = env.SESSION_DIRECTORY.get(env.SESSION_DIRECTORY.idFromName("directory"));
       return withConfiguredCors(
         request,
         await directory.fetch("https://directory/create", { method: "POST" }),
-        config
+        healthConfig
       );
     }
     if (url.pathname === "/turn-credentials" && request.method === "POST") {
@@ -269,7 +270,7 @@ export default {
       return withConfiguredCors(
         request,
         await issueTurnCredentials(request, env, directory),
-        config
+        healthConfig
       );
     }
     if (url.pathname === "/v2/relay-eligibility") {
@@ -332,7 +333,7 @@ export default {
             method: "POST"
           })
         ),
-        config
+        config!
       );
     }
     if (url.pathname === "/v2/revoke") return safeOperationError(405);
