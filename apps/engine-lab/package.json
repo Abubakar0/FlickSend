@@ -14,6 +14,7 @@
   "dependencies": {
     "@clerk/nextjs": "7.9.2",
     "@flicksend/browser-capabilities": "workspace:*",
+    "@flicksend/config": "workspace:*",
     "@flicksend/database": "workspace:*",
     "@flicksend/engine-core": "workspace:*",
     "@flicksend/filesystem-browser": "workspace:*",

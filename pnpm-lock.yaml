@@ -55,6 +55,9 @@ importers:
       "@flicksend/browser-capabilities":
         specifier: workspace:*
         version: link:../../packages/browser-capabilities
+      "@flicksend/config":
+        specifier: workspace:*
+        version: link:../../packages/config
       "@flicksend/database":
         specifier: workspace:*
         version: link:../../packages/db
@@ -101,6 +104,9 @@ importers:
 
   apps/signaling:
     dependencies:
+      "@flicksend/config":
+        specifier: workspace:*
+        version: link:../../packages/config
       "@flicksend/protocol":
         specifier: workspace:*
         version: link:../../packages/protocol
@@ -116,6 +122,12 @@ importers:
         version: 4.131.2(@cloudflare/workers-types@5.20260914.1)(@types/node@26.4.1)
 
   packages/browser-capabilities:
+    devDependencies:
+      vitest:
+        specifier: 5.0.0
+        version: 5.0.0(@types/node@26.4.1)(jsdom@30.0.1(@noble/hashes@2.4.0))(vite@8.2.2(@types/node@26.4.1)(esbuild@0.28.1)(jiti@2.7.0))
+
+  packages/config:
     devDependencies:
       vitest:
         specifier: 5.0.0
