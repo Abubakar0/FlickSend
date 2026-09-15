@@ -55,7 +55,10 @@ describe("P12 signaling capability verification", () => {
 
   it("rejects malformed, expired, overlong, wrong-version, and tampered capabilities", async () => {
     const valid = await capability();
-    const tampered = `${valid.slice(0, -1)}${valid.endsWith("a") ? "b" : "a"}`;
+    // The final unpadded Base64url character carries unused bits, so alter the preceding character
+    // to ensure the decoded HMAC bytes differ.
+    const penultimate = valid.at(-2)!;
+    const tampered = `${valid.slice(0, -2)}${penultimate === "a" ? "b" : "a"}${valid.at(-1)!}`;
     await expect(verifyProductionSignallingCapability(tampered, secret)).resolves.toBeNull();
     await expect(
       verifyProductionSignallingCapability(await capability({ exp: Date.now() - 1 }), secret)

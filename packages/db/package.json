@@ -18,7 +18,7 @@
     "generate": "node scripts/generate.mjs",
     "lint": "eslint src/client.ts src/index.ts --max-warnings 0",
     "migrate:deploy": "pnpm exec prisma migrate deploy --config prisma.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm generate && tsc --noEmit"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.0",
