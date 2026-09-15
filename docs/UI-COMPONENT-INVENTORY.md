@@ -19,73 +19,73 @@ the accepted wrapper that provides the requested behavior.
 
 ## Implemented
 
-| Component           | Status        | P3 boundary                                                                            |
-| ------------------- | ------------- | -------------------------------------------------------------------------------------- |
-| `BrandMark`         | `IMPLEMENTED` | Consumes the centralized working-brand object only.                                    |
-| `ThemeProvider`     | `IMPLEMENTED` | Local system/light/dark preference; no account or backend state.                       |
-| `ThemeControl`      | `IMPLEMENTED` | Accessible local theme-choice control.                                                 |
-| `Button`            | `IMPLEMENTED` | Named action, loading, and disabled presentation.                                      |
-| `IconButton`        | `IMPLEMENTED` | Requires an explicit accessible name.                                                  |
-| `Link`              | `IMPLEMENTED` | Styled native anchor only.                                                             |
-| `Text`              | `IMPLEMENTED` | Semantic typography wrapper.                                                           |
-| `Heading`           | `IMPLEMENTED` | Semantic heading-level and scale wrapper.                                              |
-| `Badge`             | `IMPLEMENTED` | Textual status/tag presentation.                                                       |
-| `Tag`               | `IMPLEMENTED` | Neutral compact metadata label.                                                        |
-| `Separator`         | `IMPLEMENTED` | Styled native horizontal rule.                                                         |
-| `Surface`           | `IMPLEMENTED` | Base/elevated visual surface.                                                          |
-| `Card`              | `IMPLEMENTED` | Bounded content composition surface.                                                   |
-| `Stack`             | `IMPLEMENTED` | Vertical spacing primitive.                                                            |
-| `Inline`            | `IMPLEMENTED` | Inline alignment and spacing primitive.                                                |
-| `Cluster`           | `IMPLEMENTED` | Wrapping inline grouping primitive.                                                    |
-| `Container`         | `IMPLEMENTED` | Width containment primitive.                                                           |
-| `Section`           | `IMPLEMENTED` | Semantic section primitive.                                                            |
-| `Page`              | `IMPLEMENTED` | Semantic main-content primitive.                                                       |
-| `PageHeader`        | `IMPLEMENTED` | Page heading/action composition only.                                                  |
-| `ResponsivePanel`   | `IMPLEMENTED` | Responsive panel layout only.                                                          |
-| `AppShell`          | `IMPLEMENTED` | Navigation/main layout; no routes or product workflow.                                 |
-| `Input`             | `IMPLEMENTED` | Native text input styling and attributes.                                              |
-| `Textarea`          | `IMPLEMENTED` | Native multiline input styling and attributes.                                         |
-| `NativeSelect`      | `IMPLEMENTED` | Native-select fallback primitive.                                                      |
-| `Select`            | `IMPLEMENTED` | Accessible Radix select wrapper.                                                       |
-| `Checkbox`          | `IMPLEMENTED` | Accessible Radix checkbox wrapper.                                                     |
-| `RadioGroup`        | `IMPLEMENTED` | Provides the requested radio behavior through Radix.                                   |
-| `Switch`            | `IMPLEMENTED` | Accessible Radix switch wrapper.                                                       |
-| `Label`             | `IMPLEMENTED` | Native label association.                                                              |
-| `Field`             | `IMPLEMENTED` | Labels, description/error association, and invalid-state wiring.                       |
-| `FormMessage`       | `IMPLEMENTED` | Error message with alert semantics.                                                    |
-| `Tooltip`           | `IMPLEMENTED` | Supplementary Radix tooltip; never the only accessible name.                           |
-| `Popover`           | `IMPLEMENTED` | Focus-managed Radix popover.                                                           |
-| `DropdownMenu`      | `IMPLEMENTED` | Provides the requested dropdown/menu behavior through Radix.                           |
-| `Dialog`            | `IMPLEMENTED` | Titled/described focus-managed modal wrapper.                                          |
-| `ConfirmDialog`     | `IMPLEMENTED` | Provides the requested AlertDialog behavior through Radix.                             |
-| `Sheet`             | `IMPLEMENTED` | Provides the requested Sheet/Drawer behavior with a side property.                     |
-| `Tabs`              | `IMPLEMENTED` | Keyboard-operable Radix tabs wrapper.                                                  |
-| `Accordion`         | `IMPLEMENTED` | Keyboard-operable Radix accordion wrapper.                                             |
-| `ToastProvider`     | `IMPLEMENTED` | Secondary Radix toast presentation only.                                               |
-| `Spinner`           | `IMPLEMENTED` | Named loading status.                                                                  |
-| `Skeleton`          | `IMPLEMENTED` | Decorative loading placeholder.                                                        |
-| `Alert`             | `IMPLEMENTED` | Informational/success/warning/danger callout.                                          |
-| `InlineError`       | `IMPLEMENTED` | Compact alert-semantic error text.                                                     |
-| `ErrorCallout`      | `IMPLEMENTED` | Prepared product error with retry and safe support reference.                          |
-| `ErrorPanel`        | `IMPLEMENTED` | Prepared terminal/action-required error surface.                                       |
-| `EmptyState`        | `IMPLEMENTED` | Empty-data presentation only.                                                          |
-| `StatusDot`         | `IMPLEMENTED` | Decorative state shape paired with textual status.                                     |
-| `StatusLabel`       | `IMPLEMENTED` | Prepared P1 state label.                                                               |
-| `StatusBadge`       | `IMPLEMENTED` | Prepared P1/P7 state badge, including `WAITING_FOR_SENDER`; presentation-only.         |
-| `Progress`          | `IMPLEMENTED` | Determinate or truthful indeterminate progressbar.                                     |
-| `VerifiedProgress`  | `IMPLEMENTED` | One track for transferred and receiver-safe progress.                                  |
-| `TransferHealth`    | `IMPLEMENTED` | Prepared M8 product-health snapshot only.                                              |
-| `RouteLabel`        | `IMPLEMENTED` | Allows only `Direct` or `Relayed`.                                                     |
-| `Avatar`            | `IMPLEMENTED` | Initials/avatar presentation only.                                                     |
-| `PersonChip`        | `IMPLEMENTED` | Compact person presentation only.                                                      |
-| `PersonRow`         | `IMPLEMENTED` | Person summary/action composition only.                                                |
-| `PresenceIndicator` | `IMPLEMENTED` | Distinguishes available, unavailable, and unknown.                                     |
-| `FileTypeIcon`      | `IMPLEMENTED` | Local file/folder-type icon wrapper.                                                   |
-| `Icon`              | `IMPLEMENTED` | Local inline SVG icon primitive; no icon package.                                      |
-| `FileSummary`       | `IMPLEMENTED` | Bounded display name, counts, and size; no full path rendering.                        |
-| `TransferCard`      | `IMPLEMENTED` | Prepared product presentation props only.                                              |
-| `DropZone`          | `IMPLEMENTED` | Idle, drag-active, invalid, and disabled presentation plus future selection callbacks. |
-| `Metric`            | `IMPLEMENTED` | Compact prepared metric presentation.                                                  |
+| Component           | Status        | P3 boundary                                                                                                      |
+| ------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `BrandMark`         | `IMPLEMENTED` | Consumes the centralized working-brand object only.                                                              |
+| `ThemeProvider`     | `IMPLEMENTED` | Local system/light/dark preference; no account or backend state.                                                 |
+| `ThemeControl`      | `IMPLEMENTED` | Accessible local theme-choice control.                                                                           |
+| `Button`            | `IMPLEMENTED` | Named action, loading, and disabled presentation.                                                                |
+| `IconButton`        | `IMPLEMENTED` | Requires an explicit accessible name.                                                                            |
+| `Link`              | `IMPLEMENTED` | Styled native anchor only.                                                                                       |
+| `Text`              | `IMPLEMENTED` | Semantic typography wrapper.                                                                                     |
+| `Heading`           | `IMPLEMENTED` | Semantic heading-level and scale wrapper.                                                                        |
+| `Badge`             | `IMPLEMENTED` | Textual status/tag presentation.                                                                                 |
+| `Tag`               | `IMPLEMENTED` | Neutral compact metadata label.                                                                                  |
+| `Separator`         | `IMPLEMENTED` | Styled native horizontal rule.                                                                                   |
+| `Surface`           | `IMPLEMENTED` | Base/elevated visual surface.                                                                                    |
+| `Card`              | `IMPLEMENTED` | Bounded content composition surface.                                                                             |
+| `Stack`             | `IMPLEMENTED` | Vertical spacing primitive.                                                                                      |
+| `Inline`            | `IMPLEMENTED` | Inline alignment and spacing primitive.                                                                          |
+| `Cluster`           | `IMPLEMENTED` | Wrapping inline grouping primitive.                                                                              |
+| `Container`         | `IMPLEMENTED` | Width containment primitive.                                                                                     |
+| `Section`           | `IMPLEMENTED` | Semantic section primitive.                                                                                      |
+| `Page`              | `IMPLEMENTED` | Semantic main-content primitive.                                                                                 |
+| `PageHeader`        | `IMPLEMENTED` | Page heading/action composition only.                                                                            |
+| `ResponsivePanel`   | `IMPLEMENTED` | Responsive panel layout only.                                                                                    |
+| `AppShell`          | `IMPLEMENTED` | Navigation/main layout; no routes or product workflow.                                                           |
+| `Input`             | `IMPLEMENTED` | Native text input styling and attributes.                                                                        |
+| `Textarea`          | `IMPLEMENTED` | Native multiline input styling and attributes.                                                                   |
+| `NativeSelect`      | `IMPLEMENTED` | Native-select fallback primitive.                                                                                |
+| `Select`            | `IMPLEMENTED` | Accessible Radix select wrapper.                                                                                 |
+| `Checkbox`          | `IMPLEMENTED` | Accessible Radix checkbox wrapper.                                                                               |
+| `RadioGroup`        | `IMPLEMENTED` | Provides the requested radio behavior through Radix.                                                             |
+| `Switch`            | `IMPLEMENTED` | Accessible Radix switch wrapper.                                                                                 |
+| `Label`             | `IMPLEMENTED` | Native label association.                                                                                        |
+| `Field`             | `IMPLEMENTED` | Labels, description/error association, and invalid-state wiring.                                                 |
+| `FormMessage`       | `IMPLEMENTED` | Error message with alert semantics.                                                                              |
+| `Tooltip`           | `IMPLEMENTED` | Supplementary Radix tooltip; never the only accessible name.                                                     |
+| `Popover`           | `IMPLEMENTED` | Focus-managed Radix popover.                                                                                     |
+| `DropdownMenu`      | `IMPLEMENTED` | Provides the requested dropdown/menu behavior through Radix.                                                     |
+| `Dialog`            | `IMPLEMENTED` | Titled/described focus-managed modal wrapper; P12 added optional controlled open state for secret-state cleanup. |
+| `ConfirmDialog`     | `IMPLEMENTED` | Provides the requested AlertDialog behavior through Radix.                                                       |
+| `Sheet`             | `IMPLEMENTED` | Provides the requested Sheet/Drawer behavior with a side property.                                               |
+| `Tabs`              | `IMPLEMENTED` | Keyboard-operable Radix tabs wrapper.                                                                            |
+| `Accordion`         | `IMPLEMENTED` | Keyboard-operable Radix accordion wrapper.                                                                       |
+| `ToastProvider`     | `IMPLEMENTED` | Secondary Radix toast presentation only.                                                                         |
+| `Spinner`           | `IMPLEMENTED` | Named loading status.                                                                                            |
+| `Skeleton`          | `IMPLEMENTED` | Decorative loading placeholder.                                                                                  |
+| `Alert`             | `IMPLEMENTED` | Informational/success/warning/danger callout.                                                                    |
+| `InlineError`       | `IMPLEMENTED` | Compact alert-semantic error text.                                                                               |
+| `ErrorCallout`      | `IMPLEMENTED` | Prepared product error with retry and safe support reference.                                                    |
+| `ErrorPanel`        | `IMPLEMENTED` | Prepared terminal/action-required error surface.                                                                 |
+| `EmptyState`        | `IMPLEMENTED` | Empty-data presentation only.                                                                                    |
+| `StatusDot`         | `IMPLEMENTED` | Decorative state shape paired with textual status.                                                               |
+| `StatusLabel`       | `IMPLEMENTED` | Prepared P1 state label.                                                                                         |
+| `StatusBadge`       | `IMPLEMENTED` | Prepared P1/P7 state badge, including `WAITING_FOR_SENDER`; presentation-only.                                   |
+| `Progress`          | `IMPLEMENTED` | Determinate or truthful indeterminate progressbar.                                                               |
+| `VerifiedProgress`  | `IMPLEMENTED` | One track for transferred and receiver-safe progress.                                                            |
+| `TransferHealth`    | `IMPLEMENTED` | Prepared M8 product-health snapshot only.                                                                        |
+| `RouteLabel`        | `IMPLEMENTED` | Allows only `Direct` or `Relayed`.                                                                               |
+| `Avatar`            | `IMPLEMENTED` | Initials/avatar presentation only.                                                                               |
+| `PersonChip`        | `IMPLEMENTED` | Compact person presentation only.                                                                                |
+| `PersonRow`         | `IMPLEMENTED` | Person summary/action composition only.                                                                          |
+| `PresenceIndicator` | `IMPLEMENTED` | Distinguishes available, unavailable, and unknown.                                                               |
+| `FileTypeIcon`      | `IMPLEMENTED` | Local file/folder-type icon wrapper.                                                                             |
+| `Icon`              | `IMPLEMENTED` | Local inline SVG icon primitive; no icon package.                                                                |
+| `FileSummary`       | `IMPLEMENTED` | Bounded display name, counts, and size; no full path rendering.                                                  |
+| `TransferCard`      | `IMPLEMENTED` | Prepared product presentation props only.                                                                        |
+| `DropZone`          | `IMPLEMENTED` | Idle, drag-active, invalid, and disabled presentation plus future selection callbacks.                           |
+| `Metric`            | `IMPLEMENTED` | Compact prepared metric presentation.                                                                            |
 
 ## Deferred Workflow Compositions
 

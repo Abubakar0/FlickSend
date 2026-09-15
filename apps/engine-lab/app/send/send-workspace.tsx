@@ -28,7 +28,7 @@ import {
   formatSpeed,
   useTheme
 } from "@flicksend/ui";
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   createP4MutableFolderFixture,
   createP4RecoveryFolderFixture,
@@ -41,6 +41,10 @@ import {
   type SendRecipient
 } from "./recipients";
 import { SendSessionController } from "./send-controller";
+import {
+  issueProductionSignallingSession,
+  productionWorkerUrl
+} from "../signaling/production-client";
 import {
   activeProductState,
   healthForProduct,
@@ -103,24 +107,29 @@ export function SendWorkspace({
   lifecycleRecorder,
   recipientSourceReady = true,
   preselectedRecipientId = null,
-  recipients = developmentRecipients
+  recipients = developmentRecipients,
+  productionSignalling = false
 }: {
   currentUser?: CurrentUser;
   lifecycleRecorder?: TransferLifecycleRecorder;
   recipientSourceReady?: boolean;
   preselectedRecipientId?: string | null;
+  productionSignalling?: boolean;
   recipients?: readonly SendRecipient[];
 }) {
   const recipientsRef = useRef<readonly SendRecipient[]>(recipients);
   recipientsRef.current = recipientSourceReady ? recipients : [];
   const controllerRef = useRef<SendSessionController | null>(null);
   if (!controllerRef.current) {
-    const signalingUrl = process.env.NEXT_PUBLIC_SIGNALING_URL ?? "ws://127.0.0.1:8787";
+    const signalingUrl = productionSignalling
+      ? (productionWorkerUrl() ?? "")
+      : (process.env.NEXT_PUBLIC_SIGNALING_URL ?? "ws://127.0.0.1:8787");
     controllerRef.current = new SendSessionController(
       signalingUrl,
       undefined,
       () => recipientsRef.current,
-      currentUser
+      currentUser,
+      productionSignalling ? issueProductionSignallingSession : undefined
     );
   }
   const controller = controllerRef.current;
@@ -134,11 +143,24 @@ export function SendWorkspace({
   const mutableFixture = useRef<ReturnType<typeof createP4MutableFolderFixture> | null>(null);
   const pendingRecipientId = useRef<string | null>(null);
   const preselectedRecipient = useRef<string | null>(null);
+  const [receiverLinkCopied, setReceiverLinkCopied] = useState(false);
 
   useEffect(() => {
     void controller.initializeCapabilities();
     return () => controller.dispose();
   }, [controller]);
+
+  async function copyReceiverLink(): Promise<void> {
+    if (!snapshot.receiverPath || !navigator.clipboard) return;
+    try {
+      await navigator.clipboard.writeText(
+        new URL(snapshot.receiverPath, window.location.origin).toString()
+      );
+      setReceiverLinkCopied(true);
+    } catch {
+      setReceiverLinkCopied(false);
+    }
+  }
 
   useEffect(() => {
     lifecycleRecorder?.observeSend(snapshot);
@@ -612,6 +634,23 @@ export function SendWorkspace({
               </Text>
               <code data-testid="p4-development-session-code">{snapshot.sessionCode}</code>
             </details>
+          ) : null}
+
+          {snapshot.receiverPath && snapshot.phase === "WAITING_FOR_RECIPIENT" ? (
+            <Card className="p4-send-card">
+              <Stack gap="sm">
+                <Heading as="h2" size="section">
+                  Invite your recipient to join
+                </Heading>
+                <Text tone="secondary">
+                  Share this private transfer link with your selected recipient. It expires shortly.
+                </Text>
+                <Inline gap="sm">
+                  <Button onClick={() => void copyReceiverLink()}>Copy transfer link</Button>
+                  {receiverLinkCopied ? <Text role="status">Transfer link copied.</Text> : null}
+                </Inline>
+              </Stack>
+            </Card>
           ) : null}
         </Stack>
       </Page>

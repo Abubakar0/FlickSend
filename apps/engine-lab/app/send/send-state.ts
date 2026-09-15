@@ -56,6 +56,7 @@ export type SendWorkflowSnapshot = {
   phase: SendWorkflowState;
   preparation: PreparationProgress | null;
   recipient: SendRecipient | null;
+  receiverPath: string | null;
   sessionCode: string | null;
   source: PreparedSendSource | null;
   sourceRevision: number;
@@ -75,7 +76,7 @@ export type SendWorkflowEvent =
   | { type: "SOURCE_FAILED"; revision: number; error: ProductSendError }
   | { type: "SOURCE_CLEARED" }
   | { type: "START_REQUESTED" }
-  | { type: "SESSION_CREATED"; code: string }
+  | { type: "SESSION_CREATED"; code: string | null; receiverPath: string | null }
   | { type: "START_FAILED"; error: ProductSendError }
   | { type: "ENGINE_SNAPSHOT"; snapshot: ConnectionSnapshot }
   | { type: "CANCEL_REQUESTED" }
@@ -92,6 +93,7 @@ export function createInitialSendWorkflow(currentUser: CurrentUser): SendWorkflo
     phase: "SELECTING_RECIPIENT",
     preparation: null,
     recipient: null,
+    receiverPath: null,
     sessionCode: null,
     source: null,
     sourceRevision: 0,
@@ -167,7 +169,11 @@ export function mapProductError(code: string | null | undefined): ProductSendErr
       recommendedAction: "Use a qualified Windows desktop browser or choose a supported action.",
       retryable: false
     };
-  if (code?.startsWith("FS_TURN_") || code === "FS_ICE_NEGOTIATION_FAILED")
+  if (
+    code?.startsWith("FS_TURN_") ||
+    code === "FS_ICE_NEGOTIATION_FAILED" ||
+    code === "FS_SIGNALING_UNAVAILABLE"
+  )
     return {
       code: "FS-PRODUCT-SERVICE-UNAVAILABLE",
       kind: "action_required",
@@ -255,6 +261,7 @@ export function reduceSendWorkflow(
         engine: null,
         recipient: event.recipient,
         phase: localSelectionPhase(event.recipient, state.source),
+        receiverPath: null,
         sessionCode: null,
         sourceRevision: state.sourceRevision + 1
       };
@@ -267,6 +274,7 @@ export function reduceSendWorkflow(
         error: null,
         phase: "PREPARING_SOURCE",
         preparation: { filesDiscovered: 0, directoriesDiscovered: 0, totalBytesDiscovered: 0 },
+        receiverPath: null,
         sessionCode: null,
         sourceRevision: event.revision
       };
@@ -310,6 +318,7 @@ export function reduceSendWorkflow(
         error: null,
         phase: localSelectionPhase(state.recipient, null),
         preparation: null,
+        receiverPath: null,
         sessionCode: null,
         source: null,
         sourceRevision: state.sourceRevision + 1
@@ -322,11 +331,12 @@ export function reduceSendWorkflow(
         engine: null,
         error: null,
         phase: "WAITING_FOR_RECIPIENT",
+        receiverPath: null,
         sessionCode: null,
         startAttempt: state.startAttempt + 1
       };
     case "SESSION_CREATED":
-      return { ...state, sessionCode: event.code };
+      return { ...state, receiverPath: event.receiverPath, sessionCode: event.code };
     case "START_FAILED":
       return { ...state, error: event.error, phase: "FAILED" };
     case "ENGINE_SNAPSHOT": {

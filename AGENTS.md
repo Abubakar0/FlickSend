@@ -42,9 +42,10 @@ P7 — Transfers: COMPLETE / FROZEN
 P8 — Recovery UX: COMPLETE / FROZEN
 P9 — Accessibility & UX QA: COMPLETE / FROZEN
 P10 — Authentication & Accounts: COMPLETE / FROZEN
-P11 — Production Database & Persistence: AUTHORIZED / IN PROGRESS
+P11 — Production Database & Persistence: COMPLETE / FROZEN
+P12 — Production Invitations & Signaling Infrastructure: COMPLETE / FROZEN
 
-P12 and all later phases remain NOT AUTHORIZED until P11 is reviewed and accepted.
+P13 and all later phases remain NOT AUTHORIZED until P12 is externally reviewed and accepted.
 
 P9 was limited to an audit and narrow correction pass across the frozen P3-P8 product surfaces only: Send,
 Receive, People, Transfers, Recovery, shared presentation primitives, keyboard/focus behavior, semantic
@@ -206,10 +207,44 @@ filenames, folder names, manifests, file trees, hashes, engine transfer IDs, sig
 ICE/SDP, network identifiers, TURN credentials, raw errors, or provider tokens. Provider subjects remain private
 server-side account-mapping data and emails remain unpersisted. Production must never fall back to P6/P7 process
 memory when `DATABASE_URL` is missing or unavailable; it must return a generic unavailable state with no raw
-database error. P11 does not authorize production pairing or invitation delivery, account deletion, retention,
-analytics, observability, billing, or P12+ work. Completed history still requires engine `DELIVERED` for the same
+database error. P11 did not itself authorize production pairing or invitation delivery, account deletion, retention,
+analytics, observability, or billing. Completed history still requires engine `DELIVERED` for the same
 active transfer; automatic recovery uses one application history record; terminal records cannot be reopened by
 late events.
+
+P12 authorizes only production-safe People invitations and capability-authorized signaling infrastructure. An
+invitation is a server-generated opaque bearer link with a bounded lifetime. Store only its secure digest in
+PostgreSQL; never log, retain in analytics, redisplay after its one-time creation response, or expose its raw value,
+provider subject, Account ID, relationship ID, transfer ID, email, or internal database ID. Invitation creation,
+listing, acceptance, decline, and revocation must resolve the server-side `AuthPrincipal` and opaque Account; client
+input never supplies account authority. Acceptance must use serializable transactional logic, preserve the canonical
+unordered P11 relationship constraint, reject self-invites, expired/declined/revoked/replayed invitations, and never
+bypass a blocked relationship. An invitation authorizes only a People relationship. It does not authorize transfer
+payload, source metadata, a destination, a transfer identity, or signaling access to any arbitrary transfer.
+
+P12 signaling is a bounded control plane only. Cloudflare Worker and Durable Object code must never relay or persist
+payload bytes, file metadata, manifests, paths, hashes, FSTP frames, database credentials, provider tokens, TURN
+credentials, raw capability tokens, SDP, or ICE diagnostics. Durable Objects coordinate at most one sender and one
+receiver for a short-lived live signaling session using WebSocket hibernation attachments that contain only derived
+role and expiry. They are not transfer history, a payload queue, a replacement for PostgreSQL, or an authority for
+FSTP delivery, integrity, recovery, or route selection. All untrusted control messages require bounded schema
+validation and fail closed.
+
+Production signaling capabilities are opaque, signed, short-lived, role-bound bearer credentials. The application
+server resolves the authenticated sender and connected People eligibility before minting a sender/receiver pair; the
+Worker verifies the capability before Durable Object routing. The raw capability may enter the Worker only for
+verification and must never be forwarded to the Durable Object URL, headers, attachments, or storage. Session
+revocation and expiry must close active sockets and reject later joins. The capability/session identifier is neither a
+FSTP transfer identity nor a database record. WebSocket reconnect, signaling rejoin, ICE restart, or route migration
+must preserve the existing transfer identity and receiver-authoritative verified recovery state.
+
+P5 guest Receive compatibility is limited to the issued receiver signaling capability and the existing P5 session
+authorization boundary. It does not make the guest an Account, reveal sender/source metadata before engine
+authorization, authorize payload outside the direct WebRTC engine path, or weaken `DELIVERED` requirements. P12
+must not silently fall back in production to P6 pairing codes, process-local People state, fake signaling, fixture
+authentication, or memory-backed session authority. Missing PostgreSQL, application configuration, Worker endpoint,
+or Worker secret is a generic unavailable state. Railway owns application APIs and PostgreSQL; Cloudflare owns only
+ephemeral signaling. No browser code receives database credentials or signaling-signing secrets.
 
 No UI primitive may import transfer execution, WebRTC transport, signaling, database, billing, or auth code.
 Do not change the frozen V1 scope or implement application-layer payload encryption, Mesh, offline delivery,

@@ -20,11 +20,7 @@ export default async function TransfersPage({
   ) : (
     await awaitPersistentTransfers(session.principal)
   );
-  return (
-    <CurrentAccountProvider principal={session.principal}>
-      {content}
-    </CurrentAccountProvider>
-  );
+  return <CurrentAccountProvider principal={session.principal}>{content}</CurrentAccountProvider>;
 }
 
 async function awaitPersistentTransfers(

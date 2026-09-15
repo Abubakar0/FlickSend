@@ -28,6 +28,7 @@ import {
 } from "@flicksend/ui";
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { ReceiveSessionController } from "./receive-controller";
+import { productionWorkerUrl, receiverSignallingSession } from "../signaling/production-client";
 import type { TransferLifecycleRecorder } from "../transfers/transfer-lifecycle-recorder";
 import {
   activeReceiveProductState,
@@ -100,8 +101,14 @@ export function ReceiveWorkspace({
 }>) {
   const controllerRef = useRef<ReceiveSessionController | null>(null);
   if (!controllerRef.current) {
-    const signalingUrl = process.env.NEXT_PUBLIC_SIGNALING_URL ?? "ws://127.0.0.1:8787";
-    controllerRef.current = new ReceiveSessionController(signalingUrl);
+    const productionWorker = productionWorkerUrl();
+    const signalingUrl =
+      productionWorker ?? process.env.NEXT_PUBLIC_SIGNALING_URL ?? "ws://127.0.0.1:8787";
+    controllerRef.current = new ReceiveSessionController(
+      signalingUrl,
+      undefined,
+      productionWorker ? receiverSignallingSession : undefined
+    );
   }
   const controller = controllerRef.current;
   const snapshot = useSyncExternalStore(

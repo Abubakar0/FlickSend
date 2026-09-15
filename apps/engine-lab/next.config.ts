@@ -8,7 +8,15 @@ const nextConfig: NextConfig = {
     "@flicksend/engine-core",
     "@flicksend/shared",
     "@flicksend/ui"
-  ]
+  ],
+  async headers() {
+    return [
+      {
+        source: "/invite/:path*",
+        headers: [{ key: "Referrer-Policy", value: "no-referrer" }]
+      }
+    ];
+  }
 };
 
 export default nextConfig;

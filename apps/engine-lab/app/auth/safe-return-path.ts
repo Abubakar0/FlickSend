@@ -1,4 +1,4 @@
-const allowedPrefixes = ["/account", "/people", "/send", "/transfers"] as const;
+const allowedPrefixes = ["/account", "/invite", "/people", "/send", "/transfers"] as const;
 
 /** Returns a local sender-account route only; unsafe values always fall back to Send. */
 export function safeReturnPath(candidate: string | null | undefined, fallback = "/send"): string {

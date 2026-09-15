@@ -17,6 +17,14 @@ enum RelationshipStatus {
   BLOCKED
 }
 
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  REVOKED
+  EXPIRED
+}
+
 enum TransferDirection {
   SENT
   RECEIVED
@@ -51,20 +59,41 @@ enum FailureCategory {
 }
 
 model Account {
-  id              String              @id @default(uuid()) @db.Uuid
-  authProvider    AuthProvider
-  providerSubject String              @db.Text
-  displayName     String?             @db.Text
-  createdAt       DateTime            @default(now()) @db.Timestamptz(3)
-  updatedAt       DateTime            @updatedAt @db.Timestamptz(3)
-  relationshipLow PersonRelationship[] @relation("RelationshipLow")
-  relationshipHigh PersonRelationship[] @relation("RelationshipHigh")
-  invitationsSent PersonRelationship[] @relation("RelationshipInitiator")
-  blocksPlaced    PersonRelationship[] @relation("RelationshipBlocker")
-  ownedTransfers  TransferRecord[]    @relation("TransferOwner")
-  peerTransfers   TransferRecord[]    @relation("TransferPeer")
+  id                   String               @id @default(uuid()) @db.Uuid
+  authProvider         AuthProvider
+  providerSubject      String               @db.Text
+  displayName          String?              @db.Text
+  createdAt            DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime             @updatedAt @db.Timestamptz(3)
+  relationshipLow      PersonRelationship[] @relation("RelationshipLow")
+  relationshipHigh     PersonRelationship[] @relation("RelationshipHigh")
+  invitationsSent      PersonRelationship[] @relation("RelationshipInitiator")
+  blocksPlaced         PersonRelationship[] @relation("RelationshipBlocker")
+  ownedTransfers       TransferRecord[]     @relation("TransferOwner")
+  peerTransfers        TransferRecord[]     @relation("TransferPeer")
+  invitationsCreated   Invitation[]         @relation("InvitationInviter")
+  invitationsResolved  Invitation[]         @relation("InvitationResolver")
 
   @@unique([authProvider, providerSubject])
+}
+
+model Invitation {
+  id                String           @id @default(uuid()) @db.Uuid
+  publicId          String           @unique @default(uuid()) @db.Uuid
+  inviterAccountId  String           @db.Uuid
+  resolvedByAccountId String?        @db.Uuid
+  tokenDigest       String           @unique @db.Char(64)
+  status            InvitationStatus @default(PENDING)
+  expiresAt         DateTime         @db.Timestamptz(3)
+  acceptedAt        DateTime?        @db.Timestamptz(3)
+  declinedAt        DateTime?        @db.Timestamptz(3)
+  revokedAt         DateTime?        @db.Timestamptz(3)
+  createdAt         DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime         @updatedAt @db.Timestamptz(3)
+  inviter           Account          @relation("InvitationInviter", fields: [inviterAccountId], references: [id], onDelete: Restrict)
+  resolvedBy        Account?         @relation("InvitationResolver", fields: [resolvedByAccountId], references: [id], onDelete: Restrict)
+
+  @@index([inviterAccountId, status, createdAt])
 }
 
 model PersonRelationship {

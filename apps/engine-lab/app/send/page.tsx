@@ -25,11 +25,7 @@ export default async function SendPage({
   ) : (
     await awaitPersistentSend(session.principal, params.person ?? null)
   );
-  return (
-    <CurrentAccountProvider principal={session.principal}>
-      {content}
-    </CurrentAccountProvider>
-  );
+  return <CurrentAccountProvider principal={session.principal}>{content}</CurrentAccountProvider>;
 }
 
 async function awaitPersistentSend(

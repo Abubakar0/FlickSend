@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
-import { PersistenceAccessDeniedError, PersistenceUnavailableError } from "../../../persistence/account";
+import {
+  PersistenceAccessDeniedError,
+  PersistenceUnavailableError
+} from "../../../persistence/account";
 import {
   PersistentTransfersError,
   PersistentTransfersService
@@ -26,7 +29,8 @@ export async function GET(request: Request) {
     const account = await currentPersistentAccount();
     const record = new URL(request.url).searchParams.get("record");
     const transfers = new PersistentTransfersService();
-    if (record) return NextResponse.json({ ok: true, record: await transfers.get(account, record) });
+    if (record)
+      return NextResponse.json({ ok: true, record: await transfers.get(account, record) });
     return NextResponse.json({ ok: true, records: await transfers.list(account) });
   } catch (error) {
     return failure(error);

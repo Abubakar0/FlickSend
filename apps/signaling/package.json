@@ -14,8 +14,8 @@
     "@flicksend/protocol": "workspace:*"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20260904.1",
+    "@cloudflare/workers-types": "5.20260914.1",
     "vitest": "5.0.0",
-    "wrangler": "4.129.0"
+    "wrangler": "4.131.2"
   }
 }

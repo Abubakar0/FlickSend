@@ -9,10 +9,16 @@ import {
   parseStunUrls,
   parseTurnUrls
 } from "./turn-credentials.js";
+import {
+  ProductionSessionRoom,
+  verifyProductionSignallingCapability
+} from "./production-signaling.js";
 
 export interface Env {
   SESSION_DIRECTORY: DurableObjectNamespace;
   SESSION_ROOM: DurableObjectNamespace;
+  PRODUCTION_SESSION_ROOM: DurableObjectNamespace;
+  SIGNALING_CAPABILITY_SECRET?: string;
   STUN_URLS?: string;
   TURN_CREDENTIAL_TTL_SECONDS?: string;
   TURN_DEV_MODE?: string;
@@ -192,6 +198,19 @@ function isUuid(value: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 }
 
+/**
+ * The Worker verifies the raw bearer capability. The Durable Object receives only the derived
+ * role and expiry and never gets the capability in its URL, headers, or persistent state.
+ */
+function productionRoomRequest(request: Request, headers: Headers): Request {
+  headers.delete("authorization");
+  headers.delete("cookie");
+  return new Request("https://flicksend-production-room.internal/session", {
+    headers,
+    method: request.method
+  });
+}
+
 function withCors(request: Request, response: Response): Response {
   const headers = new Headers(response.headers);
   const origin = request.headers.get("Origin");
@@ -223,6 +242,37 @@ export default {
     if (url.pathname === "/turn-credentials" && request.method === "POST") {
       return withCors(request, await issueTurnCredentials(request, env, directory));
     }
+    if (url.pathname === "/v2/session") {
+      const capability = await verifyProductionSignallingCapability(
+        url.searchParams.get("cap"),
+        env.SIGNALING_CAPABILITY_SECRET
+      );
+      if (!capability) return new Response("Unauthorized", { status: 401 });
+      const headers = new Headers(request.headers);
+      headers.set("x-flicksend-signalling-role", capability.role);
+      headers.set("x-flicksend-signalling-expiry", String(capability.expiresAtMs));
+      return env.PRODUCTION_SESSION_ROOM.get(
+        env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
+      ).fetch(productionRoomRequest(request, headers));
+    }
+    if (url.pathname === "/v2/revoke" && request.method === "POST") {
+      const capability = await verifyProductionSignallingCapability(
+        url.searchParams.get("cap"),
+        env.SIGNALING_CAPABILITY_SECRET
+      );
+      if (!capability) return new Response("Unauthorized", { status: 401 });
+      const headers = new Headers();
+      headers.set("x-flicksend-production-operation", "revoke");
+      headers.set("x-flicksend-signalling-expiry", String(capability.expiresAtMs));
+      return env.PRODUCTION_SESSION_ROOM.get(
+        env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
+      ).fetch(
+        new Request("https://flicksend-production-room.internal/revoke", {
+          headers,
+          method: "POST"
+        })
+      );
+    }
     if (url.pathname === "/session") {
       const lookup = await directory.fetch(
         "https://directory/lookup?code=" + (url.searchParams.get("code") ?? "")
@@ -240,6 +290,8 @@ export default {
     return new Response("Not found", { status: 404 });
   }
 };
+
+export { ProductionSessionRoom };
 
 type TurnRequest = {
   sessionCode: string;

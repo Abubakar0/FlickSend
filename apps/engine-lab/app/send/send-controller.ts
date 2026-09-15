@@ -6,7 +6,8 @@ import {
 import {
   ConnectionCoordinator,
   type ConnectionSnapshot,
-  type IntegrityFault
+  type IntegrityFault,
+  type AuthorizedSignallingSession
 } from "@flicksend/engine-core";
 import {
   streamPackSourceFromDirectoryHandle,
@@ -43,7 +44,12 @@ type SendCoordinator = Pick<
   | "selectFolder"
   | "simulateTransportDisconnect"
   | "subscribe"
->;
+> &
+  Partial<Pick<ConnectionCoordinator, "joinAuthorizedSignallingSession">>;
+
+export type ProductionSignallingSessionIssuer = (
+  recipientId: string
+) => Promise<{ receiverPath: string; sender: AuthorizedSignallingSession }>;
 
 export type SendCoordinatorFactory = (signalingUrl: string) => SendCoordinator;
 type Listener = (snapshot: SendWorkflowSnapshot) => void;
@@ -141,7 +147,8 @@ export class SendSessionController {
       new ConnectionCoordinator(url),
     private readonly eligibleRecipients: () => readonly SendRecipient[] = () =>
       developmentRecipients,
-    currentUser: CurrentUser = developmentCurrentUser
+    currentUser: CurrentUser = developmentCurrentUser,
+    private readonly issueProductionSession?: ProductionSignallingSessionIssuer
   ) {
     this.snapshot = createInitialSendWorkflow(currentUser);
   }
@@ -225,7 +232,7 @@ export class SendSessionController {
       this.dispatch({ type: "START_FAILED", error: mapProductError("FS_PEOPLE_BLOCKED") });
       return;
     }
-    const recipientId = this.snapshot.recipient?.id;
+    const recipientId = this.snapshot.recipient.id;
     const sourceRevision = this.snapshot.sourceRevision;
     this.dispatch({ type: "START_REQUESTED" });
     const attempt = this.snapshot.startAttempt;
@@ -235,16 +242,31 @@ export class SendSessionController {
       this.receiveEngineSnapshot(coordinator, engineSnapshot)
     );
     try {
-      const code = await coordinator.createSession();
+      const productionSession = this.issueProductionSession
+        ? await this.issueProductionSession(recipientId)
+        : null;
+      if (productionSession) {
+        if (!coordinator.joinAuthorizedSignallingSession)
+          throw new Error("FS_SIGNALING_UNAVAILABLE");
+        await coordinator.joinAuthorizedSignallingSession(productionSession.sender);
+      }
+      const code = productionSession ? null : await coordinator.createSession();
       if (!this.isCurrentAttempt(coordinator, attempt, recipientId, sourceRevision)) {
         coordinator.disconnect();
         return;
       }
-      this.dispatch({ type: "SESSION_CREATED", code });
-    } catch {
+      this.dispatch({
+        type: "SESSION_CREATED",
+        code,
+        receiverPath: productionSession?.receiverPath ?? null
+      });
+    } catch (error) {
       if (this.coordinator !== coordinator) return;
       this.closeCoordinator();
-      this.dispatch({ type: "START_FAILED", error: mapProductError("FS_ICE_NEGOTIATION_FAILED") });
+      this.dispatch({
+        type: "START_FAILED",
+        error: mapProductError(error instanceof Error ? error.message : "FS_ICE_NEGOTIATION_FAILED")
+      });
     }
   }
 

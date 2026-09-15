@@ -3,7 +3,11 @@
 import { connectedPeople } from "../people/people-state";
 import { PeopleProvider, type PeopleRepositoryMode, usePeople } from "../people/people-provider";
 import type { PersonIdentity } from "../people/people-types";
-import { TransfersProvider, type TransfersRepositoryMode, useTransfers } from "../transfers/transfers-provider";
+import {
+  TransfersProvider,
+  type TransfersRepositoryMode,
+  useTransfers
+} from "../transfers/transfers-provider";
 import { SendWorkspace } from "./send-workspace";
 
 function ConnectedPeopleSendWorkspace({
@@ -30,6 +34,7 @@ function ConnectedPeopleSendWorkspace({
       currentUser={currentUser}
       lifecycleRecorder={recorder}
       preselectedRecipientId={preselectedRecipientId}
+      productionSignalling={source === "persistent"}
       recipientSourceReady={!snapshot.isLoading}
       recipients={recipients}
     />

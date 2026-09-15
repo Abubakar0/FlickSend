@@ -24,11 +24,7 @@ export default async function PeoplePage({
   ) : (
     await awaitPersistentPeople(session.principal)
   );
-  return (
-    <CurrentAccountProvider principal={session.principal}>
-      {content}
-    </CurrentAccountProvider>
-  );
+  return <CurrentAccountProvider principal={session.principal}>{content}</CurrentAccountProvider>;
 }
 
 async function awaitPersistentPeople(

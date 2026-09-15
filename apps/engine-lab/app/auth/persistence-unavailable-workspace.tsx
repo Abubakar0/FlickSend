@@ -33,9 +33,12 @@ export function PersistenceUnavailableWorkspace({ area }: { area: keyof typeof c
         </PageHeader>
         <Card className="p10-account-card" role="status">
           <Stack gap="sm">
-            <Text>FlickSend&apos;s account data could not be reached right now. Try again shortly.</Text>
+            <Text>
+              FlickSend&apos;s account data could not be reached right now. Try again shortly.
+            </Text>
             <Text size="small" tone="secondary">
-              Existing transfer correctness, verified progress, and guest authorization are unaffected.
+              Existing transfer correctness, verified progress, and guest authorization are
+              unaffected.
             </Text>
             {area === "account" ? (
               <Inline>

@@ -22,13 +22,16 @@ test("P10 live Clerk qualification", async ({ page }) => {
     await page.goto("/send");
     await expect(
       page.getByRole("heading", {
-        name: persistentDataAvailable ? "Send" : "Send is temporarily unavailable"
+        exact: true,
+        name: persistentDataAvailable ? "Send a file or folder" : "Send is temporarily unavailable"
       })
     ).toBeVisible();
+    await expect(page.locator("body")).not.toContainText(testUser.id);
 
     await page.goto("/people");
     await expect(
       page.getByRole("heading", {
+        exact: true,
         name: persistentDataAvailable ? "People" : "People is temporarily unavailable"
       })
     ).toBeVisible();

@@ -1,5 +1,9 @@
 import { detectBrowserCapabilities, runtimeCompatibility } from "@flicksend/browser-capabilities";
-import { ConnectionCoordinator, type ConnectionSnapshot } from "@flicksend/engine-core";
+import {
+  ConnectionCoordinator,
+  type AuthorizedSignallingSession,
+  type ConnectionSnapshot
+} from "@flicksend/engine-core";
 import {
   BrowserStreamPackDestination,
   createOpfsRecoveryStore,
@@ -28,11 +32,13 @@ type ReceiveCoordinator = Pick<
   | "acceptIncomingFolder"
   | "cancelTransfer"
   | "disconnect"
+  | "joinAuthorizedSignallingSession"
   | "joinSession"
   | "subscribe"
 >;
 
 export type ReceiveCoordinatorFactory = (signalingUrl: string) => ReceiveCoordinator;
+export type ReceiveSessionResolver = (rawSession: string) => AuthorizedSignallingSession | null;
 type Listener = (snapshot: ReceiveWorkflowSnapshot) => void;
 
 type PreparedDestination = {
@@ -99,7 +105,8 @@ export class ReceiveSessionController {
   constructor(
     private readonly signalingUrl: string,
     private readonly createCoordinator: ReceiveCoordinatorFactory = (url) =>
-      new ConnectionCoordinator(url)
+      new ConnectionCoordinator(url),
+    private readonly resolveProductionSession?: ReceiveSessionResolver
   ) {}
 
   subscribe(listener: Listener): () => void {
@@ -128,8 +135,9 @@ export class ReceiveSessionController {
       compatibility: runtimeCompatibility(capabilities)
     });
 
-    const session = normalizeSessionCode(rawSession);
-    if (!session) {
+    const productionSession = this.resolveProductionSession?.(rawSession) ?? null;
+    const session = productionSession ? null : normalizeSessionCode(rawSession);
+    if (!productionSession && !session) {
       this.dispatch({ type: "SESSION_UNAVAILABLE", revision });
       return;
     }
@@ -141,7 +149,8 @@ export class ReceiveSessionController {
       this.receiveEngineSnapshot(coordinator, revision, engineSnapshot)
     );
     try {
-      await coordinator.joinSession(session);
+      if (productionSession) await coordinator.joinAuthorizedSignallingSession(productionSession);
+      else await coordinator.joinSession(session!);
     } catch {
       if (this.coordinator !== coordinator || revision !== this.sessionRevision) return;
       this.closeCoordinator();

@@ -84,7 +84,9 @@ export function PeopleProvider({
   }, [controller, mode]);
 
   return (
-    <PeopleContext.Provider value={{ controller, mode, snapshot }}>{children}</PeopleContext.Provider>
+    <PeopleContext.Provider value={{ controller, mode, snapshot }}>
+      {children}
+    </PeopleContext.Provider>
   );
 }
 

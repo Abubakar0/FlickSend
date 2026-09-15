@@ -63,9 +63,12 @@ launch, domain acquisition, or trademark claim may proceed without counsel revie
 presentation-only, fixture-validated design foundation. P4 Core Send UX, P5 Receive UX, and P6 People & Pairing
 are complete and frozen. P7 Transfers and P8 Recovery UX are complete and frozen. P9 Accessibility & UX QA is
 complete and frozen as an audit/correction phase only. P10 Authentication & Accounts is complete and frozen after
-live Clerk development qualification. P11 and later product phases remain not authorized until external review
-accepts P10.
+live Clerk development qualification. P11 Production Database & Persistence is complete and frozen after local
+PostgreSQL qualification. P12 Production Invitations & Signaling Infrastructure is complete and frozen after
+PostgreSQL invitation and temporary Cloudflare Worker/Durable Object qualification. P13 and later product phases
+remain not authorized until external review accepts P12.
 
-P11 Production Database & Persistence is authorized and in progress. It adds PostgreSQL/Prisma durable account,
-People, and metadata-only history repositories without changing engine correctness or beginning P12 invitations,
-signaling, retention, deletion, analytics, or billing.
+P11 adds PostgreSQL/Prisma durable account, People, and metadata-only history repositories without changing engine
+correctness. P12 adds digest-only authenticated People invitations and a bounded Cloudflare Worker/Durable Object
+signaling control plane without changing FSTP correctness, routing, integrity, payload transport, retention,
+deletion, analytics, billing, or any P13+ product scope.

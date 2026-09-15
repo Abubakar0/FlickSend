@@ -28,6 +28,7 @@ import { useState } from "react";
 import { connectedPeople } from "./people-state";
 import { usePeople } from "./people-provider";
 import type { PersonRelationship } from "./people-types";
+import { ProductionInvitationPanel } from "./production-invitation-panel";
 import "./people.css";
 
 function ThemeUtility() {
@@ -82,55 +83,57 @@ export function PeopleWorkspace() {
         <PageHeader
           actions={
             mode === "development" ? (
-            <Dialog
-              description="Share a short-lived development code or enter one from another person."
-              title="Connect with someone"
-              trigger={<Button id="p6-connect-trigger">Connect with someone</Button>}
-            >
-              <Stack gap="md">
-                <Text as="p" size="small" tone="secondary">
-                  P6 DEVELOPMENT PAIRING MECHANISM. This is not production invitation security.
-                </Text>
-                {snapshot.inviteCode ? (
-                  <Card className="p6-pairing-code" data-testid="people-pairing-code">
-                    <Stack gap="xs">
-                      <Text as="p" size="label" tone="muted">
-                        Development pairing code
-                      </Text>
-                      <code>{snapshot.inviteCode}</code>
-                      <Text as="p" size="small" tone="secondary">
-                        This opaque code is short-lived and disappears after it is used.
-                      </Text>
-                    </Stack>
-                  </Card>
-                ) : (
-                  <Button disabled={busy} onClick={() => void controller.createInvite()}>
-                    Create development pairing code
-                  </Button>
-                )}
-                <label className="p6-pairing-input" htmlFor="p6-pairing-input">
-                  <Text as="span" size="label">
-                    Enter invite code
+              <Dialog
+                description="Share a short-lived development code or enter one from another person."
+                title="Connect with someone"
+                trigger={<Button id="p6-connect-trigger">Connect with someone</Button>}
+              >
+                <Stack gap="md">
+                  <Text as="p" size="small" tone="secondary">
+                    P6 DEVELOPMENT PAIRING MECHANISM. This is not production invitation security.
                   </Text>
-                  <Input
-                    id="p6-pairing-input"
-                    onChange={(event) => setPairingCode(event.target.value)}
-                    placeholder="fp-..."
-                    value={pairingCode}
-                  />
-                </label>
-                <Button
-                  disabled={busy || pairingCode.trim().length === 0}
-                  onClick={() => {
-                    void controller.redeemInvite(pairingCode);
-                    setPairingCode("");
-                  }}
-                  variant="secondary"
-                >
-                  Use pairing code
-                </Button>
-              </Stack>
-            </Dialog>
+                  {snapshot.inviteCode ? (
+                    <Card className="p6-pairing-code" data-testid="people-pairing-code">
+                      <Stack gap="xs">
+                        <Text as="p" size="label" tone="muted">
+                          Development pairing code
+                        </Text>
+                        <code>{snapshot.inviteCode}</code>
+                        <Text as="p" size="small" tone="secondary">
+                          This opaque code is short-lived and disappears after it is used.
+                        </Text>
+                      </Stack>
+                    </Card>
+                  ) : (
+                    <Button disabled={busy} onClick={() => void controller.createInvite()}>
+                      Create development pairing code
+                    </Button>
+                  )}
+                  <label className="p6-pairing-input" htmlFor="p6-pairing-input">
+                    <Text as="span" size="label">
+                      Enter invite code
+                    </Text>
+                    <Input
+                      id="p6-pairing-input"
+                      onChange={(event) => setPairingCode(event.target.value)}
+                      placeholder="fp-..."
+                      value={pairingCode}
+                    />
+                  </label>
+                  <Button
+                    disabled={busy || pairingCode.trim().length === 0}
+                    onClick={() => {
+                      void controller.redeemInvite(pairingCode);
+                      setPairingCode("");
+                    }}
+                    variant="secondary"
+                  >
+                    Use pairing code
+                  </Button>
+                </Stack>
+              </Dialog>
+            ) : mode === "persistent" ? (
+              <ProductionInvitationPanel />
             ) : null
           }
           eyebrow="FlickSend"
@@ -260,7 +263,8 @@ export function PeopleWorkspace() {
                                 }
                               >
                                 <Text as="p">
-                                  You can connect again later with a new pairing code.
+                                  You can connect again later with a new{" "}
+                                  {mode === "development" ? "pairing code" : "invitation"}.
                                 </Text>
                               </ConfirmDialog>
                               <ConfirmDialog

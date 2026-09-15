@@ -63,11 +63,13 @@ export function AuthView({
     return mode === "sign-in" ? (
       <SignIn
         forceRedirectUrl={destination}
+        routing="hash"
         signUpUrl={`/sign-up?returnTo=${encodeURIComponent(destination)}`}
       />
     ) : (
       <SignUp
         forceRedirectUrl={destination}
+        routing="hash"
         signInUrl={`/sign-in?returnTo=${encodeURIComponent(destination)}`}
       />
     );

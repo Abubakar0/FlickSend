@@ -13,10 +13,7 @@ import type {
 import type { PersistentAccount } from "./account";
 
 export type PersistentPeopleErrorCode =
-  | "PEOPLE_ALREADY_CONNECTED"
-  | "PEOPLE_BLOCKED"
-  | "PEOPLE_INVITE_INVALID"
-  | "PEOPLE_SELF";
+  "PEOPLE_ALREADY_CONNECTED" | "PEOPLE_BLOCKED" | "PEOPLE_INVITE_INVALID" | "PEOPLE_SELF";
 
 export class PersistentPeopleError extends Error {
   constructor(readonly code: PersistentPeopleErrorCode) {
@@ -39,9 +36,7 @@ function pair(left: string, right: string): readonly [string, string] {
 }
 
 function isOpaqueAccountId(value: string): boolean {
-  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
-    value
-  );
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 }
 
 function relationshipState(
@@ -66,7 +61,8 @@ function relationshipDto(
   relationship: RelationshipWithAccounts,
   accountId: string
 ): PersonRelationship {
-  const other = relationship.accountLowId === accountId ? relationship.accountHigh : relationship.accountLow;
+  const other =
+    relationship.accountLowId === accountId ? relationship.accountHigh : relationship.accountLow;
   return {
     person: person(other),
     state: relationshipState(relationship, accountId),
@@ -148,7 +144,10 @@ export class PersistentPeopleService {
 
   async decline(account: PersistentAccount, otherAccountId: string): Promise<PeopleSnapshot> {
     await this.updatePair(account.id, otherAccountId, async (transaction, relationship) => {
-      if (relationship?.status === RelationshipStatus.INVITED && relationship.initiatedByAccountId !== account.id)
+      if (
+        relationship?.status === RelationshipStatus.INVITED &&
+        relationship.initiatedByAccountId !== account.id
+      )
         await transaction.personRelationship.delete({ where: { id: relationship.id } });
     });
     return this.load(account);
@@ -178,8 +177,20 @@ export class PersistentPeopleService {
     return snapshot.relationships.filter((relationship) => relationship.state === "CONNECTED");
   }
 
+  /** Server-only eligibility check for P12 session issuance. A relationship never authorizes payload. */
+  async isConnected(account: PersistentAccount, otherAccountId: string): Promise<boolean> {
+    if (!isOpaqueAccountId(otherAccountId) || account.id === otherAccountId) return false;
+    const [accountLowId, accountHighId] = pair(account.id, otherAccountId);
+    const relationship = await this.client.personRelationship.findUnique({
+      where: { accountLowId_accountHighId: { accountLowId, accountHighId } },
+      select: { status: true }
+    });
+    return relationship?.status === RelationshipStatus.CONNECTED;
+  }
+
   private async requireOtherAccount(accountId: string, otherAccountId: string): Promise<void> {
-    if (!isOpaqueAccountId(otherAccountId)) throw new PersistentPeopleError("PEOPLE_INVITE_INVALID");
+    if (!isOpaqueAccountId(otherAccountId))
+      throw new PersistentPeopleError("PEOPLE_INVITE_INVALID");
     if (accountId === otherAccountId) throw new PersistentPeopleError("PEOPLE_SELF");
     const target = await this.client.account.findUnique({ where: { id: otherAccountId } });
     if (!target) throw new PersistentPeopleError("PEOPLE_INVITE_INVALID");
@@ -190,7 +201,9 @@ export class PersistentPeopleService {
     otherAccountId: string,
     update: (
       transaction: Prisma.TransactionClient,
-      relationship: Awaited<ReturnType<Prisma.TransactionClient["personRelationship"]["findUnique"]>>
+      relationship: Awaited<
+        ReturnType<Prisma.TransactionClient["personRelationship"]["findUnique"]>
+      >
     ) => Promise<void>
   ): Promise<void> {
     await this.requireOtherAccount(accountId, otherAccountId);

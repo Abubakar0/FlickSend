@@ -98,9 +98,7 @@ const productFailure: Record<FailureCategory, SafeFailureCategory> = {
 };
 
 function isOpaqueAccountId(value: string): boolean {
-  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
-    value
-  );
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 }
 
 function nonNegativeInteger(value: number | null, maximum = Number.MAX_SAFE_INTEGER): boolean {
@@ -164,10 +162,12 @@ export function assertPersistentLifecycleEvent(event: TransferLifecycleEvent): v
 function databaseMetadata(event: TransferLifecycleEvent) {
   return {
     activeMetadata: event.active === null ? Prisma.DbNull : (event.active as Prisma.InputJsonValue),
-    failureCategory: event.productStatus === "FAILED" && event.failureCategory
-      ? dbFailure[event.failureCategory]
-      : null,
-    speedProof: event.speedProof === null ? Prisma.DbNull : (event.speedProof as Prisma.InputJsonValue),
+    failureCategory:
+      event.productStatus === "FAILED" && event.failureCategory
+        ? dbFailure[event.failureCategory]
+        : null,
+    speedProof:
+      event.speedProof === null ? Prisma.DbNull : (event.speedProof as Prisma.InputJsonValue),
     status: dbStatus[event.productStatus]
   };
 }
@@ -180,7 +180,9 @@ function terminalStatus(status: TransferStatus): boolean {
   );
 }
 
-function jsonObject(value: Prisma.JsonValue | null | undefined): Record<string, Prisma.JsonValue> | null {
+function jsonObject(
+  value: Prisma.JsonValue | null | undefined
+): Record<string, Prisma.JsonValue> | null {
   return value && typeof value === "object" && !Array.isArray(value)
     ? (value as Record<string, Prisma.JsonValue>)
     : null;
@@ -206,10 +208,15 @@ function activeDto(value: Prisma.JsonValue | null): ActiveTransferMetadata | nul
   if (
     transferredBytes === null ||
     verifiedBytes === null ||
-    !["Direct", "Relayed"].includes(route ?? "") && route !== null ||
-    !["GOOD", "UNSTABLE", "SLOWER_THAN_EXPECTED", "NOT_ENOUGH_INFORMATION", "RECONNECTING"].includes(
-      health ?? ""
-    ) && health !== null
+    (!["Direct", "Relayed"].includes(route ?? "") && route !== null) ||
+    (![
+      "GOOD",
+      "UNSTABLE",
+      "SLOWER_THAN_EXPECTED",
+      "NOT_ENOUGH_INFORMATION",
+      "RECONNECTING"
+    ].includes(health ?? "") &&
+      health !== null)
   )
     return null;
   return {
@@ -261,7 +268,8 @@ function speedProofDto(value: Prisma.JsonValue | null): SafeSpeedProofSummary | 
     dominantBottleneck: dominantBottleneck as SafeSpeedProofSummary["dominantBottleneck"],
     durationMs: numeric("durationMs")!,
     integrityRetryCount: numeric("integrityRetryCount")!,
-    measurementAvailability: measurementAvailability as SafeSpeedProofSummary["measurementAvailability"],
+    measurementAvailability:
+      measurementAvailability as SafeSpeedProofSummary["measurementAvailability"],
     payloadBytes: numeric("payloadBytes")!,
     peakPayloadSpeedBps: numeric("peakPayloadSpeedBps"),
     reconnectCount: numeric("reconnectCount")!,

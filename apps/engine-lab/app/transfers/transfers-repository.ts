@@ -97,7 +97,10 @@ export class PersistentTransfersRepository implements TransfersRepository {
     return response.records ?? [];
   }
 
-  async record(ownerPersonId: string, event: TransferLifecycleEvent): Promise<TransferHistoryRecord> {
+  async record(
+    ownerPersonId: string,
+    event: TransferLifecycleEvent
+  ): Promise<TransferHistoryRecord> {
     void ownerPersonId;
     const response = await this.request("/api/persistence/transfers", {
       body: JSON.stringify({ event, operation: "RECORD" }),

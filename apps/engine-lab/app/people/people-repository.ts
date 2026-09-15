@@ -144,7 +144,10 @@ export class PersistentPeopleRepository implements PeopleRepository {
     return this.operation("ACCEPT", targetPersonId);
   }
 
-  async block(context: PeopleOperationContext, targetPersonId: string): Promise<PeopleRepositoryResult> {
+  async block(
+    context: PeopleOperationContext,
+    targetPersonId: string
+  ): Promise<PeopleRepositoryResult> {
     void context;
     return this.operation("BLOCK", targetPersonId);
   }
@@ -155,7 +158,10 @@ export class PersistentPeopleRepository implements PeopleRepository {
     throw new PeopleRepositoryError("PEOPLE_INVITE_INVALID");
   }
 
-  async decline(context: PeopleOperationContext, targetPersonId: string): Promise<PeopleRepositoryResult> {
+  async decline(
+    context: PeopleOperationContext,
+    targetPersonId: string
+  ): Promise<PeopleRepositoryResult> {
     void context;
     return this.operation("DECLINE", targetPersonId);
   }
@@ -165,14 +171,20 @@ export class PersistentPeopleRepository implements PeopleRepository {
     return this.request("/api/persistence/people");
   }
 
-  async redeemInvite(context: PeopleOperationContext, code: string): Promise<PeopleRepositoryResult> {
+  async redeemInvite(
+    context: PeopleOperationContext,
+    code: string
+  ): Promise<PeopleRepositoryResult> {
     void context;
     void code;
     // Development pairing tokens are deliberately not sent to production persistence.
     throw new PeopleRepositoryError("PEOPLE_INVITE_INVALID");
   }
 
-  async remove(context: PeopleOperationContext, targetPersonId: string): Promise<PeopleRepositoryResult> {
+  async remove(
+    context: PeopleOperationContext,
+    targetPersonId: string
+  ): Promise<PeopleRepositoryResult> {
     void context;
     return this.operation("REMOVE", targetPersonId);
   }
@@ -182,7 +194,10 @@ export class PersistentPeopleRepository implements PeopleRepository {
     throw new PeopleRepositoryError("PEOPLE_SERVICE_UNAVAILABLE");
   }
 
-  async unblock(context: PeopleOperationContext, targetPersonId: string): Promise<PeopleRepositoryResult> {
+  async unblock(
+    context: PeopleOperationContext,
+    targetPersonId: string
+  ): Promise<PeopleRepositoryResult> {
     void context;
     return this.operation("UNBLOCK", targetPersonId);
   }
@@ -198,7 +213,10 @@ export class PersistentPeopleRepository implements PeopleRepository {
     });
   }
 
-  private async request(input: RequestInfo | URL, init?: RequestInit): Promise<PeopleRepositoryResult> {
+  private async request(
+    input: RequestInfo | URL,
+    init?: RequestInit
+  ): Promise<PeopleRepositoryResult> {
     let response: Response;
     try {
       response = await fetch(input, init);

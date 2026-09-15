@@ -2,9 +2,12 @@ packages:
   - apps/*
   - packages/*
 allowBuilds:
-  '@prisma/engines': true
+  "@prisma/engines": true
   esbuild: true
   prisma: true
   workerd: true
 minimumReleaseAgeExclude:
-  - "@cloudflare/workers-types@5.20260904.1"
+  - "@cloudflare/workers-types@5.20260904.1 || 5.20260914.1"
+  - miniflare@5.20260911.1-alpha
+  - wrangler@4.131.2
+  - zod@4.6.5

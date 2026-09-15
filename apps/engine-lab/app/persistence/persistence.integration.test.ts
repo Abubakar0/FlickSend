@@ -1,6 +1,9 @@
 import {
   DatabaseUnavailableError,
   RelationshipStatus,
+  TransferDirection,
+  TransferSourceKind,
+  TransferStatus,
   createDatabaseClient,
   type PrismaClient
 } from "@flicksend/database";
@@ -72,6 +75,7 @@ p11("P11 PostgreSQL persistence", () => {
     // This reset is only reachable through the exact loopback qualification database guard above.
     await client.transferRecord.deleteMany();
     await client.personRelationship.deleteMany();
+    await client.invitation.deleteMany();
     await client.account.deleteMany();
   });
 
@@ -81,18 +85,28 @@ p11("P11 PostgreSQL persistence", () => {
 
   it("provisions exactly one account per concurrent provider subject without email authority", async () => {
     const first = principal("provider-subject-a", "A name");
+    const secondClient = createDatabaseClient(qualificationUrl);
     const accounts = await Promise.all(
-      Array.from({ length: 12 }, () => resolveOrProvisionAccount(first, client))
+      Array.from({ length: 12 }, (_, index) =>
+        resolveOrProvisionAccount(first, index % 2 === 0 ? client : secondClient)
+      )
     );
+    await secondClient.$disconnect();
     expect(new Set(accounts.map((account) => account.id))).toHaveLength(1);
     expect(await client.account.count()).toBe(1);
 
-    const renamed = await resolveOrProvisionAccount(principal("provider-subject-a", "Renamed"), client);
+    const renamed = await resolveOrProvisionAccount(
+      principal("provider-subject-a", "Renamed"),
+      client
+    );
     const changedEmail = await resolveOrProvisionAccount(
       { ...principal("provider-subject-a", "Renamed"), primaryEmail: "changed@example.test" },
       client
     );
-    const second = await resolveOrProvisionAccount(principal("provider-subject-b", "B name"), client);
+    const second = await resolveOrProvisionAccount(
+      principal("provider-subject-b", "B name"),
+      client
+    );
 
     expect(renamed.id).toBe(accounts[0]!.id);
     expect(changedEmail.id).toBe(accounts[0]!.id);
@@ -120,19 +134,23 @@ p11("P11 PostgreSQL persistence", () => {
 
     const peopleA = new PersistentPeopleService(client);
     const peopleC = new PersistentPeopleService(client);
-    expect((await peopleA.connected(accountA)).map((relationship) => relationship.person.id)).toEqual([
-      accountB.id
-    ]);
+    expect(
+      (await peopleA.connected(accountA)).map((relationship) => relationship.person.id)
+    ).toEqual([accountB.id]);
 
     // C can only create/change C<->B. It cannot mutate the existing A<->B relationship.
     await peopleC.block(accountC, accountB.id);
-    expect((await peopleA.connected(accountA)).map((relationship) => relationship.person.id)).toEqual([
-      accountB.id
-    ]);
+    expect(
+      (await peopleA.connected(accountA)).map((relationship) => relationship.person.id)
+    ).toEqual([accountB.id]);
 
     await peopleA.block(accountA, accountB.id);
     expect(await peopleA.connected(accountA)).toHaveLength(0);
     await peopleA.unblock(accountA, accountB.id);
+    expect(await peopleA.connected(accountA)).toHaveLength(0);
+
+    await connect(accountA, accountB);
+    await peopleA.remove(accountA, accountB.id);
     expect(await peopleA.connected(accountA)).toHaveLength(0);
 
     await expect(
@@ -153,7 +171,14 @@ p11("P11 PostgreSQL persistence", () => {
     const transfers = new PersistentTransfersService(client);
     const key = "p7-89b3a619-2459-4e46-b19d-57e6553a8b8b";
 
-    const active = await transfers.record(owner, lifecycleEvent(key, { peerPersonId: peer.id }));
+    const active = await transfers.record(owner, {
+      ...lifecycleEvent(key, { peerPersonId: peer.id }),
+      // Unrecognized client input must never expand the persisted schema projection.
+      engineTransferId: "engine-transfer-private",
+      filename: "PRIVATE-HISTORY-NAME-MUST-NOT-PERSIST.mov",
+      sessionId: "signaling-session-private",
+      sourcePath: "C:\\Users\\private"
+    } as TransferLifecycleEvent);
     const recovery = await transfers.record(
       owner,
       lifecycleEvent(key, {
@@ -185,6 +210,12 @@ p11("P11 PostgreSQL persistence", () => {
     expect(stale.productStatus).toBe("COMPLETED");
     expect(await transfers.get(other, active.recordId)).toBeNull();
 
+    const triggerProtected = await client.transferRecord.update({
+      where: { id: active.recordId },
+      data: { status: TransferStatus.TRANSFERRING }
+    });
+    expect(triggerProtected.status).toBe(TransferStatus.COMPLETED);
+
     const failed = await transfers.record(
       owner,
       lifecycleEvent("p7-5ec24938-6678-48fc-ae15-2a89cbdde9fe", {
@@ -209,6 +240,36 @@ p11("P11 PostgreSQL persistence", () => {
     expect(failed.productStatus).toBe("FAILED");
     expect(canceled.productStatus).toBe("CANCELED");
     expect(retry.recordId).not.toBe(failed.recordId);
+
+    const concurrentKey = "p7-27738aef-365a-42f1-9be9-56066d91c9fb";
+    const [firstObservation, deliveryObservation] = await Promise.all([
+      transfers.record(owner, lifecycleEvent(concurrentKey, { peerPersonId: peer.id })),
+      transfers.record(
+        owner,
+        lifecycleEvent(concurrentKey, {
+          active: null,
+          deliveryConfirmed: true,
+          peerPersonId: peer.id,
+          productStatus: "COMPLETED"
+        })
+      )
+    ]);
+    expect(firstObservation.recordId).toBe(deliveryObservation.recordId);
+    expect((await transfers.get(owner, firstObservation.recordId))?.productStatus).toBe(
+      "COMPLETED"
+    );
+
+    await expect(
+      client.transferRecord.create({
+        data: {
+          direction: TransferDirection.SENT,
+          lifecycleKey: "p7-31ef53e1-aee5-40a1-a663-80380c3ad80c",
+          ownerAccountId: "00000000-0000-4000-8000-000000000001",
+          sourceKind: TransferSourceKind.SINGLE_FILE,
+          status: TransferStatus.TRANSFERRING
+        }
+      })
+    ).rejects.toBeDefined();
 
     const raw = await client.transferRecord.findUniqueOrThrow({ where: { id: active.recordId } });
     const serialized = JSON.stringify(raw, (_, value: unknown) =>
@@ -235,10 +296,12 @@ p11("P11 PostgreSQL persistence", () => {
     client = createDatabaseClient(qualificationUrl);
     const restartedPeople = new PersistentPeopleService(client);
     const restartedTransfers = new PersistentTransfersService(client);
-    expect((await restartedPeople.connected(owner)).map((relationship) => relationship.person.id)).toEqual([
-      peer.id
-    ]);
-    expect((await restartedTransfers.get(owner, initial.recordId))?.recordId).toBe(initial.recordId);
+    expect(
+      (await restartedPeople.connected(owner)).map((relationship) => relationship.person.id)
+    ).toEqual([peer.id]);
+    expect((await restartedTransfers.get(owner, initial.recordId))?.recordId).toBe(
+      initial.recordId
+    );
 
     for (let index = 0; index < 55; index += 1)
       await restartedTransfers.record(

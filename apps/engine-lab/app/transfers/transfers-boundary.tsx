@@ -2,7 +2,11 @@
 
 import { PeopleProvider, usePeople } from "../people/people-provider";
 import { isSendEligible, type PersonIdentity } from "../people/people-types";
-import { TransfersProvider, type TransfersRepositoryMode, useTransfers } from "./transfers-provider";
+import {
+  TransfersProvider,
+  type TransfersRepositoryMode,
+  useTransfers
+} from "./transfers-provider";
 import { TransferDetail, TransfersWorkspace } from "./transfers-workspace";
 
 function TransfersContent({ recordId }: { recordId?: string }) {

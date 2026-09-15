@@ -1,9 +1,5 @@
 import type { ProductErrorViewModel } from "@flicksend/ui";
-import {
-  type PeopleSnapshot,
-  type PersonIdentity,
-  type PersonRelationship
-} from "./people-types";
+import { type PeopleSnapshot, type PersonIdentity, type PersonRelationship } from "./people-types";
 import type { PeopleRepositoryErrorCode } from "./people-repository";
 
 export type PeopleProductError = ProductErrorViewModel & { code: string };

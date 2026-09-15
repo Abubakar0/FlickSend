@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { PersistenceAccessDeniedError, PersistenceUnavailableError } from "../../../persistence/account";
 import {
-  PersistentPeopleError,
-  PersistentPeopleService
-} from "../../../persistence/people";
+  PersistenceAccessDeniedError,
+  PersistenceUnavailableError
+} from "../../../persistence/account";
+import { PersistentPeopleError, PersistentPeopleService } from "../../../persistence/people";
 import { currentPersistentAccount } from "../../../persistence/request-account";
 
 export const dynamic = "force-dynamic";

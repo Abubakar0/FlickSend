@@ -15,14 +15,12 @@ export default async function AccountPage({
   if (session.state === "CONFIGURATION_UNAVAILABLE") return <AuthConfigurationUnavailable />;
   if (!session.principal) return null;
   const content =
-    session.source === "development-fixture"
-      ? <AccountWorkspace fixture />
-      : await awaitPersistentAccount(session.principal);
-  return (
-    <CurrentAccountProvider principal={session.principal}>
-      {content}
-    </CurrentAccountProvider>
-  );
+    session.source === "development-fixture" ? (
+      <AccountWorkspace fixture />
+    ) : (
+      await awaitPersistentAccount(session.principal)
+    );
+  return <CurrentAccountProvider principal={session.principal}>{content}</CurrentAccountProvider>;
 }
 
 async function awaitPersistentAccount(

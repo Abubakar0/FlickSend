@@ -107,6 +107,15 @@ export type ConnectionCoordinatorOptions = {
   transferHealth?: false | Partial<TransferHealthConfig>;
 };
 
+/**
+ * An application-issued bearer capability for the P12 signaling control plane. It intentionally
+ * has no transfer identity, account identifier, source metadata, or payload authority.
+ */
+export type AuthorizedSignallingSession = {
+  accessToken: string;
+  expiresAtMs: number;
+};
+
 export type ConnectionSnapshot = {
   state: ConnectionState;
   sessionCode: string | null;
@@ -145,6 +154,7 @@ export class ConnectionCoordinator {
   private reconnectAttempts = 0;
   private routeRecoveryAttempts = 0;
   private sessionCode?: string;
+  private signallingAccessToken?: string;
   private routePolicy: IceRoutePolicy = "AUTO";
   private nextRecoveryPolicy?: IceRoutePolicy;
   private credentialTestMode?: "expired" | "invalid" | "unreachable";
@@ -224,6 +234,7 @@ export class ConnectionCoordinator {
 
     this.closedByUser = false;
     this.sessionCode = normalized;
+    this.signallingAccessToken = undefined;
     this.simulatedReconnectHeld = false;
     this.reconnectAttempts = 0;
     this.routeRecoveryAttempts = 0;
@@ -251,7 +262,47 @@ export class ConnectionCoordinator {
       route: this.routeCoordinator.current(),
       error: null
     });
-    this.connect(normalized);
+    this.connect();
+  }
+
+  /**
+   * Joins a server-authorized P12 signaling session. This replaces only the WebSocket admission
+   * path; FSTP, WebRTC, integrity, recovery, and transfer identity remain unchanged.
+   */
+  async joinAuthorizedSignallingSession(session: AuthorizedSignallingSession): Promise<void> {
+    if (!isAuthorizedSignallingSession(session)) throw new Error("Invalid signalling session.");
+
+    this.closedByUser = false;
+    this.sessionCode = undefined;
+    this.signallingAccessToken = session.accessToken;
+    this.simulatedReconnectHeld = false;
+    this.reconnectAttempts = 0;
+    this.routeRecoveryAttempts = 0;
+    this.remoteRouteGeneration = 0;
+    this.clearReconnectTimer();
+    this.clearRouteRecoveryTimers();
+    this.routeCoordinator.invalidate();
+    this.fileTransfer?.dispose();
+    this.folderTransfer?.dispose();
+    this.fileTransfer = undefined;
+    this.folderTransfer = undefined;
+    this.transport?.close();
+    this.transport = undefined;
+    this.role = undefined;
+    const previousSocket = this.socket;
+    this.socket = undefined;
+    previousSocket?.close();
+    this.update({
+      state: "SIGNALLING_CONNECTING",
+      sessionCode: null,
+      control: "closed",
+      data: "closed",
+      helloReceived: false,
+      binaryResult: null,
+      route: this.routeCoordinator.current(),
+      error: null
+    });
+    this.connect();
   }
 
   sendHello(): void {
@@ -449,10 +500,18 @@ export class ConnectionCoordinator {
     });
   }
 
-  private connect(code: string): void {
-    const url = new URL(this.signalingUrl + "/session");
-    url.searchParams.set("code", code);
-    url.searchParams.set("peerId", this.peerId);
+  private connect(): void {
+    const accessToken = this.signallingAccessToken;
+    const url = new URL(this.signalingUrl + (accessToken ? "/v2/session" : "/session"));
+    if (accessToken) url.searchParams.set("cap", accessToken);
+    else {
+      if (!this.sessionCode) {
+        this.update({ state: "FAILED", error: "Signalling session is unavailable." });
+        return;
+      }
+      url.searchParams.set("code", this.sessionCode);
+      url.searchParams.set("peerId", this.peerId);
+    }
     const socket = new WebSocket(url);
     this.socket = socket;
     socket.onopen = () => {
@@ -467,11 +526,11 @@ export class ConnectionCoordinator {
       this.trace("signaling:close");
       if (this.socket !== socket) return;
       this.update({ signalling: "disconnected" });
-      if (this.closedByUser || !this.snapshot.sessionCode) {
+      if (this.closedByUser || (!this.sessionCode && !this.signallingAccessToken)) {
         this.update({ state: this.closedByUser ? "CLOSED" : "DISCONNECTED" });
         return;
       }
-      this.scheduleReconnect(code);
+      this.scheduleReconnect();
     };
     socket.onerror = () => {
       this.trace("signaling:error");
@@ -480,14 +539,14 @@ export class ConnectionCoordinator {
     socket.onmessage = ({ data }) => this.handle(data);
   }
 
-  private scheduleReconnect(code: string): void {
+  private scheduleReconnect(): void {
     if (this.reconnectAttempts >= 3) {
       this.update({ state: "FAILED", error: "Signalling reconnect failed after three attempts." });
       return;
     }
     this.reconnectAttempts += 1;
     this.update({ state: "RECONNECTING" });
-    this.reconnectTimer = setTimeout(() => this.connect(code), this.reconnectAttempts * 500);
+    this.reconnectTimer = setTimeout(() => this.connect(), this.reconnectAttempts * 500);
   }
 
   private handle(raw: unknown): void {
@@ -1064,3 +1123,12 @@ export class ConnectionCoordinator {
 
 export const engineCoreBoundary =
   "Framework-independent connection coordinator; React, Next.js, auth, database, and UI imports are prohibited.";
+
+function isAuthorizedSignallingSession(value: AuthorizedSignallingSession): boolean {
+  return (
+    typeof value.accessToken === "string" &&
+    /^fsst1\.[A-Za-z0-9_-]{1,1024}\.[A-Za-z0-9_-]{43}$/.test(value.accessToken) &&
+    Number.isSafeInteger(value.expiresAtMs) &&
+    value.expiresAtMs > Date.now()
+  );
+}

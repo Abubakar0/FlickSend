@@ -90,9 +90,22 @@ type DialogBaseProps = {
   trigger: ReactElement;
 };
 
-export function Dialog({ children, description, footer, title, trigger }: DialogBaseProps) {
+type DialogProps = DialogBaseProps & {
+  onOpenChange?: (open: boolean) => void;
+  open?: boolean;
+};
+
+export function Dialog({
+  children,
+  description,
+  footer,
+  onOpenChange,
+  open,
+  title,
+  trigger
+}: DialogProps) {
   return (
-    <DialogPrimitive.Root>
+    <DialogPrimitive.Root onOpenChange={onOpenChange} open={open}>
       <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fs-overlay" />

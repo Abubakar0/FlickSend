@@ -43,3 +43,6 @@ are required before changing any of these decisions or beginning the relevant mi
 | 040 | Establish a presentation-only, brand-swappable P3 design system.                           | Accepted                      |
 | 041 | Keep P4 sender orchestration in an application controller outside React and the engine.    | Accepted                      |
 | 042 | Keep P5 recipient authorization, destination selection, and engine orchestration separate. | Accepted                      |
+| 047 | Use PostgreSQL/Prisma for metadata-only P11 persistence behind server repositories.        | Accepted                      |
+| 048 | Store P12 invitation bearer links as digest-only, bounded-lifetime relationship requests.  | Accepted                      |
+| 049 | Use signed role capabilities with hibernating Durable Objects for P12 signaling.           | Accepted                      |

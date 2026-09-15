@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   Avatar,
   Button,
@@ -117,6 +117,24 @@ describe("UI primitives", () => {
     expect(dialog).toHaveAccessibleDescription("A focused fixture description.");
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("notifies a controlled dialog when it opens and closes", async () => {
+    const user = userEvent.setup();
+    const onOpenChange = vi.fn();
+    render(
+      <Dialog
+        onOpenChange={onOpenChange}
+        title="Controlled dialog"
+        trigger={<Button>Open controlled</Button>}
+      >
+        <p>Controlled fixture content</p>
+      </Dialog>
+    );
+    await user.click(screen.getByRole("button", { name: "Open controlled" }));
+    await user.click(screen.getByRole("button", { name: "Close dialog" }));
+    expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
+    expect(onOpenChange).toHaveBeenLastCalledWith(false);
   });
 
   it("uses native/Radix checkbox semantics", async () => {

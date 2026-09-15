@@ -49,7 +49,9 @@ export function TransfersProvider({
   const repositoryRef = useRef<TransfersRepository | null>(null);
   if (!repositoryRef.current)
     repositoryRef.current =
-      mode === "persistent" ? new PersistentTransfersRepository() : new DevelopmentTransfersRepository();
+      mode === "persistent"
+        ? new PersistentTransfersRepository()
+        : new DevelopmentTransfersRepository();
   if (!controllerRef.current || controllerRef.current.currentPersonId !== currentPersonId)
     controllerRef.current = new TransfersController(currentPersonId, repositoryRef.current);
   const controller = controllerRef.current;
