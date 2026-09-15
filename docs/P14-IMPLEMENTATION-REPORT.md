@@ -12,6 +12,22 @@ P14 TURN deployment and operational readiness implementation is complete in the 
 - legacy session-code credential requests remain explicitly rejected when no legacy code exists; and
 - provider-neutral coturn templates, firewall guidance, and deterministic local qualification exist.
 
+## Qualification Evidence
+
+- `pnpm qualification:p14`: repository checks PASS. It ran the coturn artifact test, Engine Lab
+  credential/route/browser-adapter tests, and local Docker Compose validation with an ephemeral test
+  secret.
+- `pnpm qualification:p13-p14`: repository `PASS`; P13 and P14 external statuses remain `BLOCKED`.
+- `pnpm typecheck`, `pnpm lint`, `pnpm test`, and `pnpm build`: PASS. The serial unit suite reported
+  28 successful Turbo tasks; `engine-core` reported 50 tests and Engine Lab reported 68 passed with
+  10 intentionally environment-gated PostgreSQL tests skipped.
+- `pnpm test:e2e`: 71 passed, 18 skipped, 0 failed, 89 configured. The skips are retained
+  environment-gated physical, large-fixture, local-coturn, and lifecycle qualifications, not P14
+  failures.
+- `pnpm format:check`: FAILS on a pre-existing global baseline of 372 files. P13/P14 files touched in
+  this work were separately formatted and checked. This report does not treat that separate baseline
+  as public TURN qualification evidence.
+
 ## External Evidence
 
 **BLOCKED — PUBLIC TURN INFRASTRUCTURE QUALIFICATION NOT EXECUTED**
@@ -22,5 +38,5 @@ The successful local Docker start is not a public relay qualification.
 
 ## Status
 
-`P14 REPOSITORY IMPLEMENTATION: PASS` is conditional on final repository verification. `P14 EXTERNAL
-QUALIFICATION: BLOCKED` remains authoritative. P14 is not frozen, and P15+ scope was not started.
+`P14 REPOSITORY IMPLEMENTATION: PASS` and `P14 EXTERNAL QUALIFICATION: BLOCKED` remain authoritative.
+P14 is not frozen, and P15+ scope was not started.
