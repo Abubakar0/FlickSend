@@ -23,9 +23,17 @@ export type WorkerEnvironmentConfig = Readonly<{
 export function resolveWorkerEnvironment(
   env: WorkerEnvironmentSource
 ): WorkerEnvironmentConfig | null {
+  const configuration = resolveWorkerHealthEnvironment(env);
+  return configuration && hasMinimumSecret(env.SIGNALING_CAPABILITY_SECRET) ? configuration : null;
+}
+
+/** Health exposes only a valid deployment identity and must not reveal secret configuration state. */
+export function resolveWorkerHealthEnvironment(
+  env: WorkerEnvironmentSource
+): WorkerEnvironmentConfig | null {
   const environment = parseEnvironmentClass(env.ENVIRONMENT);
   const expectedOrigins = parseExpectedOrigins(env.EXPECTED_ORIGINS);
-  if (!environment || !expectedOrigins || !hasMinimumSecret(env.SIGNALING_CAPABILITY_SECRET)) return null;
+  if (!environment || !expectedOrigins) return null;
   return {
     environment,
     expectedOrigins,
@@ -34,7 +42,9 @@ export function resolveWorkerEnvironment(
 }
 
 function hasMinimumSecret(value: string | undefined): boolean {
-  return typeof value === "string" && new TextEncoder().encode(value).byteLength >= minimumSecretBytes;
+  return (
+    typeof value === "string" && new TextEncoder().encode(value).byteLength >= minimumSecretBytes
+  );
 }
 
 function safeBuildVersion(value: string | undefined): string {

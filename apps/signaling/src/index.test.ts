@@ -30,6 +30,19 @@ describe("P13 Worker request boundary", () => {
     });
   });
 
+  it("keeps health as a safe liveness response when the capability secret is unavailable", async () => {
+    const response = await worker.fetch(new Request("https://worker.example/health"), {
+      ...env,
+      SIGNALING_CAPABILITY_SECRET: undefined
+    });
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({
+      environment: "staging",
+      status: "ok",
+      version: "unknown"
+    });
+  });
+
   it("rejects an untrusted browser origin before Durable Object access", async () => {
     const response = await worker.fetch(
       new Request("https://worker.example/v2/session", {

@@ -13,7 +13,7 @@ import {
   ProductionSessionRoom,
   verifyProductionSignallingCapability
 } from "./production-signaling.js";
-import { resolveWorkerEnvironment } from "./environment.js";
+import { resolveWorkerEnvironment, resolveWorkerHealthEnvironment } from "./environment.js";
 import {
   BoundedRequestRateLimiter,
   createHealthResponse,
@@ -232,7 +232,9 @@ function parseRelayEligibility(value: unknown): RelayEligibility | null {
   const result = value as Record<string, unknown>;
   if (
     typeof result.eligible !== "boolean" ||
-    (result.category !== "ELIGIBLE" && result.category !== "REJECTED" && result.category !== "UNAVAILABLE") ||
+    (result.category !== "ELIGIBLE" &&
+      result.category !== "REJECTED" &&
+      result.category !== "UNAVAILABLE") ||
     (result.category === "ELIGIBLE") !== result.eligible
   )
     return null;
@@ -242,9 +244,10 @@ function parseRelayEligibility(value: unknown): RelayEligibility | null {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = requestUrl(request);
-    const config = resolveWorkerEnvironment(env);
+    const healthConfig = resolveWorkerHealthEnvironment(env);
     if (url.pathname === "/health")
-      return config ? createHealthResponse(config) : safeOperationError(503);
+      return healthConfig ? createHealthResponse(healthConfig) : safeOperationError(503);
+    const config = resolveWorkerEnvironment(env);
     if (!config) return safeOperationError(503);
     if (request.method === "OPTIONS") {
       if (!hasConfiguredBrowserOrigin(request, config)) return safeOperationError(403);
@@ -263,7 +266,11 @@ export default {
     }
     if (url.pathname === "/turn-credentials" && request.method === "POST") {
       const directory = env.SESSION_DIRECTORY.get(env.SESSION_DIRECTORY.idFromName("directory"));
-      return withConfiguredCors(request, await issueTurnCredentials(request, env, directory), config);
+      return withConfiguredCors(
+        request,
+        await issueTurnCredentials(request, env, directory),
+        config
+      );
     }
     if (url.pathname === "/v2/relay-eligibility") {
       if (request.method !== "POST") return safeOperationError(405);
@@ -315,14 +322,18 @@ export default {
       const headers = new Headers();
       headers.set("x-flicksend-production-operation", "revoke");
       headers.set("x-flicksend-signalling-expiry", String(capability.expiresAtMs));
-      return withConfiguredCors(request, await env.PRODUCTION_SESSION_ROOM.get(
-        env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
-      ).fetch(
-        new Request("https://flicksend-production-room.internal/revoke", {
-          headers,
-          method: "POST"
-        })
-      ), config);
+      return withConfiguredCors(
+        request,
+        await env.PRODUCTION_SESSION_ROOM.get(
+          env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
+        ).fetch(
+          new Request("https://flicksend-production-room.internal/revoke", {
+            headers,
+            method: "POST"
+          })
+        ),
+        config
+      );
     }
     if (url.pathname === "/v2/revoke") return safeOperationError(405);
     if (url.pathname === "/session") {
