@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { verifyProductionSignallingCapability } from "./production-signaling.js";
+import {
+  ProductionSessionRoom,
+  verifyProductionSignallingCapability
+} from "./production-signaling.js";
 
 const textEncoder = new TextEncoder();
 const secret = base64Url(randomBytes(48));
@@ -64,6 +67,25 @@ describe("P12 signaling capability verification", () => {
     await expect(
       verifyProductionSignallingCapability(await capability(), "short")
     ).resolves.toBeNull();
+  });
+
+  it("returns only a safe room eligibility category", async () => {
+    const storage = new Map<string, number>();
+    const room = new ProductionSessionRoom({
+      storage: {
+        get: async <T>(key: string) => storage.get(key) as T | undefined
+      }
+    } as unknown as DurableObjectState);
+    const request = { expiresAtMs: Date.now() + 60_000, role: "sender" as const };
+    await expect(room.relayEligibility(request)).resolves.toEqual({
+      category: "ELIGIBLE",
+      eligible: true
+    });
+    storage.set("revoked", Date.now() + 60_000);
+    await expect(room.relayEligibility(request)).resolves.toEqual({
+      category: "REJECTED",
+      eligible: false
+    });
   });
 });
 

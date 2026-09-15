@@ -13,6 +13,16 @@ export type ProductionSignallingCapability = {
   sessionId: string;
 };
 
+export type RelayEligibility = Readonly<{
+  category: "ELIGIBLE" | "REJECTED" | "UNAVAILABLE";
+  eligible: boolean;
+}>;
+
+export type RelayEligibilityRequest = Readonly<{
+  expiresAtMs: number;
+  role: ProductionSignallingCapability["role"];
+}>;
+
 type CapabilityClaims = {
   exp: unknown;
   jti: unknown;
@@ -93,6 +103,16 @@ export class ProductionSessionRoom {
       return new Response(null, { status: 204 });
     }
 
+    if (request.headers.get("x-flicksend-production-operation") === "relay-eligibility") {
+      const role = request.headers.get("x-flicksend-signalling-role");
+      const expiresAtMs = Number(request.headers.get("x-flicksend-signalling-expiry"));
+      const result = await this.relayEligibility({
+        expiresAtMs,
+        role: role === "sender" || role === "receiver" ? role : "invalid"
+      });
+      return Response.json(result);
+    }
+
     if (request.headers.get("Upgrade") !== "websocket")
       return new Response("WebSocket required", { status: 426 });
     const role = request.headers.get("x-flicksend-signalling-role");
@@ -120,6 +140,26 @@ export class ProductionSessionRoom {
     this.send(server, { type: "session-ready", role: role === "sender" ? "offerer" : "answerer" });
     this.announcePeerJoined();
     return new Response(null, { status: 101, webSocket: client });
+  }
+
+  async relayEligibility(
+    request: RelayEligibilityRequest | { expiresAtMs: number; role: "invalid" }
+  ): Promise<RelayEligibility> {
+    if (
+      (request.role !== "sender" && request.role !== "receiver") ||
+      !Number.isSafeInteger(request.expiresAtMs) ||
+      request.expiresAtMs <= Date.now()
+    ) {
+      return { category: "REJECTED", eligible: false };
+    }
+    try {
+      const revokedUntil = await this.state.storage.get<number>("revoked");
+      if (revokedUntil && revokedUntil > Date.now()) return { category: "REJECTED", eligible: false };
+      if (revokedUntil) await this.state.storage.delete("revoked");
+      return { category: "ELIGIBLE", eligible: true };
+    } catch {
+      return { category: "UNAVAILABLE", eligible: false };
+    }
   }
 
   async webSocketMessage(socket: WebSocket, message: ArrayBuffer | string): Promise<void> {
