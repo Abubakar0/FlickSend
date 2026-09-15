@@ -3,6 +3,7 @@ node_modules/
 .worktrees/
 .turbo/
 dist/
+apps/signaling/dist-staging/
 .next/
 .wrangler/
 playwright-report/
