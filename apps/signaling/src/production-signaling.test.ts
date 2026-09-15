@@ -75,6 +75,7 @@ describe("P12 signaling capability verification", () => {
   it("returns only a safe room eligibility category", async () => {
     const storage = new Map<string, number>();
     const room = new ProductionSessionRoom({
+      getWebSockets: () => [],
       storage: {
         get: async <T>(key: string) => storage.get(key) as T | undefined
       }
@@ -89,6 +90,27 @@ describe("P12 signaling capability verification", () => {
       category: "REJECTED",
       eligible: false
     });
+  });
+
+  it("retains hibernatable sockets reconstructed from persisted attachments", () => {
+    const sender = {
+      deserializeAttachment: () => ({ expiresAtMs: Date.now() + 60_000, role: "sender" })
+    } as unknown as WebSocket;
+    const receiver = {
+      deserializeAttachment: () => ({ expiresAtMs: Date.now() + 60_000, role: "receiver" })
+    } as unknown as WebSocket;
+    let enumerations = 0;
+    const room = new ProductionSessionRoom({
+      getWebSockets: () => {
+        enumerations += 1;
+        return enumerations === 1 ? [sender, receiver] : [];
+      }
+    } as unknown as DurableObjectState);
+
+    const registry = room as unknown as { activeSockets: () => { socket: WebSocket }[] };
+    expect(registry.activeSockets().map((entry) => entry.socket)).toEqual([sender, receiver]);
+    expect(registry.activeSockets().map((entry) => entry.socket)).toEqual([sender, receiver]);
+    expect(enumerations).toBe(1);
   });
 });
 
