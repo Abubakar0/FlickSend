@@ -43,28 +43,27 @@ external P13 gate.
 
 **BLOCKED — PERSISTENT CLOUDFLARE STAGING QUALIFICATION NOT EXECUTED**
 
-On 2026-09-16, Wrangler OAuth authentication completed for the intended Cloudflare account. The
-repository then attempted the committed staging-only deployment command,
-`pnpm --filter @flicksend/signaling exec wrangler deploy --env staging`. Cloudflare rejected the
-request because the account email is not verified for Workers usage. Cloudflare also reported that
-the account must register a `workers.dev` subdomain. No Worker, Durable Object binding, capability
-secret, deployment identifier, persistent WSS endpoint, or health evidence was created by the failed
-attempt.
+On 2026-09-16, Wrangler OAuth authentication completed for the intended Cloudflare account. After
+Cloudflare account verification, the committed staging-only deployment command,
+`pnpm --filter @flicksend/signaling exec wrangler deploy --env staging`, deployed
+`flicksend-signaling-staging` successfully. The persistent Worker has the required
+`SESSION_DIRECTORY`, `SESSION_ROOM`, and `PRODUCTION_SESSION_ROOM` Durable Object bindings. Its safe
+health endpoint returned HTTP 200 with staging and `ok` status. This verifies deployment reachability,
+not live signaling admission, recovery, or revocation behavior.
 
 The Railway CLI is not installed in this environment and no Railway staging environment access is
-available here. Consequently, the staging `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` cannot yet be set to
-a deployed WSS endpoint, and the matching server-only `SIGNALING_CAPABILITY_SECRET` cannot be
-configured safely on both providers. A secret must not be generated or rotated on just one side.
+available here. Cloudflare currently has no configured `SIGNALING_CAPABILITY_SECRET`. Consequently,
+the staging `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` cannot yet be set on Railway and live signaling
+cannot be configured safely. A secret must not be generated or rotated on just one side.
 
 Manual actions remaining before the external gate can run:
 
-1. Verify the Cloudflare account email and register its `workers.dev` subdomain.
-2. Deploy only the committed staging Worker configuration.
-3. Source the existing Railway staging capability secret through an authorized channel and configure
-   the same value as server-only `SIGNALING_CAPABILITY_SECRET` in Railway staging and Cloudflare.
-4. Set Railway staging `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` to the deployed persistent WSS endpoint,
+1. Create or retrieve one approved high-entropy shared secret through an authorized Railway/secret
+   management channel, then configure that identical value as server-only
+   `SIGNALING_CAPABILITY_SECRET` in Railway staging and Cloudflare staging.
+2. Set Railway staging `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` to the deployed persistent WSS endpoint,
    then redeploy only the staging Engine Lab service.
-5. Run `FLICKSEND_P13_EXTERNAL=1 pnpm qualification:p13` and record the real external result.
+3. Run `FLICKSEND_P13_EXTERNAL=1 pnpm qualification:p13` and record the real external result.
 
 A fresh built-client asset audit found no raw signaling capability, Clerk secret, TURN shared secret,
 database URL, or provider bearer token. The Clerk runtime's `CLERK_SECRET_KEY` environment-variable

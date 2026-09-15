@@ -37,13 +37,13 @@ P13 remains **BLOCKED — PERSISTENT CLOUDFLARE STAGING QUALIFICATION NOT EXECUT
 do not substitute for either gate. No deployment, public relay, TLS/TURNS, physical-throughput, or
 rollback claim is made here.
 
-On 2026-09-16, staging-only deployment was attempted after Wrangler OAuth authentication. Cloudflare
-blocked the request until the account email is verified for Workers and a `workers.dev` subdomain is
-registered. The staging Worker therefore remains absent; no Durable Object binding, capability secret,
-WSS endpoint, health check, or external P13 WebSocket qualification exists. Railway staging access is
-also required to configure the identical server-only `SIGNALING_CAPABILITY_SECRET` on both providers
-and to set `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` to the deployed endpoint. These are external manual
-actions, not repository implementation failures. No P14 deployment or new P14 qualification work was
-performed.
+On 2026-09-16, the committed staging-only Worker deployed after Wrangler OAuth authentication and
+Cloudflare account verification. Its three required Durable Object bindings are present and its safe
+health endpoint returned HTTP 200 with staging and `ok` status. Cloudflare currently has no configured
+capability secret, and Railway staging access is still required to configure the identical server-only
+`SIGNALING_CAPABILITY_SECRET` on both providers and to set
+`NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` to the deployed endpoint. Live WebSocket qualification remains
+blocked until those provider settings are complete. These are external configuration actions, not
+repository implementation failures. No P14 deployment or new P14 qualification work was performed.
 
 P15+ scope was not started.
