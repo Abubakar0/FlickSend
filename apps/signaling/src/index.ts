@@ -13,6 +13,7 @@ import {
   ProductionSessionRoom,
   verifyProductionSignallingCapability
 } from "./production-signaling.js";
+import { resolveWorkerEnvironment } from "./environment.js";
 
 export interface Env {
   SESSION_DIRECTORY: DurableObjectNamespace;
@@ -24,6 +25,9 @@ export interface Env {
   TURN_DEV_MODE?: string;
   TURN_SHARED_SECRET?: string;
   TURN_URLS?: string;
+  ENVIRONMENT?: string;
+  EXPECTED_ORIGINS?: string;
+  BUILD_VERSION?: string;
 }
 
 type Session = { id: string; expiresAt: number };
@@ -243,6 +247,8 @@ export default {
       return withCors(request, await issueTurnCredentials(request, env, directory));
     }
     if (url.pathname === "/v2/session") {
+      if (!resolveWorkerEnvironment(env))
+        return Response.json({ code: "FS_SIGNALING_UNAVAILABLE" }, { status: 503 });
       const capability = await verifyProductionSignallingCapability(
         url.searchParams.get("cap"),
         env.SIGNALING_CAPABILITY_SECRET
@@ -256,6 +262,8 @@ export default {
       ).fetch(productionRoomRequest(request, headers));
     }
     if (url.pathname === "/v2/revoke" && request.method === "POST") {
+      if (!resolveWorkerEnvironment(env))
+        return Response.json({ code: "FS_SIGNALING_UNAVAILABLE" }, { status: 503 });
       const capability = await verifyProductionSignallingCapability(
         url.searchParams.get("cap"),
         env.SIGNALING_CAPABILITY_SECRET
