@@ -43,9 +43,34 @@ external P13 gate.
 
 **BLOCKED — PERSISTENT CLOUDFLARE STAGING QUALIFICATION NOT EXECUTED**
 
-No persistent Cloudflare staging Worker/DO deployment, provider secret configuration, or external
-admission/reconnect/revocation evidence was available in this repository task. A Wrangler dry-run is
-not deployment evidence and a preview URL cannot substitute for the persistent gate.
+On 2026-09-16, Wrangler OAuth authentication completed for the intended Cloudflare account. The
+repository then attempted the committed staging-only deployment command,
+`pnpm --filter @flicksend/signaling exec wrangler deploy --env staging`. Cloudflare rejected the
+request because the account email is not verified for Workers usage. Cloudflare also reported that
+the account must register a `workers.dev` subdomain. No Worker, Durable Object binding, capability
+secret, deployment identifier, persistent WSS endpoint, or health evidence was created by the failed
+attempt.
+
+The Railway CLI is not installed in this environment and no Railway staging environment access is
+available here. Consequently, the staging `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` cannot yet be set to
+a deployed WSS endpoint, and the matching server-only `SIGNALING_CAPABILITY_SECRET` cannot be
+configured safely on both providers. A secret must not be generated or rotated on just one side.
+
+Manual actions remaining before the external gate can run:
+
+1. Verify the Cloudflare account email and register its `workers.dev` subdomain.
+2. Deploy only the committed staging Worker configuration.
+3. Source the existing Railway staging capability secret through an authorized channel and configure
+   the same value as server-only `SIGNALING_CAPABILITY_SECRET` in Railway staging and Cloudflare.
+4. Set Railway staging `NEXT_PUBLIC_PRODUCTION_SIGNALING_URL` to the deployed persistent WSS endpoint,
+   then redeploy only the staging Engine Lab service.
+5. Run `FLICKSEND_P13_EXTERNAL=1 pnpm qualification:p13` and record the real external result.
+
+A fresh built-client asset audit found no raw signaling capability, Clerk secret, TURN shared secret,
+database URL, or provider bearer token. The Clerk runtime's `CLERK_SECRET_KEY` environment-variable
+identifier is present as framework code, but no secret value is present in the client assets. A
+Wrangler dry-run is not deployment evidence and a preview URL cannot substitute for the persistent
+gate.
 
 ## Status
 
