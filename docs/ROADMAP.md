@@ -65,10 +65,17 @@ are complete and frozen. P7 Transfers and P8 Recovery UX are complete and frozen
 complete and frozen as an audit/correction phase only. P10 Authentication & Accounts is complete and frozen after
 live Clerk development qualification. P11 Production Database & Persistence is complete and frozen after local
 PostgreSQL qualification. P12 Production Invitations & Signaling Infrastructure is complete and frozen after
-PostgreSQL invitation and temporary Cloudflare Worker/Durable Object qualification. P13 and later product phases
-remain not authorized until external review accepts P12.
+PostgreSQL invitation and temporary Cloudflare Worker/Durable Object qualification. P13 Production Signaling
+Deployment & Operations and P14 Production TURN Deployment & Operations are authorized together for repository
+implementation. Their persistent Cloudflare staging and public coturn qualification gates remain blocked pending
+provider-managed deployment evidence. P15 and later phases remain not authorized.
 
 P11 adds PostgreSQL/Prisma durable account, People, and metadata-only history repositories without changing engine
 correctness. P12 adds digest-only authenticated People invitations and a bounded Cloudflare Worker/Durable Object
 signaling control plane without changing FSTP correctness, routing, integrity, payload transport, retention,
 deletion, analytics, billing, or any P13+ product scope.
+
+P13 adds environment-separated Worker configuration, bounded operations, exact origin policy, and a deterministic
+Railway-to-Worker eligibility boundary. P14 adds server-issued ephemeral browser ICE configuration and coturn host
+templates. Neither phase authorizes payload proxying, transfer-engine redesign, public TLS/TURNS claims, database
+migrations, billing, analytics, or P15+ work. Their external qualification remains a separate mandatory gate.

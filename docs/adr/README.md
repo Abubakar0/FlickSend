@@ -46,3 +46,6 @@ are required before changing any of these decisions or beginning the relevant mi
 | 047 | Use PostgreSQL/Prisma for metadata-only P11 persistence behind server repositories.        | Accepted                      |
 | 048 | Store P12 invitation bearer links as digest-only, bounded-lifetime relationship requests.  | Accepted                      |
 | 049 | Use signed role capabilities with hibernating Durable Objects for P12 signaling.           | Accepted                      |
+| 050 | Separate Cloudflare signaling names, origins, and bindings by P13 environment.             | Accepted                      |
+| 051 | Issue P14 coturn REST credentials from Railway after Worker eligibility verification.      | Accepted                      |
+| 052 | Permit capability signaling sessions to use an injected ICE configuration provider.        | Accepted                      |
