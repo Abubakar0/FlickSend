@@ -20,7 +20,16 @@ export function externalP13Status(environment = process.env) {
 
 export function runP13Qualification() {
   const commands = [
-    [pnpmCommand, ["exec", "vitest", "run", "tests/p13/qualification.test.ts"]],
+    [
+      pnpmCommand,
+      [
+        "exec",
+        "vitest",
+        "run",
+        "tests/p13/qualification.test.ts",
+        "tests/p13/turbo-environment.test.ts"
+      ]
+    ],
     [pnpmCommand, ["--filter", "@flicksend/config", "test", "--", "environment-contract.test.ts"]],
     [pnpmCommand, ["--filter", "@flicksend/signaling", "test"]],
     [pnpmCommand, ["--filter", "@flicksend/signaling", "typecheck"]],
