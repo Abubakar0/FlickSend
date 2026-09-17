@@ -10,7 +10,6 @@ export type BrandIdentity = {
   futureMarketingAssets: "DEFERRED";
 };
 
-/** Working brand asset — not a final legal-cleared identity. */
 export const workingBrand: BrandIdentity = {
   name: "FlickSend",
   shortName: "FlickSend",
