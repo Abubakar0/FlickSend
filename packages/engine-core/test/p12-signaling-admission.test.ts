@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ConnectionCoordinator, type ConnectionSnapshot } from "../src/index.js";
+import type { IceConfigurationProvider } from "@flicksend/transport-webrtc";
 
 class TestWebSocket {
   static readonly OPEN = 1;
@@ -60,5 +61,27 @@ describe("P12 signaling admission", () => {
       sessionCode: null,
       transfer: { transferId: "fs_tr_existing" }
     });
+  });
+
+  it("allows an authorized signaling session to obtain ICE without a legacy session code", async () => {
+    vi.stubGlobal("WebSocket", TestWebSocket);
+    const getConfiguration = vi.fn(async () => ({ iceServers: [] }));
+    const provider: IceConfigurationProvider = { getConfiguration };
+    const coordinator = new ConnectionCoordinator("wss://signal.example.test", {
+      iceConfigurationProvider: provider
+    });
+
+    await coordinator.joinAuthorizedSignallingSession({
+      accessToken: `fsst1.${"a".repeat(32)}.${"b".repeat(43)}`,
+      expiresAtMs: Date.now() + 60_000
+    });
+
+    const resolver = coordinator as unknown as {
+      resolveIceConfiguration(policy: "AUTO"): Promise<RTCConfiguration>;
+    };
+    await expect(resolver.resolveIceConfiguration("AUTO")).resolves.toEqual({ iceServers: [] });
+    expect(getConfiguration).toHaveBeenCalledWith(
+      expect.objectContaining({ policy: "AUTO", sessionCode: undefined })
+    );
   });
 });

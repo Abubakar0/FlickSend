@@ -867,7 +867,7 @@ export class ConnectionCoordinator {
         iceServers: this.iceServers,
         iceTransportPolicy: policy === "RELAY_ONLY" ? "relay" : "all"
       };
-    if (!this.sessionCode) {
+    if (!this.sessionCode && !this.signallingAccessToken) {
       this.trace("route:credential-missing-session");
       throw new TurnCredentialError("FS_TURN_CREDENTIAL_UNAVAILABLE");
     }

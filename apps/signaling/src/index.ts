@@ -13,6 +13,16 @@ import {
   ProductionSessionRoom,
   verifyProductionSignallingCapability
 } from "./production-signaling.js";
+import { resolveWorkerEnvironment, resolveWorkerHealthEnvironment } from "./environment.js";
+import {
+  BoundedRequestRateLimiter,
+  createHealthResponse,
+  hasConfiguredBrowserOrigin,
+  safeOperationError,
+  validateBrowserOrigin,
+  verifyRelayEligibilityRequest,
+  withConfiguredCors
+} from "./operations.js";
 
 export interface Env {
   SESSION_DIRECTORY: DurableObjectNamespace;
@@ -24,6 +34,9 @@ export interface Env {
   TURN_DEV_MODE?: string;
   TURN_SHARED_SECRET?: string;
   TURN_URLS?: string;
+  ENVIRONMENT?: string;
+  EXPECTED_ORIGINS?: string;
+  BUILD_VERSION?: string;
 }
 
 type Session = { id: string; expiresAt: number };
@@ -32,6 +45,7 @@ type RoomMember = { role: Role; expiresAt: number };
 
 const sessionLifetimeMs = 30 * 60_000;
 const textEncoder = new TextEncoder();
+const productionOperationLimiter = new BoundedRequestRateLimiter(120, 60_000);
 
 export class SessionDirectory {
   constructor(private readonly state: DurableObjectState) {}
@@ -211,43 +225,88 @@ function productionRoomRequest(request: Request, headers: Headers): Request {
   });
 }
 
-function withCors(request: Request, response: Response): Response {
-  const headers = new Headers(response.headers);
-  const origin = request.headers.get("Origin");
-  if (origin) {
-    headers.set("Access-Control-Allow-Origin", origin);
-    headers.set("Vary", "Origin");
-  }
-  headers.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  headers.set("Access-Control-Allow-Headers", "content-type");
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers
-  });
+type RelayEligibility = { category: "ELIGIBLE" | "REJECTED" | "UNAVAILABLE"; eligible: boolean };
+
+function parseRelayEligibility(value: unknown): RelayEligibility | null {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return null;
+  const result = value as Record<string, unknown>;
+  if (
+    typeof result.eligible !== "boolean" ||
+    (result.category !== "ELIGIBLE" &&
+      result.category !== "REJECTED" &&
+      result.category !== "UNAVAILABLE") ||
+    (result.category === "ELIGIBLE") !== result.eligible
+  )
+    return null;
+  return { category: result.category, eligible: result.eligible };
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = requestUrl(request);
-    if (request.method === "OPTIONS") return withCors(request, new Response(null, { status: 204 }));
-    if (url.pathname === "/health") return withCors(request, Response.json({ ok: true }));
-    const directory = env.SESSION_DIRECTORY.get(env.SESSION_DIRECTORY.idFromName("directory"));
+    const healthConfig = resolveWorkerHealthEnvironment(env);
+    if (url.pathname === "/health")
+      return healthConfig ? createHealthResponse(healthConfig) : safeOperationError(503);
+    const config = resolveWorkerEnvironment(env);
+    if (!healthConfig) return safeOperationError(503);
+    const p12Route = url.pathname.startsWith("/v2/");
+    if (p12Route && !config) return safeOperationError(503);
+    if (request.method === "OPTIONS") {
+      if (!hasConfiguredBrowserOrigin(request, healthConfig)) return safeOperationError(403);
+      return withConfiguredCors(request, new Response(null, { status: 204 }), healthConfig);
+    }
+    if (!validateBrowserOrigin(request, healthConfig)) return safeOperationError(403);
+    if (p12Route && !productionOperationLimiter.allow()) return safeOperationError(429);
     if (url.pathname === "/sessions" && request.method === "POST") {
-      return withCors(
+      const directory = env.SESSION_DIRECTORY.get(env.SESSION_DIRECTORY.idFromName("directory"));
+      return withConfiguredCors(
         request,
-        await directory.fetch("https://directory/create", { method: "POST" })
+        await directory.fetch("https://directory/create", { method: "POST" }),
+        healthConfig
       );
     }
     if (url.pathname === "/turn-credentials" && request.method === "POST") {
-      return withCors(request, await issueTurnCredentials(request, env, directory));
+      const directory = env.SESSION_DIRECTORY.get(env.SESSION_DIRECTORY.idFromName("directory"));
+      return withConfiguredCors(
+        request,
+        await issueTurnCredentials(request, env, directory),
+        healthConfig
+      );
+    }
+    if (url.pathname === "/v2/relay-eligibility") {
+      if (request.method !== "POST") return safeOperationError(405);
+      const rawCapability = await verifyRelayEligibilityRequest(
+        request,
+        env.SIGNALING_CAPABILITY_SECRET
+      );
+      const capability = await verifyProductionSignallingCapability(
+        rawCapability,
+        env.SIGNALING_CAPABILITY_SECRET
+      );
+      if (!capability) return safeOperationError(403);
+      const headers = new Headers();
+      headers.set("x-flicksend-production-operation", "relay-eligibility");
+      headers.set("x-flicksend-signalling-role", capability.role);
+      headers.set("x-flicksend-signalling-expiry", String(capability.expiresAtMs));
+      const roomResponse = await env.PRODUCTION_SESSION_ROOM.get(
+        env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
+      ).fetch(
+        new Request("https://flicksend-production-room.internal/relay-eligibility", {
+          headers,
+          method: "POST"
+        })
+      );
+      if (!roomResponse.ok) return safeOperationError(503);
+      const result = parseRelayEligibility(await roomResponse.json().catch(() => null));
+      return result ? Response.json(result) : safeOperationError(503);
     }
     if (url.pathname === "/v2/session") {
+      if (request.method !== "GET") return safeOperationError(405);
       const capability = await verifyProductionSignallingCapability(
         url.searchParams.get("cap"),
         env.SIGNALING_CAPABILITY_SECRET
       );
-      if (!capability) return new Response("Unauthorized", { status: 401 });
+      if (!capability) return safeOperationError(403);
       const headers = new Headers(request.headers);
       headers.set("x-flicksend-signalling-role", capability.role);
       headers.set("x-flicksend-signalling-expiry", String(capability.expiresAtMs));
@@ -260,20 +319,26 @@ export default {
         url.searchParams.get("cap"),
         env.SIGNALING_CAPABILITY_SECRET
       );
-      if (!capability) return new Response("Unauthorized", { status: 401 });
+      if (!capability) return safeOperationError(403);
       const headers = new Headers();
       headers.set("x-flicksend-production-operation", "revoke");
       headers.set("x-flicksend-signalling-expiry", String(capability.expiresAtMs));
-      return env.PRODUCTION_SESSION_ROOM.get(
-        env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
-      ).fetch(
-        new Request("https://flicksend-production-room.internal/revoke", {
-          headers,
-          method: "POST"
-        })
+      return withConfiguredCors(
+        request,
+        await env.PRODUCTION_SESSION_ROOM.get(
+          env.PRODUCTION_SESSION_ROOM.idFromName(`p12:${capability.sessionId}`)
+        ).fetch(
+          new Request("https://flicksend-production-room.internal/revoke", {
+            headers,
+            method: "POST"
+          })
+        ),
+        config!
       );
     }
+    if (url.pathname === "/v2/revoke") return safeOperationError(405);
     if (url.pathname === "/session") {
+      const directory = env.SESSION_DIRECTORY.get(env.SESSION_DIRECTORY.idFromName("directory"));
       const lookup = await directory.fetch(
         "https://directory/lookup?code=" + (url.searchParams.get("code") ?? "")
       );
@@ -287,7 +352,7 @@ export default {
         return Response.json({ code: "FS_TURN_AUTH_FAILED" }, { status: registration.status });
       return env.SESSION_ROOM.get(env.SESSION_ROOM.idFromName(session.id)).fetch(request);
     }
-    return new Response("Not found", { status: 404 });
+    return safeOperationError(404);
   }
 };
 

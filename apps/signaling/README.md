@@ -17,3 +17,14 @@ when TURN is not configured, so ordinary Engine Lab runs continue without a rela
 
 `TURN_DEV_MODE=true` enables only the M7 qualification's invalid, expired, and unreachable negative
 credential modes. It is not a production authorization mechanism. See `services/turn/README.md`.
+
+## P13 production signaling boundary
+
+P13 uses explicit development, staging, and production Worker environments with unique names, the
+same declared Durable Object bindings/migrations, exact configured origins, and a provider-managed
+`SIGNALING_CAPABILITY_SECRET`. The Worker remains metadata-only. `/health` returns only safe status,
+environment, and version fields; all other operational errors remain generic.
+
+Railway derives the server-only relay-eligibility HTTPS endpoint from the validated public `wss:`
+Worker root and proves its request with a domain-separated HMAC. The Worker returns only a safe
+eligibility category. See [P13 deployment documentation](../../docs/P13-SIGNALING-DEPLOYMENT.md).

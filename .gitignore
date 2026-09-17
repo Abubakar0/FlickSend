@@ -3,6 +3,10 @@ node_modules/
 .worktrees/
 .turbo/
 dist/
+apps/signaling/dist-staging/
+apps/signaling/dist-p12-check/
+apps/signaling/dist-p12-close-check/
+apps/signaling/dist-p12-final-check/
 .next/
 .wrangler/
 playwright-report/

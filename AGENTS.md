@@ -44,8 +44,29 @@ P9 — Accessibility & UX QA: COMPLETE / FROZEN
 P10 — Authentication & Accounts: COMPLETE / FROZEN
 P11 — Production Database & Persistence: COMPLETE / FROZEN
 P12 — Production Invitations & Signaling Infrastructure: COMPLETE / FROZEN
+P13 — Production Signaling Deployment & Operations: AUTHORIZED / IN PROGRESS
+P14 — Production TURN & Relay Infrastructure: AUTHORIZED / IN PROGRESS
 
-P13 and all later phases remain NOT AUTHORIZED until P12 is externally reviewed and accepted.
+P15 and all later phases remain NOT AUTHORIZED.
+
+P13/P14 authorize only environment-separated signaling operations, a server-authorized TURN credential
+issuer, browser-safe prepared ICE configuration, sanitized coturn deployment artifacts, deterministic
+qualification, operations/security documentation, and the external qualification commands described in the
+accepted P13/P14 design. `engine-core`, FSTP, integrity, StreamPack, delivery, transfer identity, and
+receiver-authoritative recovery remain unchanged. Railway application APIs, the Cloudflare Worker, and
+PostgreSQL must never carry normal payload bytes or persist signaling/TURN secrets, capabilities,
+ICE/SDP, paths, filenames, manifests, network metadata, or credential values.
+
+The browser may receive only a bounded `ClientIceConfiguration`: public STUN/TURN URLs and ephemeral
+coturn username/password with expiry. It must never receive `TURN_SHARED_SECRET`, signaling secrets,
+SDP, ICE candidates, private addresses, provider credentials, or admin credentials. Ephemeral TURN
+credentials must never be logged, persisted, added to product history, or surfaced in diagnostics.
+
+P13/P14 external qualification is not a repository-only result. Persistent Cloudflare staging Worker/DO
+evidence is required for P13 external PASS; public coturn host evidence with real clients is required for
+P14 external PASS. Until those provider resources are configured, report the external gates as BLOCKED,
+never PASS. P15+ work, production analytics, billing, a domain purchase, application-layer encryption,
+offline delivery, Mesh, Turbo, and native applications remain outside this authorization.
 
 P9 was limited to an audit and narrow correction pass across the frozen P3-P8 product surfaces only: Send,
 Receive, People, Transfers, Recovery, shared presentation primitives, keyboard/focus behavior, semantic

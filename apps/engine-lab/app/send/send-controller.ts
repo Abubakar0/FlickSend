@@ -5,6 +5,7 @@ import {
 } from "@flicksend/browser-capabilities";
 import {
   ConnectionCoordinator,
+  type ConnectionCoordinatorOptions,
   type ConnectionSnapshot,
   type IntegrityFault,
   type AuthorizedSignallingSession
@@ -14,6 +15,7 @@ import {
   streamPackSourceFromFiles
 } from "@flicksend/filesystem-browser";
 import type { StreamPackSource } from "@flicksend/stream-pack";
+import { ProductionIceConfigurationProvider } from "../signaling/turn-client";
 import {
   developmentCurrentUser,
   developmentRecipients,
@@ -51,7 +53,12 @@ export type ProductionSignallingSessionIssuer = (
   recipientId: string
 ) => Promise<{ receiverPath: string; sender: AuthorizedSignallingSession }>;
 
-export type SendCoordinatorFactory = (signalingUrl: string) => SendCoordinator;
+type CoordinatorIceOptions = Pick<ConnectionCoordinatorOptions, "iceConfigurationProvider">;
+
+export type SendCoordinatorFactory = (
+  signalingUrl: string,
+  options?: CoordinatorIceOptions
+) => SendCoordinator;
 type Listener = (snapshot: SendWorkflowSnapshot) => void;
 type SourceLoader = (
   signal: AbortSignal,
@@ -143,8 +150,8 @@ export class SendSessionController {
 
   constructor(
     private readonly signalingUrl: string,
-    private readonly createCoordinator: SendCoordinatorFactory = (url) =>
-      new ConnectionCoordinator(url),
+    private readonly createCoordinator: SendCoordinatorFactory = (url, options) =>
+      new ConnectionCoordinator(url, options),
     private readonly eligibleRecipients: () => readonly SendRecipient[] = () =>
       developmentRecipients,
     currentUser: CurrentUser = developmentCurrentUser,
@@ -236,23 +243,35 @@ export class SendSessionController {
     const sourceRevision = this.snapshot.sourceRevision;
     this.dispatch({ type: "START_REQUESTED" });
     const attempt = this.snapshot.startAttempt;
-    const coordinator = this.createCoordinator(this.signalingUrl);
-    this.coordinator = coordinator;
-    this.currentCoordinatorUnsubscribe = coordinator.subscribe((engineSnapshot) =>
-      this.receiveEngineSnapshot(coordinator, engineSnapshot)
-    );
+    let coordinator: SendCoordinator | undefined;
     try {
       const productionSession = this.issueProductionSession
         ? await this.issueProductionSession(recipientId)
         : null;
+      if (!this.isCurrentStart(attempt, recipientId, sourceRevision)) return;
+      const activeCoordinator = this.createCoordinator(
+        this.signalingUrl,
+        productionSession
+          ? {
+              iceConfigurationProvider: new ProductionIceConfigurationProvider(
+                productionSession.sender.accessToken
+              )
+            }
+          : undefined
+      );
+      coordinator = activeCoordinator;
+      this.coordinator = activeCoordinator;
+      this.currentCoordinatorUnsubscribe = activeCoordinator.subscribe((engineSnapshot) =>
+        this.receiveEngineSnapshot(activeCoordinator, engineSnapshot)
+      );
       if (productionSession) {
-        if (!coordinator.joinAuthorizedSignallingSession)
+        if (!activeCoordinator.joinAuthorizedSignallingSession)
           throw new Error("FS_SIGNALING_UNAVAILABLE");
-        await coordinator.joinAuthorizedSignallingSession(productionSession.sender);
+        await activeCoordinator.joinAuthorizedSignallingSession(productionSession.sender);
       }
-      const code = productionSession ? null : await coordinator.createSession();
-      if (!this.isCurrentAttempt(coordinator, attempt, recipientId, sourceRevision)) {
-        coordinator.disconnect();
+      const code = productionSession ? null : await activeCoordinator.createSession();
+      if (!this.isCurrentAttempt(activeCoordinator, attempt, recipientId, sourceRevision)) {
+        activeCoordinator.disconnect();
         return;
       }
       this.dispatch({
@@ -261,7 +280,16 @@ export class SendSessionController {
         receiverPath: productionSession?.receiverPath ?? null
       });
     } catch (error) {
-      if (this.coordinator !== coordinator) return;
+      if (!coordinator || this.coordinator !== coordinator) {
+        if (this.isCurrentStart(attempt, recipientId, sourceRevision))
+          this.dispatch({
+            type: "START_FAILED",
+            error: mapProductError(
+              error instanceof Error ? error.message : "FS_ICE_NEGOTIATION_FAILED"
+            )
+          });
+        return;
+      }
       this.closeCoordinator();
       this.dispatch({
         type: "START_FAILED",
@@ -445,7 +473,16 @@ export class SendSessionController {
     sourceRevision: number
   ): boolean {
     return (
-      this.coordinator === coordinator &&
+      this.coordinator === coordinator && this.isCurrentStart(attempt, recipientId, sourceRevision)
+    );
+  }
+
+  private isCurrentStart(
+    attempt: number,
+    recipientId: string | undefined,
+    sourceRevision: number
+  ): boolean {
+    return (
       this.snapshot.startAttempt === attempt &&
       this.snapshot.recipient?.id === recipientId &&
       this.snapshot.sourceRevision === sourceRevision

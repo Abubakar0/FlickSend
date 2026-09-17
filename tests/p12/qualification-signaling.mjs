@@ -82,7 +82,8 @@ async function runQualification() {
 
   const replacedSender = await open(senderCapability);
   await expectSignal(replacedSender, { role: "offerer", type: "session-ready" });
-  await expectClosed(sender, 5_000);
+  await expectServerCloseInitiated(sender, 5_000);
+  await terminateForLocalCleanup(sender);
   sender = replacedSender;
   console.log("P12 signaling case 2: duplicate sender socket replaced");
 
@@ -138,7 +139,8 @@ async function runQualification() {
   const revocable = await open(revocableCapability);
   await expectSignal(revocable, { role: "offerer", type: "session-ready" });
   await revoke(revocableCapability);
-  await expectClosed(revocable, 5_000);
+  await expectServerCloseInitiated(revocable, 5_000);
+  await terminateForLocalCleanup(revocable);
   await expectRejected(open(revocableCapability));
   console.log("P12 signaling case 10: revoked capability rejected");
 
@@ -146,7 +148,8 @@ async function runQualification() {
   const expiringCapability = capability(randomUUID(), "sender", Date.now() + 5_000);
   const expiring = await open(expiringCapability);
   await expectSignal(expiring, { role: "offerer", type: "session-ready" });
-  await expectClosed(expiring, 10_000);
+  await expectServerCloseInitiated(expiring, 10_000);
+  await terminateForLocalCleanup(expiring);
   console.log("P12 signaling case 11: expiry cleanup");
 
   receiver.terminate();
@@ -235,6 +238,8 @@ async function expectRejected(socket) {
 }
 
 async function expectClosed(socket, timeoutMs) {
+  // A replacement close can arrive with session-ready; do not miss an already-observed close event.
+  if (socket.readyState === WebSocket.CLOSED) return;
   await new Promise((resolve, reject) => {
     const timeout = setTimeout(
       () => reject(new Error("Expired session remained open.")),
@@ -245,6 +250,21 @@ async function expectClosed(socket, timeoutMs) {
       resolve();
     });
   });
+}
+
+async function expectServerCloseInitiated(socket, timeoutMs) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (socket.readyState === WebSocket.CLOSING || socket.readyState === WebSocket.CLOSED) return;
+    await delay(25);
+  }
+  throw new Error("Server did not initiate the required socket close.");
+}
+
+async function terminateForLocalCleanup(socket) {
+  const closed = expectClosed(socket, 1_000);
+  socket.terminate();
+  await closed;
 }
 
 function delay(ms) {
@@ -263,8 +283,9 @@ async function stopWorker() {
 /** The runner owns only port 8791; this clears detached workerd children on Windows. */
 function stopDedicatedPortProcess() {
   const command =
-    "Get-NetTCPConnection -LocalPort 8791 -State Listen -ErrorAction SilentlyContinue | " +
-    "Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force }";
+    "$listenerIds = @(Get-NetTCPConnection -LocalPort 8791 -State Listen -ErrorAction SilentlyContinue | " +
+    "Select-Object -ExpandProperty OwningProcess -Unique); " +
+    "$listenerIds | ForEach-Object { Stop-Process -Id $_ -Force }";
   execFileSync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", command], {
     stdio: "ignore"
   });

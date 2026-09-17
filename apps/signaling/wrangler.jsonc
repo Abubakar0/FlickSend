@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "flicksend-signaling",
+  "name": "flicksend-signaling-development",
   "main": "src/index.ts",
   "compatibility_date": "2026-09-14",
   "durable_objects": {
@@ -13,5 +13,60 @@
   "migrations": [
     { "tag": "v1", "new_sqlite_classes": ["SessionDirectory", "SessionRoom"] },
     { "tag": "v2", "new_sqlite_classes": ["ProductionSessionRoom"] }
-  ]
+  ],
+  "vars": {
+    "BUILD_VERSION": "local",
+    "ENVIRONMENT": "development",
+    "EXPECTED_ORIGINS": "http://127.0.0.1:3000,http://localhost:3000"
+  },
+  "env": {
+    "development": {
+      "name": "flicksend-signaling-development",
+      "workers_dev": true,
+      "durable_objects": {
+        "bindings": [
+          { "name": "SESSION_DIRECTORY", "class_name": "SessionDirectory" },
+          { "name": "SESSION_ROOM", "class_name": "SessionRoom" },
+          { "name": "PRODUCTION_SESSION_ROOM", "class_name": "ProductionSessionRoom" }
+        ]
+      },
+      "vars": {
+        "BUILD_VERSION": "development",
+        "ENVIRONMENT": "development",
+        "EXPECTED_ORIGINS": "http://127.0.0.1:3000,http://localhost:3000"
+      }
+    },
+    "staging": {
+      "name": "flicksend-signaling-staging",
+      "workers_dev": true,
+      "durable_objects": {
+        "bindings": [
+          { "name": "SESSION_DIRECTORY", "class_name": "SessionDirectory" },
+          { "name": "SESSION_ROOM", "class_name": "SessionRoom" },
+          { "name": "PRODUCTION_SESSION_ROOM", "class_name": "ProductionSessionRoom" }
+        ]
+      },
+      "vars": {
+        "BUILD_VERSION": "staging",
+        "ENVIRONMENT": "staging",
+        "EXPECTED_ORIGINS": "https://flicksendengine-lab-staging.up.railway.app"
+      }
+    },
+    "production": {
+      "name": "flicksend-signaling-production",
+      "workers_dev": true,
+      "durable_objects": {
+        "bindings": [
+          { "name": "SESSION_DIRECTORY", "class_name": "SessionDirectory" },
+          { "name": "SESSION_ROOM", "class_name": "SessionRoom" },
+          { "name": "PRODUCTION_SESSION_ROOM", "class_name": "ProductionSessionRoom" }
+        ]
+      },
+      "vars": {
+        "BUILD_VERSION": "production",
+        "ENVIRONMENT": "production",
+        "EXPECTED_ORIGINS": "https://flicksend.invalid"
+      }
+    }
+  }
 }

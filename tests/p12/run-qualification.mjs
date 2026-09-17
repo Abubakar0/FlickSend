@@ -28,11 +28,13 @@ function runPnpm(args, environment) {
   );
 }
 
-// The fixed loopback URL and explicit switches prevent this qualification from resetting an
-// externally supplied or production database.
+// The fixed loopback URL and explicit switches make this local fixture safe to reset without
+// touching an externally supplied or production database.
 if (process.env.DATABASE_URL && process.env.DATABASE_URL !== databaseUrl)
   throw new Error("P12 qualification refuses a non-local test DATABASE_URL.");
 
+runPnpm(["exec", "vitest", "run", "tests/p12/qualification.test.ts"]);
+run("docker", ["compose", "-f", composeFile, "down", "--volumes", "--remove-orphans"]);
 run("docker", ["compose", "-f", composeFile, "up", "-d", "--wait"]);
 runPnpm(["--filter", "@flicksend/database", "run", "migrate:deploy"], {
   DATABASE_URL: databaseUrl

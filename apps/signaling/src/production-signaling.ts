@@ -1,4 +1,6 @@
 import { maxSignallingPayloadBytes, parseSignallingMessage } from "@flicksend/protocol";
+import { DurableObject } from "cloudflare:workers";
+import type { Env } from "./index.js";
 
 const capabilityLifetimeMaximumMs = 30 * 60 * 1_000;
 const capabilityMinimumSecretBytes = 32;
@@ -12,6 +14,16 @@ export type ProductionSignallingCapability = {
   role: "receiver" | "sender";
   sessionId: string;
 };
+
+export type RelayEligibility = Readonly<{
+  category: "ELIGIBLE" | "REJECTED" | "UNAVAILABLE";
+  eligible: boolean;
+}>;
+
+export type RelayEligibilityRequest = Readonly<{
+  expiresAtMs: number;
+  role: ProductionSignallingCapability["role"];
+}>;
 
 type CapabilityClaims = {
   exp: unknown;
@@ -79,8 +91,20 @@ export async function verifyProductionSignallingCapability(
  * Ephemeral two-peer control-plane room. Hibernation attachments retain only a role and expiry;
  * SDP/ICE is forwarded live and never written to Durable Object storage or application storage.
  */
-export class ProductionSessionRoom {
-  constructor(private readonly state: DurableObjectState) {}
+export class ProductionSessionRoom extends DurableObject<Env> {
+  private readonly sockets = new Map<WebSocket, SocketAttachment>();
+
+  constructor(
+    private readonly state: DurableObjectState,
+    env: Env = {} as Env
+  ) {
+    super(state, env);
+    // Restore the only persisted connection metadata when hibernation recreates this object.
+    for (const socket of state.getWebSockets()) {
+      const attachment = this.attachment(socket);
+      if (attachment) this.sockets.set(socket, attachment);
+    }
+  }
 
   async fetch(request: Request): Promise<Response> {
     if (request.headers.get("x-flicksend-production-operation") === "revoke") {
@@ -89,8 +113,19 @@ export class ProductionSessionRoom {
         return new Response("Unauthorized", { status: 401 });
       await this.state.storage.put("revoked", expiresAtMs);
       await this.state.storage.setAlarm(expiresAtMs);
-      for (const { socket } of this.activeSockets()) socket.close(4403, "Session revoked");
+      for (const { socket } of this.activeSockets())
+        this.closeSocket(socket, 4403, "Session revoked");
       return new Response(null, { status: 204 });
+    }
+
+    if (request.headers.get("x-flicksend-production-operation") === "relay-eligibility") {
+      const role = request.headers.get("x-flicksend-signalling-role");
+      const expiresAtMs = Number(request.headers.get("x-flicksend-signalling-expiry"));
+      const result = await this.relayEligibility({
+        expiresAtMs,
+        role: role === "sender" || role === "receiver" ? role : "invalid"
+      });
+      return Response.json(result);
     }
 
     if (request.headers.get("Upgrade") !== "websocket")
@@ -110,16 +145,40 @@ export class ProductionSessionRoom {
     if (revokedUntil) await this.state.storage.delete("revoked");
 
     this.closeExpiredSockets();
-    for (const socket of this.socketsForRole(role)) socket.close(4001, "Socket replaced");
+    const replacedSockets = this.socketsForRole(role);
 
     const pair = new WebSocketPair();
     const [client, server] = Object.values(pair) as [WebSocket, WebSocket];
     this.state.acceptWebSocket(server, [role]);
-    server.serializeAttachment({ expiresAtMs, role } satisfies SocketAttachment);
+    const attachment = { expiresAtMs, role } satisfies SocketAttachment;
+    server.serializeAttachment(attachment);
+    this.sockets.set(server, attachment);
     await this.state.storage.setAlarm(expiresAtMs);
     this.send(server, { type: "session-ready", role: role === "sender" ? "offerer" : "answerer" });
+    for (const socket of replacedSockets) this.closeSocket(socket, 4001, "Socket replaced");
     this.announcePeerJoined();
     return new Response(null, { status: 101, webSocket: client });
+  }
+
+  async relayEligibility(
+    request: RelayEligibilityRequest | { expiresAtMs: number; role: "invalid" }
+  ): Promise<RelayEligibility> {
+    if (
+      (request.role !== "sender" && request.role !== "receiver") ||
+      !Number.isSafeInteger(request.expiresAtMs) ||
+      request.expiresAtMs <= Date.now()
+    ) {
+      return { category: "REJECTED", eligible: false };
+    }
+    try {
+      const revokedUntil = await this.state.storage.get<number>("revoked");
+      if (revokedUntil && revokedUntil > Date.now())
+        return { category: "REJECTED", eligible: false };
+      if (revokedUntil) await this.state.storage.delete("revoked");
+      return { category: "ELIGIBLE", eligible: true };
+    } catch {
+      return { category: "UNAVAILABLE", eligible: false };
+    }
   }
 
   async webSocketMessage(socket: WebSocket, message: ArrayBuffer | string): Promise<void> {
@@ -151,11 +210,12 @@ export class ProductionSessionRoom {
   }
 
   webSocketClose(socket: WebSocket, code: number, reason: string, wasClean: boolean): void {
-    void code;
-    void reason;
     void wasClean;
     const closed = this.attachment(socket);
     if (!closed) return;
+    this.sockets.delete(socket);
+    // Complete the reciprocal close for runtimes without automatic close replies.
+    socket.close(validCloseCode(code) ? code : 1000, reason);
     const replacementExists = this.socketsForRole(closed.role).some(
       (candidate) => candidate !== socket
     );
@@ -168,17 +228,13 @@ export class ProductionSessionRoom {
   }
 
   async alarm(): Promise<void> {
-    for (const { socket } of this.activeSockets()) socket.close(4401, "Session expired");
+    for (const { socket } of this.activeSockets())
+      this.closeSocket(socket, 4401, "Session expired");
     await this.state.storage.deleteAll();
   }
 
   private activeSockets(): { attachment: SocketAttachment; socket: WebSocket }[] {
-    const result: { attachment: SocketAttachment; socket: WebSocket }[] = [];
-    for (const socket of this.state.getWebSockets()) {
-      const attachment = this.attachment(socket);
-      if (attachment) result.push({ attachment, socket });
-    }
-    return result;
+    return [...this.sockets].map(([socket, attachment]) => ({ attachment, socket }));
   }
 
   private attachment(socket: WebSocket): SocketAttachment | null {
@@ -199,7 +255,12 @@ export class ProductionSessionRoom {
 
   private closeExpiredSockets(): void {
     for (const { attachment, socket } of this.activeSockets())
-      if (attachment.expiresAtMs <= Date.now()) socket.close(4401, "Session expired");
+      if (attachment.expiresAtMs <= Date.now()) this.closeSocket(socket, 4401, "Session expired");
+  }
+
+  private closeSocket(socket: WebSocket, code: number, reason: string): void {
+    this.sockets.delete(socket);
+    socket.close(code, reason);
   }
 
   private announcePeerJoined(): void {
@@ -243,4 +304,13 @@ function decodeBase64Url(value: string): Uint8Array<ArrayBuffer> | null {
   } catch {
     return null;
   }
+}
+
+function validCloseCode(code: number): boolean {
+  return (
+    Number.isInteger(code) &&
+    code >= 1_000 &&
+    code <= 4_999 &&
+    ![1_004, 1_005, 1_006, 1_015].includes(code)
+  );
 }

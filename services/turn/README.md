@@ -11,6 +11,7 @@ down the service and deletes generated secrets. It refuses to overwrite an exist
 `.dev.vars` file.
 
 This compose service is development-only. It deliberately disables TLS/DTLS because `localhost` has
-no production certificate. A production deployment needs public routable IP mapping, a trusted
-certificate for TURN/TLS, firewall rules for the full relay range, rate limiting, monitoring, log
-redaction, secret rotation, and a separately documented infrastructure plan.
+no production certificate. Production artifacts are maintained separately in
+[`infra/turn`](../../infra/turn/README.md). They require public routable IP mapping, a trusted certificate
+before any TLS/TURNS claim, firewall rules for the full relay range, rate limiting, monitoring, log
+redaction, and secret rotation. Public coturn qualification remains a P14 external gate.

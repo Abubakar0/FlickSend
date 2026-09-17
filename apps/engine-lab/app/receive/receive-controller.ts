@@ -2,6 +2,7 @@ import { detectBrowserCapabilities, runtimeCompatibility } from "@flicksend/brow
 import {
   ConnectionCoordinator,
   type AuthorizedSignallingSession,
+  type ConnectionCoordinatorOptions,
   type ConnectionSnapshot
 } from "@flicksend/engine-core";
 import {
@@ -16,6 +17,7 @@ import {
 import { normalizeSessionCode } from "@flicksend/protocol";
 import type { RecoveryStore } from "@flicksend/resume";
 import type { ProductErrorViewModel } from "@flicksend/ui";
+import { ProductionIceConfigurationProvider } from "../signaling/turn-client";
 import {
   createInitialReceiveWorkflow,
   mapReceiveProductError,
@@ -37,7 +39,12 @@ type ReceiveCoordinator = Pick<
   | "subscribe"
 >;
 
-export type ReceiveCoordinatorFactory = (signalingUrl: string) => ReceiveCoordinator;
+type CoordinatorIceOptions = Pick<ConnectionCoordinatorOptions, "iceConfigurationProvider">;
+
+export type ReceiveCoordinatorFactory = (
+  signalingUrl: string,
+  options?: CoordinatorIceOptions
+) => ReceiveCoordinator;
 export type ReceiveSessionResolver = (rawSession: string) => AuthorizedSignallingSession | null;
 type Listener = (snapshot: ReceiveWorkflowSnapshot) => void;
 
@@ -104,8 +111,8 @@ export class ReceiveSessionController {
 
   constructor(
     private readonly signalingUrl: string,
-    private readonly createCoordinator: ReceiveCoordinatorFactory = (url) =>
-      new ConnectionCoordinator(url),
+    private readonly createCoordinator: ReceiveCoordinatorFactory = (url, options) =>
+      new ConnectionCoordinator(url, options),
     private readonly resolveProductionSession?: ReceiveSessionResolver
   ) {}
 
@@ -143,7 +150,16 @@ export class ReceiveSessionController {
     }
 
     this.dispatch({ type: "SESSION_AUTHORIZING", revision });
-    const coordinator = this.createCoordinator(this.signalingUrl);
+    const coordinator = this.createCoordinator(
+      this.signalingUrl,
+      productionSession
+        ? {
+            iceConfigurationProvider: new ProductionIceConfigurationProvider(
+              productionSession.accessToken
+            )
+          }
+        : undefined
+    );
     this.coordinator = coordinator;
     this.coordinatorUnsubscribe = coordinator.subscribe((engineSnapshot) =>
       this.receiveEngineSnapshot(coordinator, revision, engineSnapshot)

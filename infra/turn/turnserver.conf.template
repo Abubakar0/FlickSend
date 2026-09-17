@@ -1,0 +1,16 @@
+# Render this template only on the TURN host with deployment-time environment substitution.
+realm=${TURN_REALM}
+use-auth-secret
+static-auth-secret=${TURN_SHARED_SECRET}
+lt-cred-mech
+fingerprint
+no-cli
+no-multicast-peers
+no-loopback-peers
+external-ip=${TURN_EXTERNAL_IP}
+min-port=49160
+max-port=49200
+
+# TLS/TURNS remains NOT QUALIFIED until a public hostname and certificate are deployed and tested.
+no-tls
+no-dtls
